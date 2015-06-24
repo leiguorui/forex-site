@@ -1,4 +1,4 @@
-package cn.injava.forex.web;
+package cn.injava.forex.web.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
