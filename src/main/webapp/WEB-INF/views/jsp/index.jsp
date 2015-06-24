@@ -81,12 +81,12 @@
 			<div class="container">
 				<ul>
 					<li><a href="index.html">Home</a></li>
-					<li><a href="news.html">News</a></li>
+					<li><a href="news.html">实时新闻</a></li>
 					<li class="dropdown">
-					<a href="#">Pages <i class="fa fa-chevron-down"></i></a>
+					<a href="#">外汇工具 <i class="fa fa-chevron-down"></i></a>
 					<!-- dropdown menu -->
 						<ul class="dropdown-menu">
-							<li><a href="404.html">404</a></li>
+							<li><a href="404.html">汇价订阅</a></li>
 							<li><a href="post.html">Post</a></li>
 							<li><a href="timeline.html">Timeline</a></li>
 							<li><a href="sidebar_left.html">Sidebar Left</a></li>
@@ -106,7 +106,7 @@
 							<li><a href="icons.html">Icons</a></li>
 						</ul>
 					</li>
-					<li><a href="forums.html">Forums</a></li>
+					<li><a href="forums.html">财经日历</a></li>
 					<li><a href="gallery.html">Gallery</a></li>
 					<li><a href="contact.html">Contact</a></li>
 				</ul>
