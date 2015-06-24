@@ -1,0 +1,116 @@
+#styleswitcher {
+	background: #FFF;
+	width: 180px;
+	position: fixed;
+	top: 300px;
+	z-index: 3;
+	left: -180px;
+}
+	
+#styleswitcher h3 {
+	color: #333;
+	font-size: 12px;
+	font-family: Arial;
+	margin:0px 0px 0px 3px;
+	color: #FFF;
+	padding: 10px;
+	
+}
+	
+#styleswitcher div {
+	padding: 10px 10px;
+} 
+
+#styleswitcher h4 {
+	font-size: 12px;
+	font-family: Arial;
+	margin-top: 10px;
+	padding: 10px 10px 5px 0;
+	display: inline-block;
+}
+
+#styleswitcher h2 a {
+	display: block;
+	position: absolute;
+	right: -40px;
+	color: #FFF;
+	font-size: 18px;
+	top: 0;
+	padding: 15px 10px;
+}
+
+#styleswitcher .well {
+	margin: 10px 0 0 0!important;
+}
+
+.layouts { 
+	list-style: none;
+	margin: 0px; 
+	overflow: hidden;
+	padding: 0;
+}
+
+.layouts li { 
+	float:left; 
+	margin:2px; 
+}
+
+.layout {
+	background:#FFF!important;
+	border: 2px solid #f6f6f8!important;
+	font-family: Arial!important;
+	color: #666!important;
+}
+
+.colors { 
+	list-style: none;
+	margin: 0; 
+	padding: 0;
+	overflow: hidden;
+}
+
+.colors li { 
+	float:left; 
+	margin:2px; 
+}
+
+.colors li a { 
+	display: block; 
+	width:15px; 
+	height:15px; 
+	cursor: pointer;
+}
+	
+.layout-style select {
+	width: 100%;
+	padding: 5px;
+	border: 2px solid #f6f6f8;
+	margin:0 0 0 -5px;
+	color: #666;
+	cursor: pointer;
+	font-family: Arial;
+}
+
+.green { 
+	background: #a0ce4e;
+}
+
+.blue { 
+	background: #5f9ff5; 
+}
+
+.red { 
+	background: #bf1313; 
+}
+
+.pink { 
+	background: #a435aa; 
+}
+	
+@media only screen and (max-width: 1029px) {
+
+#styleswitcher {
+	display: none;
+}
+
+}
