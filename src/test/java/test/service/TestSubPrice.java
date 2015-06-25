@@ -20,7 +20,7 @@ public class TestSubPrice extends TestSupport {
                 e.printStackTrace();
             }
 
-            if (subPriceService.subPrice("degreelei@gmail.com", "EURUSD", 1.1203)){
+            if (subPriceService.subPrice( "EURUSD", 1.1203)){
                 break;
             }
         }

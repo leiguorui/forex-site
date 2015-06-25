@@ -5,17 +5,22 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.scheduling.annotation.Async;
 import org.springframework.stereotype.Service;
 
 import java.io.IOException;
 
 @Service
 public class SubPriceService {
-    public boolean subPrice(String email, String product, double price ) {
+    @Value("#{sysConfigProperties['forex.price.host']}")
+    private String forexPriceHost;
+
+    public boolean subPrice(String product, double price ) {
         final WebClient webClient = new WebClient();
         boolean result = false;
         try {
-            final Page page = webClient.getPage("http://quotes.instaforex.com/get_quotes.php?m=json&q="+product);
+            final Page page = webClient.getPage(forexPriceHost+product);
             String response = page.getWebResponse().getContentAsString();
             System.out.println(response);
 
@@ -32,5 +37,20 @@ public class SubPriceService {
         }
 
         return result;
+    }
+
+    @Async
+    public void subPriceByEmailAsync(String email, String product, double price ){
+        while(true){
+            try {
+                Thread.sleep(1000); // Waiting before run.
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            if (this.subPrice("EURUSD", 1.1203)){
+                break;
+            }
+        }
     }
 }
