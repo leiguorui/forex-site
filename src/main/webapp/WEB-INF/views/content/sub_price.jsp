@@ -58,7 +58,7 @@
 									<%--<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Scotland+Yard,+Broadway,+London,+Britain&hl=hu&ie=UTF8&sll=51.505217,0.099392&sspn=0.037023,0.104628&oq=Britain+scotlan&hq=Scotland+Yard,+Broadway,&hnear=London,+Egyes%C3%BClt+Kir%C3%A1lys%C3%A1g&t=m&z=14&amp;output=embed"></iframe>--%>
 								<%--</div>--%>
 								<!-- contact form -->
-								<form method="post" class="contact-form" action="/do_subprice.html">
+								<form method="post" class="contact-form" action="/sub_price.html">
 								<div class="row">
 									<div class="col-md-5">
 										<div class="input-group">
@@ -75,7 +75,7 @@
 										</div>
 									</div>
 								</div>
-								<div class="details"><a href="post.html" class="btn btn-primary pull-right btn-flat">Send</a></div>
+								<div class="details"><button class="btn btn-primary pull-right btn-flat">Send</button></div>
 								</form>
 							</section>
 						</div>

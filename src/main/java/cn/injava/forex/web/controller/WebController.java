@@ -6,6 +6,7 @@ import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
@@ -26,8 +27,9 @@ public class WebController {
     }
 
     @RequestMapping(value = "/sub_price", method = RequestMethod.POST)
+    @ResponseBody
     public String do_sub_price(String email, String product, double price) {
-        subPriceService.subPrice(email, product, price);
+        subPriceService.subPriceByEmailAsync(email, product, price);
         return "ok";
     }
 }
