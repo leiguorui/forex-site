@@ -58,20 +58,20 @@
 									<%--<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Scotland+Yard,+Broadway,+London,+Britain&hl=hu&ie=UTF8&sll=51.505217,0.099392&sspn=0.037023,0.104628&oq=Britain+scotlan&hq=Scotland+Yard,+Broadway,&hnear=London,+Egyes%C3%BClt+Kir%C3%A1lys%C3%A1g&t=m&z=14&amp;output=embed"></iframe>--%>
 								<%--</div>--%>
 								<!-- contact form -->
-								<form method="post" class="contact-form" action="/sub_price.html">
+								<form method="post" class="contact-form" action="/sub_price.html" id="subpriceId">
 								<div class="row">
 									<div class="col-md-5">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input class="form-control" type="text" name="product" placeholder="product" />
+											<input class="form-control" type="text" name="product" placeholder="product" value="EURUSD"/>
 										</div>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-											<input class="form-control" type="text" name="email" placeholder="Email Address" />
+											<input class="form-control" type="text" name="email" placeholder="Email Address" value="green_forex@163.com"/>
 										</div>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
-											<input class="form-control" type="text" name="price" placeholder="price" />
+											<input class="form-control" type="text" name="price" placeholder="price" value="1."/>
 										</div>
 									</div>
 								</div>
@@ -165,5 +165,20 @@
 	<script src="js/jquery.bxslider.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/custom.js"></script>
+
+	<script type="text/javascript">
+		$(document).ready(function () {
+			$("#subpriceId").submit(function(e) {
+				//prevent Default functionality
+				e.preventDefault();
+				var requestData =   { "product": this.product.value,"email":this.email.value,"price":this.price.value};
+				//do your own request an handle the results
+				$.post("/sub_price.html", requestData,
+					function(data){
+						alert(data);
+					});
+			});
+		});
+	</script>
 </body>
 </html>
