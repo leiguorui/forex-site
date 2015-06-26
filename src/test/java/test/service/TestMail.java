@@ -16,7 +16,7 @@ public class TestMail {
 
         MailUtil mm = (MailUtil) context.getBean("mailUtil");
         mm.sendMail("green_forex@163.com",
-                "degreelei@gmail.com",
+                "green_forex@163.com",
                 "Testing123",
                 "Testing only \n\n Hello Spring Email Sender");
     }

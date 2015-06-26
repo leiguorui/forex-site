@@ -18,9 +18,18 @@ public class SubPriceService {
     @Value("#{sysConfigProperties['forex.price.host']}")
     private String forexPriceHost;
 
+    @Value("#{sysConfigProperties['email.username']}")
+    private String mailSender;
+
     @Resource
     private MailUtil mailUtil;
 
+    /**
+     * 读取价格
+     * @param product 货币对
+     * @param price   要对比的报价
+     * @return
+     */
     public boolean subPrice(String product, double price ) {
         final WebClient webClient = new WebClient();
         boolean result = false;
@@ -44,7 +53,12 @@ public class SubPriceService {
         return result;
     }
 
-    @Async
+    /**
+     * 订阅报价
+     * @param email
+     * @param product
+     * @param price
+     */
     public void subPriceByEmailAsync(String email, String product, double price ){
 
         class OneShotTask implements Runnable {
@@ -52,16 +66,19 @@ public class SubPriceService {
             String product;
             double price;
             SubPriceService subPriceService;
+
+            // 使用构造函数传递参数
             OneShotTask(String e, String pt, double pc,SubPriceService sp) {
                 email = e;
                 product = pt;
                 price = pc;
                 subPriceService = sp;
             }
+
             public void run() {
                 while(true){
                     if (subPriceService.subPrice(product, price)){
-                        mailUtil.sendMail("degree_lei2014@163.com",
+                        mailUtil.sendMail(mailSender,
                                 email,
                                 product+"-"+price,
                                 "Testing only \n\n Hello Spring Email Sender");
@@ -71,6 +88,7 @@ public class SubPriceService {
                 }
             }
         }
+
         Thread t = new Thread(new OneShotTask(email,product,price,this));
         t.start();
     }

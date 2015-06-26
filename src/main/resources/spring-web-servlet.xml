@@ -23,7 +23,7 @@
  
 	<mvc:annotation-driven />
 
-	<!-- 引入常量配置文件 -->
+	<!-- 引入常量配置文件，程序中注入 -->
 	<bean id="sysConfigProperties" class="org.springframework.beans.factory.config.PropertiesFactoryBean">
 		<property name="locations">
 			<list>

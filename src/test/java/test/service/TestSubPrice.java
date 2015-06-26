@@ -1,6 +1,6 @@
 package test.service;
 
-import cn.injava.forex.core.TestSupport;
+import cn.injava.forex.core.test.TestSupport;
 import cn.injava.forex.web.service.SubPriceService;
 import org.junit.Test;
 
