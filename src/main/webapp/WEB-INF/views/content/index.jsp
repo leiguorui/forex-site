@@ -205,7 +205,7 @@
 							</section>
 							
 							<ul class="section-title clearfix">
-									<li><h3>Latest Video</h3></li>
+									<li><h3> 本周重要的财经日历</h3></li>
 									<li class="pull-right"><a href="#" class="btn btn-default"><i class="fa fa-film"></i></a></li>
 							</ul>
 							<section class="clearfix">
