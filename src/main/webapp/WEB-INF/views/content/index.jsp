@@ -206,7 +206,7 @@
 							
 							<ul class="section-title clearfix">
 									<li><h3> 本周重要的财经日历</h3></li>
-									<li class="pull-right"><a href="#" class="btn btn-default"><i class="fa fa-film"></i></a></li>
+									<li class="pull-right"><a href="#" class="btn btn-default"><i class="fa fa-film"></i> 查看所有财经日历</a></li>
 							</ul>
 							<section class="clearfix">
 								<div class="col-md-12 no-padding">
