@@ -58,11 +58,11 @@
       </div>
 
       <!-- latest tweets -->
-      <div class="col-md-3">
-        <h4>Latest Tweets</h4>
-        <script src="js/twitter.js"></script>
-        <div id="twitter_list"></div>
-      </div>
+      <%--<div class="col-md-3">--%>
+        <%--<h4>Latest Tweets</h4>--%>
+        <%--<script src="js/twitter.js"></script>--%>
+        <%--<div id="twitter_list"></div>--%>
+      <%--</div>--%>
 
       <!-- recent comments -->
       <div class="col-md-3">
