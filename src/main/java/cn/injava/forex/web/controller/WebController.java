@@ -1,6 +1,7 @@
 package cn.injava.forex.web.controller;
 
 import cn.injava.forex.web.service.SubPriceService;
+import cn.injava.forex.web.service.SubTechnicalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -16,6 +17,9 @@ public class WebController {
     @Resource
     private SubPriceService subPriceService;
 
+    @Resource
+    private SubTechnicalService subTechnicalService;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         return "content/index";
@@ -30,6 +34,18 @@ public class WebController {
     @ResponseBody
     public String do_sub_price(String email, String product, double price) {
         subPriceService.subPriceByEmailAsync(email, product, price);
+        return "ok";
+    }
+
+    @RequestMapping(value = "/sub_technical", method = RequestMethod.GET)
+    public String sub_technical(ModelMap model) {
+        return "content/sub_technical";
+    }
+
+    @RequestMapping(value = "/sub_technical", method = RequestMethod.POST)
+    @ResponseBody
+    public String do_sub_technical(String email, String product, int period) {
+        subTechnicalService.subByEmailAsync(email, product, period);
         return "ok";
     }
 }

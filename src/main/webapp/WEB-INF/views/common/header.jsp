@@ -21,8 +21,8 @@
         <a href="#">tools <i class="fa fa-chevron-down"></i></a>
         <!-- dropdown menu -->
         <ul class="dropdown-menu">
-          <li><a href="sub_price.html">sub</a></li>
-          <li><a href="post.html">Post</a></li>
+          <li><a href="sub_price.html">sub_price</a></li>
+          <li><a href="sub_technical.html">sub_technical</a></li>
           <li><a href="timeline.html">Timeline</a></li>
           <li><a href="sidebar_left.html">Sidebar Left</a></li>
           <li><a href="sidebar_right.html">Sidebar Right</a></li>

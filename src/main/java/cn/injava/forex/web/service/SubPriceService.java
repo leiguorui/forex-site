@@ -77,6 +77,12 @@ public class SubPriceService {
 
             public void run() {
                 while(true){
+                    try {
+                        Thread.sleep(1000); // Waiting before run.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+
                     if (subPriceService.subPrice(product, price)){
                         mailUtil.sendMail(mailSender,
                                 email,
