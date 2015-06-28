@@ -14,8 +14,8 @@ import java.io.IOException;
 
 @Service
 public class SubTechnical {
-    @Value("#{sysConfigProperties['forex.price.host']}")
-    private String forexPriceHost;
+    @Value("#{sysConfigProperties['forex.technical.host']}")
+    private String forexTechnicalHost;
 
     @Value("#{sysConfigProperties['email.username']}")
     private String mailSender;
@@ -24,27 +24,21 @@ public class SubTechnical {
     private MailUtil mailUtil;
 
     /**
-     * 读取价格
+     * 读取技术分析
      * @param product 货币对
-     * @param price   要对比的报价
+     * @param period   时间段
      * @return
      */
-    public boolean subPrice(String product, double price ) {
+    public boolean subTechnical(String product, double period ) {
         final WebClient webClient = new WebClient();
+        webClient.setJavaScriptEnabled(false);
         boolean result = false;
         try {
-            final Page page = webClient.getPage(forexPriceHost+product);
-            String response = page.getWebResponse().getContentAsString();
+            final Page page = webClient.getPage(forexTechnicalHost + product+ "-technical?period="+period);
+                    String response = page.getWebResponse().getContentAsString();
             System.out.println(response);
 
-            JsonElement jelement = new JsonParser().parse(response);
-            JsonObject jobject = jelement.getAsJsonObject();
-            jobject = jobject.getAsJsonObject(product);
-            double bid = jobject.get("bid").getAsDouble();
-            double absul = Math.abs(bid - price);
-            if (absul < 0.0002){
-                result = true;
-            }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -58,7 +52,7 @@ public class SubTechnical {
      * @param product
      * @param price
      */
-    public void subPriceByEmailAsync(String email, String product, double price ){
+    public void subByEmailAsync(String email, String product, double price ){
 
         class OneShotTask implements Runnable {
             String email;
@@ -76,7 +70,7 @@ public class SubTechnical {
 
             public void run() {
                 while(true){
-                    if (subPriceService.subPrice(product, price)){
+                    if (subPriceService.subTechnical(product, price)){
                         mailUtil.sendMail(mailSender,
                                 email,
                                 product+"-"+price,
