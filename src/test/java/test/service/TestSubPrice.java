@@ -14,16 +14,21 @@ public class TestSubPrice extends TestSupport {
     public void test_sub() {
         start();
         while(true){
+            if (subPriceService.subPrice( "EURUSD", 1.1203)){
+                break;
+            }
+
             try {
                 Thread.sleep(1000); // Waiting before run.
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
-
-            if (subPriceService.subPrice( "EURUSD", 1.1203)){
-                break;
-            }
         }
         end();
+    }
+
+    @Test
+    public void test_se() {
+        System.out.println("你好");
     }
 }

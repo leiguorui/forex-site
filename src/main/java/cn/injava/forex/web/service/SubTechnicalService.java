@@ -50,12 +50,11 @@ public class SubTechnicalService {
             technical.setMaSell(maSell);
             technical.setTiBuy(tiBuy);
             technical.setTiSell(tiSell);
-
-            System.out.println("完成一次请求");
         } catch (IOException e) {
             e.printStackTrace();
         }
 
+        System.out.println("subTechnical完成一次请求");
 
         return technical;
     }
@@ -84,12 +83,6 @@ public class SubTechnicalService {
 
             public void run() {
                 while(true){
-//                    try {
-//                        Thread.sleep(period*1000); // 等待60秒
-//                    } catch (InterruptedException e) {
-//                        e.printStackTrace();
-//                    }
-
                     Technical technical = subPriceService.subTechnical(product, period);
 
                     if ("(12)".equals(technical.getMaBuy()) && "(12)".equals(technical.getTiBuy())){
@@ -106,6 +99,12 @@ public class SubTechnicalService {
                                 "Testing only \n\n Hello Spring Email Sender");
                         System.out.println("mail has send");
                         break;
+                    }
+
+                    try {
+                        Thread.sleep(period*1000); // 等待60秒
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }

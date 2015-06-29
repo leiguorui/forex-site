@@ -50,6 +50,8 @@ public class SubPriceService {
             e.printStackTrace();
         }
 
+        System.out.println("subPrice完成一次请求");
+
         return result;
     }
 
@@ -77,12 +79,6 @@ public class SubPriceService {
 
             public void run() {
                 while(true){
-                    try {
-                        Thread.sleep(1000); // Waiting before run.
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
-
                     if (subPriceService.subPrice(product, price)){
                         mailUtil.sendMail(mailSender,
                                 email,
@@ -90,6 +86,12 @@ public class SubPriceService {
                                 "Testing only \n\n Hello Spring Email Sender");
                         System.out.println("mail has send");
                         break;
+                    }
+
+                    try {
+                        Thread.sleep(1000); // Waiting before run.
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
                     }
                 }
             }
