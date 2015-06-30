@@ -63,5 +63,69 @@
 	</bean>
 	<!--  // 发送邮件-->
 
+	<!--线程池-->
+	<bean id="threadPoolTaskExecutor"
+		  class="org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor">
+		<property name="corePoolSize" value="5" />
+		<property name="maxPoolSize" value="10" />
+		<property name="WaitForTasksToCompleteOnShutdown" value="false" />
+	</bean>
+	<!-- // 线程池-->
 
+	<!--定时器-->
+	<bean id="subPriceTaskEURUSD" class="cn.injava.forex.core.schedul.SubPriceTask">
+		<constructor-arg type="java.lang.String">
+			<value>EURUSD</value>
+		</constructor-arg>
+	</bean>
+	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+
+		<property name="jobClass" value="cn.injava.forex.core.schedul.RunMeJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />
+				<entry key="subPriceTaskEURUSD" value-ref="subPriceTaskEURUSD" />
+			</map>
+		</property>
+
+	</bean>
+
+	<!--停止定时任务中的所有线程-->
+	<bean name="stopMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+
+		<property name="jobClass" value="cn.injava.forex.core.schedul.StopMeJob" />
+		<property name="jobDataAsMap">
+			<map>
+				<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />
+			</map>
+		</property>
+
+	</bean>
+
+	<bean id="cronTriggerRunMeJob"
+		  class="org.springframework.scheduling.quartz.CronTriggerBean">
+
+		<property name="jobDetail" ref="runMeJob" />
+		<property name="cronExpression" value="0 56 18 * * ?" />
+		<!--每隔5秒执行-->
+		<!--<property name="cronExpression" value="1/5 * * * * ?" />-->
+		<!--每隔30分钟执行-->
+		<!--<property name="cronExpression" value="0 0/50 * * * ?" />-->
+	</bean>
+
+	<bean id="cronTriggerStopMeJob"
+		  class="org.springframework.scheduling.quartz.CronTriggerBean">
+		<property name="jobDetail" ref="stopMeJob" />
+		<property name="cronExpression" value="0 57 18 * * ?" />
+	</bean>
+
+	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+		<property name="triggers">
+			<list>
+				<ref bean="cronTriggerRunMeJob" />
+				<ref bean="cronTriggerStopMeJob" />
+			</list>
+		</property>
+	</bean>
+	<!-- // 定时器-->
 </beans>

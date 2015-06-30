@@ -1,6 +1,8 @@
 package cn.injava.forex.web.controller;
 
+import cn.injava.forex.web.model.SubPrice;
 import cn.injava.forex.web.service.SubPriceService;
+import cn.injava.forex.web.service.SubService;
 import cn.injava.forex.web.service.SubTechnicalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -20,6 +22,9 @@ public class WebController {
     @Resource
     private SubTechnicalService subTechnicalService;
 
+    @Resource
+    private SubService subService;
+
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
         return "content/index";
@@ -33,7 +38,12 @@ public class WebController {
     @RequestMapping(value = "/sub_price", method = RequestMethod.POST)
     @ResponseBody
     public String do_sub_price(String email, String product, double price) {
-        subPriceService.subPriceByEmailAsync(email, product, price);
+//        subPriceService.subPriceByEmailAsync(email, product, price);
+        SubPrice subPrice = new SubPrice();
+        subPrice.setEmail(email);
+        subPrice.setPrice(price);
+        subPrice.setProduct(product);
+        subService.addSubPrice(subPrice);
         return "ok";
     }
 
