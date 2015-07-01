@@ -78,6 +78,14 @@
 			<value>EURUSD</value>
 		</constructor-arg>
 	</bean>
+	<bean id="subTechnicalTaskEURUSD300" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>eur-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<value>300</value>
+		</constructor-arg>
+	</bean>
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 
 		<property name="jobClass" value="cn.injava.forex.core.schedul.RunMeJob" />

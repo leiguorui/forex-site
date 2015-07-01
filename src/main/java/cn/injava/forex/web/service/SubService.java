@@ -1,6 +1,7 @@
 package cn.injava.forex.web.service;
 
-import cn.injava.forex.web.model.SubPrice;
+import cn.injava.forex.core.constant.SubTypeConstant;
+import cn.injava.forex.web.model.SubModel;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -11,23 +12,35 @@ import java.util.List;
  */
 @Service
 public class SubService {
-    List<SubPrice> subPrices = new ArrayList<>();
+    List<SubModel> subModels = new ArrayList<>();
 
-    public boolean addSubPrice(SubPrice subPrice) {
-        return this.subPrices.add(subPrice);
+    public boolean addSubPrice(SubModel subModel) {
+        return this.subModels.add(subModel);
     }
 
-    public boolean removeSubPrice(SubPrice subPrice) {
-        return this.subPrices.remove(subPrice);
+    public boolean removeSubPrice(SubModel subModel) {
+        return this.subModels.remove(subModel);
     }
 
-    public List<SubPrice> getSubPricesByProduct(String produce){
-        List<SubPrice> subPricesByProduct = new ArrayList<>();
-        for (SubPrice subPrice : subPrices){
-            if (produce.equals(subPrice.getProduct())){
-                subPricesByProduct.add(subPrice);
+    public List<SubModel> getSubPricesByProduct(String produce){
+        List<SubModel> subPricesByProduct = new ArrayList<>();
+        for (SubModel sub : subModels){
+            if (SubTypeConstant.sub_price.equals(sub.getSubType()) &&
+                    produce.equals(sub.getProduct())){
+                subPricesByProduct.add(sub);
             }
         }
         return subPricesByProduct;
+    }
+
+    public List<SubModel> getSubTechnicalByProductAndPeriod(String produce, int period){
+        List<SubModel> subs = new ArrayList<>();
+        for (SubModel sub : subModels){
+            if (SubTypeConstant.sub_technical.equals(sub.getSubType()) &&
+                    period == sub.getPeriod()){
+                subs.add(sub);
+            }
+        }
+        return subs;
     }
 }

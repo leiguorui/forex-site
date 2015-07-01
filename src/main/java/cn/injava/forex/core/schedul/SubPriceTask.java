@@ -1,7 +1,7 @@
 package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.core.utils.MailUtil;
-import cn.injava.forex.web.model.SubPrice;
+import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -11,11 +11,9 @@ import com.google.gson.JsonParser;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
-import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.List;
 
 /**
  * 获取价格的方法
@@ -54,16 +52,16 @@ public class SubPriceTask implements Runnable{
             double bid = subPrice(product);
 
             //遍历订阅者
-            for (SubPrice subPrice : subService.getSubPricesByProduct(product)){
-                double absul = Math.abs(bid - subPrice.getPrice());
+            for (SubModel subModel : subService.getSubPricesByProduct(product)){
+                double absul = Math.abs(bid - subModel.getPrice());
                 if (absul < pricePip){
                     mailUtil.sendMail(mailSender,
-                            subPrice.getEmail(),
-                            product+"-"+subPrice.getPrice(),
+                            subModel.getEmail(),
+                            product+"-"+subModel.getPrice(),
                             "Testing only \n\n Hello Spring Email Sender");
 
-                    subService.removeSubPrice(subPrice);
-                    System.out.println("mail has send----"+subPrice.getEmail());
+                    subService.removeSubPrice(subModel);
+                    System.out.println("mail has send----"+subModel.getEmail());
                 }
             }
 

@@ -12,8 +12,23 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  * Time: 上午10:46
  */
 public class RunMeJob extends QuartzJobBean {
+    //线程池
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
+
+    //订阅价格
     private SubPriceTask subPriceTaskEURUSD;
+
+    //订阅技术分析
+    private SubTechnicalTask subTechnicalTaskEURUSD300;
+
+    //执行定时任务
+    protected void executeInternal(JobExecutionContext context)
+            throws JobExecutionException {
+
+        threadPoolTaskExecutor.execute(subPriceTaskEURUSD);
+        threadPoolTaskExecutor.execute(subTechnicalTaskEURUSD300);
+
+    }
 
     public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
         this.threadPoolTaskExecutor = threadPoolTaskExecutor;
@@ -21,11 +36,7 @@ public class RunMeJob extends QuartzJobBean {
     public void setSubPriceTaskEURUSD(SubPriceTask subPriceTaskEURUSD) {
         this.subPriceTaskEURUSD = subPriceTaskEURUSD;
     }
-
-    protected void executeInternal(JobExecutionContext context)
-            throws JobExecutionException {
-
-        threadPoolTaskExecutor.execute(subPriceTaskEURUSD);
-
+    public void setSubTechnicalTaskEURUSD300(SubTechnicalTask subTechnicalTaskEURUSD300) {
+        this.subTechnicalTaskEURUSD300 = subTechnicalTaskEURUSD300;
     }
 }

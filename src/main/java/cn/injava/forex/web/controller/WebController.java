@@ -1,16 +1,14 @@
 package cn.injava.forex.web.controller;
 
-import cn.injava.forex.web.model.SubPrice;
+import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubPriceService;
 import cn.injava.forex.web.service.SubService;
 import cn.injava.forex.web.service.SubTechnicalService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.servlet.ModelAndView;
 
 import javax.annotation.Resource;
 
@@ -39,7 +37,7 @@ public class WebController {
     @ResponseBody
     public String do_sub_price(String email, String product, double price) {
 //        subPriceService.subPriceByEmailAsync(email, product, price);
-        SubPrice subPrice = new SubPrice();
+        SubModel subPrice = new SubModel();
         subPrice.setEmail(email);
         subPrice.setPrice(price);
         subPrice.setProduct(product);
