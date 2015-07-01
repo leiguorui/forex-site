@@ -68,11 +68,15 @@ public class SubPriceTask implements Runnable{
             }
 
             try {
-                Thread.sleep(1000); // Waiting before run.
+                Thread.sleep(10*1000); // Waiting before run.
             } catch (InterruptedException e) {
-                e.printStackTrace();
+                //A thread cannot process an interrupt while it's sleeping.  restore interrupted status
+                Thread.currentThread().interrupt();
+                break;
             }
         }
+
+        System.out.println("Shutting down thread");
     }
 
     /**
