@@ -71,6 +71,7 @@ public class SubPriceTask implements Runnable{
                 Thread.sleep(10*1000); // Waiting before run.
             } catch (InterruptedException e) {
                 //A thread cannot process an interrupt while it's sleeping.  restore interrupted status
+                //当threadPoolTaskExecutor.shutdown()，会抛出这个异常，捕获之后结束循环
                 Thread.currentThread().interrupt();
                 break;
             }
