@@ -4,12 +4,14 @@ import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import org.springframework.mail.MailSender;
 import org.springframework.mail.SimpleMailMessage;
+import org.springframework.stereotype.Component;
 
 /**
  * 访问页面工具
  *
  * Created by Administrator on 2015/6/25.
  */
+@Component
 public class HtmlUnit {
     private WebClient webClient = new WebClient(BrowserVersion.CHROME) ;
 
@@ -25,9 +27,9 @@ public class HtmlUnit {
         webClient.getOptions().setActiveXNative(false);
         webClient.getOptions().setAppletEnabled(false);
         webClient.getOptions().setGeolocationEnabled(false);
-        webClient.getOptions().setDoNotTrackEnabled(true);
-        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
-        webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+//        webClient.getOptions().setDoNotTrackEnabled(true);  //不追踪隐私
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);  //页面有错，不抛出异常
+        webClient.getOptions().setPrintContentOnFailingStatusCode(false);    //页面有错，不打印
 
         return webClient;
     }

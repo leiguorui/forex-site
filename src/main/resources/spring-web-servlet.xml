@@ -57,10 +57,6 @@
 			</props>
 		</property>
 	</bean>
-
-	<bean id="mailUtil" class="cn.injava.forex.core.utils.MailUtil">
-		<property name="mailSender" ref="mailSender" />
-	</bean>
 	<!--  // 发送邮件-->
 
 	<!--线程池-->
