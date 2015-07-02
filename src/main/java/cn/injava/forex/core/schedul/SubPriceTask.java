@@ -9,6 +9,8 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -48,6 +50,9 @@ public class SubPriceTask implements Runnable{
         this.product = product;
     }
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(SubPriceTask.class);
+
     @Override
     public void run() {
 
@@ -65,7 +70,8 @@ public class SubPriceTask implements Runnable{
                             "Testing only \n\n Hello Spring Email Sender");
 
                     subService.removeSubPrice(subModel);
-                    System.out.println("mail has send----"+subModel.getEmail());
+
+                    logger.debug("mail has send to {}", subModel.getEmail());
                 }
             }
 
@@ -79,7 +85,7 @@ public class SubPriceTask implements Runnable{
             }
         }
 
-        System.out.println("Shutting down thread");
+        logger.debug("Shutting down thread");
     }
 
     /**
@@ -104,6 +110,8 @@ public class SubPriceTask implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
+
+        logger.debug("请求一次报价");
 
         return bid;
     }

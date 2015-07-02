@@ -7,6 +7,8 @@ import cn.injava.forex.web.model.Technical;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
@@ -38,6 +40,9 @@ public class SubTechnicalTask implements Runnable{
     private String product;
     private int period;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(SubTechnicalTask.class);
+
     public SubTechnicalTask(String product, int period){
         this.product = product;
         this.period = period;
@@ -58,7 +63,8 @@ public class SubTechnicalTask implements Runnable{
                             "Testing only \n\n Hello Spring Email Sender");
 
                     subService.removeSubPrice(subModel);
-                    System.out.println("mail has send----"+subModel.getEmail());
+
+                    logger.debug("mail has send to {}", subModel.getEmail());
                 } else if ("(12)".equals(technical.getMaSell()) && "(12)".equals(technical.getTiSell())){
                     mailUtil.sendMail(mailSender,
                             subModel.getEmail(),
@@ -66,7 +72,8 @@ public class SubTechnicalTask implements Runnable{
                             "Testing only \n\n Hello Spring Email Sender");
 
                     subService.removeSubPrice(subModel);
-                    System.out.println("mail has send----"+subModel.getEmail());
+
+                    logger.debug("mail has send to {}", subModel.getEmail());
                 }
             }
 
@@ -80,7 +87,7 @@ public class SubTechnicalTask implements Runnable{
             }
         }
 
-        System.out.println("Shutting down thread");
+        logger.debug("Shutting down thread");
     }
 
     /**
@@ -108,7 +115,7 @@ public class SubTechnicalTask implements Runnable{
             e.printStackTrace();
         }
 
-        System.out.println("subTechnical完成一次请求");
+        logger.debug("完成一次请求 {} {}", product,product);
 
         return technical;
     }

@@ -5,6 +5,8 @@ import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubPriceService;
 import cn.injava.forex.web.service.SubService;
 import cn.injava.forex.web.service.SubTechnicalService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -23,6 +25,9 @@ public class WebController {
 
     @Resource
     private SubService subService;
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(WebController.class);
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {

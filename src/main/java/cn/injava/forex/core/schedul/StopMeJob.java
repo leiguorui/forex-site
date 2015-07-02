@@ -2,6 +2,8 @@ package cn.injava.forex.core.schedul;
 
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.quartz.QuartzJobBean;
 
@@ -14,6 +16,9 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
 public class StopMeJob extends QuartzJobBean {
     private ThreadPoolTaskExecutor threadPoolTaskExecutor;
 
+    private static final Logger logger =
+            LoggerFactory.getLogger(StopMeJob.class);
+
     public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
         this.threadPoolTaskExecutor = threadPoolTaskExecutor;
     }
@@ -22,6 +27,8 @@ public class StopMeJob extends QuartzJobBean {
             throws JobExecutionException {
 
         threadPoolTaskExecutor.shutdown();
+
+        logger.debug("定时任务已停止, KeepAliveSeconds {} ", threadPoolTaskExecutor.getKeepAliveSeconds());
 
     }
 }

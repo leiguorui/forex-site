@@ -79,7 +79,7 @@
 			<value>eur-usd</value>
 		</constructor-arg>
 		<constructor-arg type="int">
-			<value>60</value>
+			<value>300</value>
 		</constructor-arg>
 	</bean>
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
@@ -111,7 +111,7 @@
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
 
 		<property name="jobDetail" ref="runMeJob" />
-		<property name="cronExpression" value="0 0/8 * * * ?" />
+		<property name="cronExpression" value="0 0/4 * * * ?" />
 		<!--每隔5秒执行-->
 		<!--<property name="cronExpression" value="1/5 * * * * ?" />-->
 		<!--每隔30分钟执行-->
@@ -121,7 +121,7 @@
 	<bean id="cronTriggerStopMeJob"
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="stopMeJob" />
-		<property name="cronExpression" value="0 0/15 * * * ?" />
+		<property name="cronExpression" value="0 0/7 * * * ?" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
