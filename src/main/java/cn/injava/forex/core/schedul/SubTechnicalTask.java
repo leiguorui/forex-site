@@ -1,10 +1,10 @@
 package cn.injava.forex.core.schedul;
 
+import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.model.Technical;
 import cn.injava.forex.web.service.SubService;
-import com.gargoylesoftware.htmlunit.BrowserVersion;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.springframework.beans.factory.annotation.Value;
@@ -28,6 +28,9 @@ public class SubTechnicalTask implements Runnable{
 
     @Resource
     private MailUtil mailUtil;
+
+    @Resource
+    private HtmlUnit htmlUnit;
 
     @Resource
     private SubService subService;
@@ -87,7 +90,7 @@ public class SubTechnicalTask implements Runnable{
      * @return
      */
     public Technical subTechnical(String product, int period ) {
-
+        final WebClient webClient = htmlUnit.getFastWebClient();
 
         Technical technical = new Technical();
         try {

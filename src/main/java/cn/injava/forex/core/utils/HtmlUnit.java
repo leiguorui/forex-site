@@ -11,10 +11,13 @@ import org.springframework.mail.SimpleMailMessage;
  * Created by Administrator on 2015/6/25.
  */
 public class HtmlUnit {
-    private WebClient webClient ;
+    private WebClient webClient = new WebClient(BrowserVersion.CHROME) ;
 
-    public void getFastWebClient() {
-        webClient = new WebClient(BrowserVersion.CHROME);
+    /**
+     * 获取速度最快的浏览器
+     * @return
+     */
+    public WebClient getFastWebClient() {
 
         //TODO 这里可以启动webclient的ajax功能，读取技术指标的变化
         webClient.getOptions().setCssEnabled(false);//if you don't need css
@@ -25,5 +28,7 @@ public class HtmlUnit {
         webClient.getOptions().setDoNotTrackEnabled(true);
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);
+
+        return webClient;
     }
 }

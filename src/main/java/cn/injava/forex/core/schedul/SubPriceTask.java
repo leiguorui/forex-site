@@ -1,5 +1,6 @@
 package cn.injava.forex.core.schedul;
 
+import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubService;
@@ -34,6 +35,9 @@ public class SubPriceTask implements Runnable{
 
     @Resource
     private MailUtil mailUtil;
+
+    @Resource
+    private HtmlUnit htmlUnit;
 
     @Resource
     private SubService subService;
@@ -84,7 +88,8 @@ public class SubPriceTask implements Runnable{
      * @return
      */
     public double subPrice(String product) {
-        final WebClient webClient = new WebClient();
+        final WebClient webClient = htmlUnit.getFastWebClient();
+
         double bid = 0;
         try {
             final Page page = webClient.getPage(forexPriceHost+product);
