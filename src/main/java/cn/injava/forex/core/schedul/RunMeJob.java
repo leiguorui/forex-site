@@ -26,6 +26,7 @@ public class RunMeJob extends QuartzJobBean {
             throws JobExecutionException {
 
         threadPoolTaskExecutor.execute(subPriceTaskEURUSD);
+
         threadPoolTaskExecutor.execute(subTechnicalTaskEURUSD300);
 
     }

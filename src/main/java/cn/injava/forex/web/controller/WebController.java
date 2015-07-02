@@ -1,5 +1,6 @@
 package cn.injava.forex.web.controller;
 
+import cn.injava.forex.core.constant.SubTypeConstant;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubPriceService;
 import cn.injava.forex.web.service.SubService;
@@ -37,11 +38,12 @@ public class WebController {
     @ResponseBody
     public String do_sub_price(String email, String product, double price) {
 //        subPriceService.subPriceByEmailAsync(email, product, price);
-        SubModel subPrice = new SubModel();
-        subPrice.setEmail(email);
-        subPrice.setPrice(price);
-        subPrice.setProduct(product);
-        subService.addSubPrice(subPrice);
+        SubModel subModel = new SubModel();
+        subModel.setEmail(email);
+        subModel.setPrice(price);
+        subModel.setProduct(product);
+        subModel.setSubType(SubTypeConstant.sub_price);
+        subService.addSubPrice(subModel);
         return "ok";
     }
 
@@ -53,7 +55,12 @@ public class WebController {
     @RequestMapping(value = "/sub_technical", method = RequestMethod.POST)
     @ResponseBody
     public String do_sub_technical(String email, String product, int period) {
-        subTechnicalService.subByEmailAsync(email, product, period);
+        SubModel subModel = new SubModel();
+        subModel.setEmail(email);
+        subModel.setPeriod(period);
+        subModel.setProduct(product);
+        subModel.setSubType(SubTypeConstant.sub_technical);
+        subService.addSubPrice(subModel);
         return "ok";
     }
 }

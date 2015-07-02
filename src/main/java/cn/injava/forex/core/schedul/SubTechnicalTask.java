@@ -87,14 +87,8 @@ public class SubTechnicalTask implements Runnable{
      * @return
      */
     public Technical subTechnical(String product, int period ) {
-        final WebClient webClient = new WebClient(BrowserVersion.CHROME);
-        //TODO 这里可以启动webclient的ajax功能，读取技术指标的变化
-        webClient.getOptions().setCssEnabled(false);//if you don't need css
-        webClient.getOptions().setJavaScriptEnabled(false);//if you don't need js
-        webClient.getOptions().setActiveXNative(false);
-        webClient.getOptions().setAppletEnabled(false);
-        webClient.getOptions().setDoNotTrackEnabled(true);
-        webClient.getOptions().setGeolocationEnabled(false);
+
+
         Technical technical = new Technical();
         try {
             final HtmlPage page = webClient.getPage(forexTechnicalHost + product+ "-technical?period="+period);

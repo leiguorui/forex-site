@@ -89,7 +89,7 @@ public class SubPriceTask implements Runnable{
         try {
             final Page page = webClient.getPage(forexPriceHost+product);
             String response = page.getWebResponse().getContentAsString();
-            System.out.println(response);
+//            System.out.println(response);
 
             JsonElement jelement = new JsonParser().parse(response);
             JsonObject jobject = jelement.getAsJsonObject();
@@ -99,8 +99,6 @@ public class SubPriceTask implements Runnable{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        System.out.println("subPrice完成一次请求");
 
         return bid;
     }
