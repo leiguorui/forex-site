@@ -21,21 +21,21 @@
 <body>
 	<!-- sub navigation -->
 	<div id="sub-navigation">
-		<c:import url="${pageContext.request.contextPath}/common/page/sub_navigation.html" charEncoding="UTF-8">
+		<c:import url="/common/page/sub_navigation.html" charEncoding="UTF-8">
 		</c:import>
 	</div>
 	<!-- ./sub navigation -->
 
 	<!-- top navigation -->
 	<div id="top-navigation">
-		<c:import url="${pageContext.request.contextPath}/common/page/top_navigation.html" charEncoding="UTF-8">
+		<c:import url="/common/page/top_navigation.html" charEncoding="UTF-8">
 		</c:import>
 	</div>
 	<!-- ./top navigation -->
 
 	<!-- header -->
 	<header>
-		<c:import url="${pageContext.request.contextPath}/common/page/header.html" charEncoding="UTF-8">
+		<c:import url="/common/page/header.html" charEncoding="UTF-8">
 		</c:import>
 	</header>
 	<!-- ./headerer -->
@@ -71,7 +71,7 @@
 										</div>
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
-											<input class="form-control" type="text" name="period" placeholder="period" value="60"/>
+											<input class="form-control" type="text" name="period" placeholder="period" value="300"/>
 										</div>
 									</div>
 								</div>
@@ -152,7 +152,7 @@
 	
 	<!-- footer -->
 	<footer>
-		<c:import url="${pageContext.request.contextPath}/common/page/footer.html" charEncoding="UTF-8">
+		<c:import url="/common/page/footer.html" charEncoding="UTF-8">
 		</c:import>
 	</footer>	
 	<!-- ./footer -->
