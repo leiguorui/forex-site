@@ -173,7 +173,7 @@
 				e.preventDefault();
 				var requestData =   { "product": this.product.value,"email":this.email.value,"period":this.period.value};
 				//do your own request an handle the results
-				$.post("/sub_technical.html", requestData,
+				$.post("sub_technical.html", requestData,
 					function(data){
 						alert(data);
 					});
