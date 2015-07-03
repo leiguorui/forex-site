@@ -54,13 +54,40 @@
 								<p>
 									Donec elementum dolor eu mi elementum vulputate. Vivamus condimentum mauris laoreet eros lacinia tempus molestie elit ullamcorper. Fusce non mi nec nulla varius dictum. Cras condimentum, dolor eget consectetur feugiat, libero odio rhoncus neque, vitae porta erat eros sit amet sapien..
 								</p>
-								<%--<div class="thumbnail">--%>
-									<%--<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Scotland+Yard,+Broadway,+London,+Britain&hl=hu&ie=UTF8&sll=51.505217,0.099392&sspn=0.037023,0.104628&oq=Britain+scotlan&hq=Scotland+Yard,+Broadway,&hnear=London,+Egyes%C3%BClt+Kir%C3%A1lys%C3%A1g&t=m&z=14&amp;output=embed"></iframe>--%>
-								<%--</div>--%>
+
+								<div class="col-md-6">
+									<h3>qoute</h3>
+									<p>Use contextual classes to color table rows.</p>
+									<table class="table">
+										<thead>
+										<tr>
+											<th>#</th>
+											<th>productName</th>
+											<th>bid</th>
+											<th>ask</th>
+											<th>change</th>
+											<th>dateTime</th>
+										</tr>
+										</thead>
+										<tbody>
+										<c:forEach items="${products}" var="entry" varStatus="loop">
+											<tr class="${entry.value.change > 0 ? 'success':'danger'}">
+												<td>${loop.index}</td>
+												<td>${entry.value.productName}</td>
+												<td>${entry.value.bid}</td>
+												<td>${entry.value.ask}</td>
+												<td>${entry.value.change}</td>
+												<td>${entry.value.dateTime}</td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+
 								<!-- contact form -->
 								<form method="post" class="contact-form" action="/sub_price.html" id="subpriceId">
 								<div class="row">
-									<div class="col-md-5">
+									<div class="col-md-6">
 										<div class="input-group">
 											<span class="input-group-addon"><i class="fa fa-user"></i></span>
 											<input class="form-control" type="text" name="product" placeholder="product" value="EURUSD"/>

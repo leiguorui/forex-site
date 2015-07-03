@@ -2,9 +2,7 @@ package cn.injava.forex.web.controller;
 
 import cn.injava.forex.core.constant.SubTypeConstant;
 import cn.injava.forex.web.model.SubModel;
-import cn.injava.forex.web.service.SubPriceService;
 import cn.injava.forex.web.service.SubService;
-import cn.injava.forex.web.service.SubTechnicalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -18,12 +16,6 @@ import javax.annotation.Resource;
 @Controller
 public class WebController {
     @Resource
-    private SubPriceService subPriceService;
-
-    @Resource
-    private SubTechnicalService subTechnicalService;
-
-    @Resource
     private SubService subService;
 
     private static final Logger logger =
@@ -36,6 +28,7 @@ public class WebController {
 
     @RequestMapping(value = "/sub_price", method = RequestMethod.GET)
     public String sub_price(ModelMap model) {
+        model.addAttribute("products", subService.getProducts());
         return "content/sub_price";
     }
 

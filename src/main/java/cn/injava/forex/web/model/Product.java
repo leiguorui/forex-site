@@ -1,0 +1,59 @@
+package cn.injava.forex.web.model;
+
+import org.joda.time.DateTime;
+
+/**
+ * 货币对
+ *
+ * Created by Administrator on 2015/7/3.
+ */
+public class Product {
+    String productName;
+    DateTime dateTime;
+    // 买入价
+    double bid;
+    // 卖出价
+    double ask;
+    //涨跌幅
+    double change;
+
+    public String getProductName() {
+        return productName;
+    }
+
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public DateTime getDateTime() {
+        return dateTime;
+    }
+
+    public void setDateTime(DateTime dateTime) {
+        this.dateTime = dateTime;
+    }
+
+    public double getBid() {
+        return bid;
+    }
+
+    public void setBid(double bid) {
+        this.bid = bid;
+    }
+
+    public double getAsk() {
+        return ask;
+    }
+
+    public void setAsk(double ask) {
+        this.ask = ask;
+    }
+
+    public double getChange() {
+        return change;
+    }
+
+    public void setChange(double change) {
+        this.change = change;
+    }
+}

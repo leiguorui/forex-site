@@ -2,6 +2,7 @@ package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
+import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.Page;
@@ -9,6 +10,7 @@ import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
+import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -57,8 +59,13 @@ public class SubPriceTask implements Runnable{
     public void run() {
 
         while(true){
+            Product productModel = subPrice(product);
+
+            //加入到service
+            subService.setProduct(productModel);
+
             // 报价
-            double bid = subPrice(product);
+            double bid = productModel.getBid();
 
             //遍历订阅者
             for (SubModel subModel : subService.getSubPricesByProduct(product)){
@@ -90,29 +97,34 @@ public class SubPriceTask implements Runnable{
 
     /**
      * 读取价格
-     * @param product 货币对
+     * @param productName 货币对
      * @return
      */
-    public double subPrice(String product) {
+    public Product subPrice(String productName) {
         final WebClient webClient = htmlUnit.getFastWebClient();
+        Product product = new Product();
 
-        double bid = 0;
         try {
-            final Page page = webClient.getPage(forexPriceHost+product);
+            final Page page = webClient.getPage(forexPriceHost+productName);
             String response = page.getWebResponse().getContentAsString();
-//            System.out.println(response);
 
             JsonElement jelement = new JsonParser().parse(response);
             JsonObject jobject = jelement.getAsJsonObject();
-            jobject = jobject.getAsJsonObject(product);
-            bid = jobject.get("bid").getAsDouble();
+            jobject = jobject.getAsJsonObject(productName);
+            double bid = jobject.get("bid").getAsDouble();
+            double ask = jobject.get("ask").getAsDouble();
+            double change = jobject.get("change").getAsDouble();
+            long lasttime = jobject.get("lasttime").getAsLong();
 
+            product.setAsk(ask);
+            product.setBid(bid);
+            product.setChange(change);
+            product.setDateTime(new DateTime(lasttime));
+            product.setProductName(productName);
         } catch (IOException e) {
             e.printStackTrace();
         }
 
-        logger.debug("请求一次报价");
-
-        return bid;
+        return product;
     }
 }
