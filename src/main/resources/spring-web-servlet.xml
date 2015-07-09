@@ -69,19 +69,75 @@
 	<!-- // 线程池-->
 
 	<!--定时器-->
+	<!--订阅报价-->
 	<bean id="subPriceTaskEURUSD" class="cn.injava.forex.core.schedul.SubPriceTask">
 		<constructor-arg type="java.lang.String">
 			<value>EURUSD</value>
 		</constructor-arg>
 	</bean>
+	<bean id="subPriceTaskAUDUSD" class="cn.injava.forex.core.schedul.SubPriceTask">
+		<constructor-arg type="java.lang.String">
+			<value>AUDUSD</value>
+		</constructor-arg>
+	</bean>
+
+	<!--订阅技术分析-->
 	<bean id="subTechnicalTaskEURUSD300" class="cn.injava.forex.core.schedul.SubTechnicalTask">
 		<constructor-arg type="java.lang.String">
 			<value>eur-usd</value>
 		</constructor-arg>
 		<constructor-arg type="int">
+			<!--5分钟-->
 			<value>300</value>
 		</constructor-arg>
 	</bean>
+	<bean id="subTechnicalTaskEURUSD900" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>eur-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<!--15分钟-->
+			<value>900</value>
+		</constructor-arg>
+	</bean>
+	<bean id="subTechnicalTaskEURUSD3600" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>eur-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<!--15分钟-->
+			<value>3600</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="subTechnicalTaskAUDUSD300" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>aud-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<!--5分钟-->
+			<value>300</value>
+		</constructor-arg>
+	</bean>
+	<bean id="subTechnicalTaskAUDUSD900" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>aud-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<!--15分钟-->
+			<value>900</value>
+		</constructor-arg>
+	</bean>
+	<bean id="subTechnicalTaskAUDUSD3600" class="cn.injava.forex.core.schedul.SubTechnicalTask">
+		<constructor-arg type="java.lang.String">
+			<value>aud-usd</value>
+		</constructor-arg>
+		<constructor-arg type="int">
+			<!--15分钟-->
+			<value>3600</value>
+		</constructor-arg>
+	</bean>
+
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 
 		<property name="jobClass" value="cn.injava.forex.core.schedul.RunMeJob" />

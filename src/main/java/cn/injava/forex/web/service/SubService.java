@@ -1,6 +1,6 @@
 package cn.injava.forex.web.service;
 
-import cn.injava.forex.core.constant.SubTypeConstant;
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
 import org.springframework.stereotype.Service;
@@ -15,6 +15,11 @@ import java.util.*;
 @Service
 public class SubService {
     List<SubModel> subModels = new ArrayList<>();
+    /**
+     * 所有的货币对报价、技术分析等
+     *
+     * 由定时程序 SubPriceTask、SubTechnicalTask 更新
+     */
     Map<String, Product> productMap = new HashMap<>();
 
     /**
@@ -43,7 +48,7 @@ public class SubService {
     public List<SubModel> getSubPricesByProduct(String produce){
         List<SubModel> subPricesByProduct = new ArrayList<>();
         for (SubModel sub : subModels){
-            if (SubTypeConstant.sub_price.equals(sub.getSubType()) &&
+            if (SystemConstant.sub_price.equals(sub.getSubType()) &&
                     produce.equals(sub.getProduct())){
                 subPricesByProduct.add(sub);
             }
@@ -53,15 +58,34 @@ public class SubService {
 
     /**
      * 获取订阅技术指标的人
-     * @param produce
+     * @param product
      * @param period
      * @return
      */
-    public List<SubModel> getSubTechnicalByProductAndPeriod(String produce, int period){
+    public List<SubModel> getSubTechnicalByProductAndPeriod(String product, int period){
         List<SubModel> subs = new ArrayList<>();
         for (SubModel sub : subModels){
-            if (SubTypeConstant.sub_technical.equals(sub.getSubType()) &&
-                    period == sub.getPeriod()){
+            if (SystemConstant.sub_technical.equals(sub.getSubType()) &&
+                    period == sub.getPeriod() &&
+                    product == sub.getProduct()){
+                subs.add(sub);
+            }
+        }
+        return subs;
+    }
+
+    /**
+     * 订阅多个时段的技术指标，多个时段同时买入或者卖出，才提醒
+     * @param product
+     * @param periods
+     * @return
+     */
+    public List<SubModel> getSubTechnicalByProductAndPeriods(String product, int[] periods){
+        List<SubModel> subs = new ArrayList<>();
+        for (SubModel sub : subModels){
+            if (SystemConstant.sub_technical.equals(sub.getSubType()) &&
+                    Arrays.equals(periods, sub.getPeriods()) &&
+                    product == sub.getProduct()){
                 subs.add(sub);
             }
         }
@@ -74,6 +98,15 @@ public class SubService {
      */
     public void setProduct(Product product) {
         this.productMap.put(product.getProductName(), product);
+    }
+
+    /**
+     * 获取货币对
+     * @param ProductName
+     * @return
+     */
+    public Product getProductByProductName(String ProductName){
+        return this.productMap.get(ProductName);
     }
 
     /**

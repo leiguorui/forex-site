@@ -3,6 +3,7 @@ package test.service;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.HtmlDivision;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.junit.Test;
 import org.springframework.context.ApplicationContext;
@@ -35,8 +36,8 @@ public class TestMail {
         final WebClient webClient = htmlUnit.getFastWebClient();
         final HtmlPage page;
         try {
-            page = webClient.getPage("http://www.investing.com/currencies/eur-usd-technical?period=300");
-            String maBuy = page.getHtmlElementById("maBuy").asText();
+            page = webClient.getPage("http://m.investing.com/currencies/eur-usd-technical?period=3600");
+            String maBuy = ((HtmlDivision)page.getByXPath("//p[@class='coloredBox']").get(0)).asText();
             System.out.println(maBuy);
         } catch (IOException e) {
             e.printStackTrace();

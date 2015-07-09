@@ -9,7 +9,11 @@ public class SubModel {
     private String email;
     private String product;
     private double price;
+    //订阅一个时段的技术指标
     private int period;
+    //订阅多个时段的技术指标
+    private int[] periods;
+    //订阅类型
     private String subType;
 
     public String getEmail() {
@@ -50,5 +54,13 @@ public class SubModel {
 
     public void setSubType(String subType) {
         this.subType = subType;
+    }
+
+    public int[] getPeriods() {
+        return periods;
+    }
+
+    public void setPeriods(int[] periods) {
+        this.periods = periods;
     }
 }

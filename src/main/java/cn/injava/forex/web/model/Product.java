@@ -2,6 +2,8 @@ package cn.injava.forex.web.model;
 
 import org.joda.time.DateTime;
 
+import java.util.Map;
+
 /**
  * 货币对
  *
@@ -16,6 +18,13 @@ public class Product {
     double ask;
     //涨跌幅
     double change;
+
+    /**
+     * 技术分析
+     * Integer   时段
+     * Technical 该时段的技术分析
+     */
+    Map<Integer, Technical> technicals;
 
     public String getProductName() {
         return productName;
@@ -55,5 +64,13 @@ public class Product {
 
     public void setChange(double change) {
         this.change = change;
+    }
+
+    public Map<Integer, Technical> getTechnicals() {
+        return technicals;
+    }
+
+    public void setTechnicals(Map<Integer, Technical> technicals) {
+        this.technicals = technicals;
     }
 }

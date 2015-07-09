@@ -1,5 +1,6 @@
 package cn.injava.forex.core.schedul;
 
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import cn.injava.forex.web.model.SubModel;
@@ -54,28 +55,7 @@ public class SubTechnicalTask implements Runnable{
         while(true){
             Technical technical = subTechnical(product, period);
 
-            //遍历订阅者
-            for (SubModel subModel : subService.getSubTechnicalByProductAndPeriod(product, period)){
-                if ("(12)".equals(technical.getMaBuy()) && "(12)".equals(technical.getTiBuy())){
-                    mailUtil.sendMail(mailSender,
-                            subModel.getEmail(),
-                            product+"-买入",
-                            "Testing only \n\n Hello Spring Email Sender");
 
-                    subService.removeSubPrice(subModel);
-
-                    logger.debug("mail has send to {}", subModel.getEmail());
-                } else if ("(12)".equals(technical.getMaSell()) && "(12)".equals(technical.getTiSell())){
-                    mailUtil.sendMail(mailSender,
-                            subModel.getEmail(),
-                            product+"-卖出",
-                            "Testing only \n\n Hello Spring Email Sender");
-
-                    subService.removeSubPrice(subModel);
-
-                    logger.debug("mail has send to {}", subModel.getEmail());
-                }
-            }
 
             try {
                 Thread.sleep(period*1000);
@@ -107,6 +87,8 @@ public class SubTechnicalTask implements Runnable{
             String tiBuy = page.getHtmlElementById("tiBuy").asText();
             String tiSell = page.getHtmlElementById("tiSell").asText();
 
+            technical.setProdutcName(product);
+            technical.setPeriod(period);
             technical.setMaBuy(maBuy);
             technical.setMaSell(maSell);
             technical.setTiBuy(tiBuy);
@@ -118,5 +100,53 @@ public class SubTechnicalTask implements Runnable{
         logger.debug("完成一次请求 {} {}", product,product);
 
         return technical;
+    }
+
+    /**
+     * 根据一个时段，订阅技术分析
+     *
+     * @param product
+     * @param period
+     */
+    public void subByPeriod(String product, int period, Technical technical){
+        //遍历订阅者
+        for (SubModel subModel : subService.getSubTechnicalByProductAndPeriod(product, period)){
+            String techSingle = technical.getTechSingle();
+            if (!SystemConstant.TECH_NO_CLEAR_SINGLE.equals(techSingle)){
+                mailUtil.sendMail(mailSender,
+                        subModel.getEmail(),
+                        product+"-"+techSingle,
+                        "技术分析详情： \n\n" + technical.toString());
+
+                subService.removeSubPrice(subModel);
+
+                logger.debug("mail has send to {}", subModel.getEmail());
+            }
+        }
+    }
+
+    /**
+     * 订阅多个时段的技术指标
+     * @param product
+     * @param periods
+     */
+    public void subByMultiPeriod(String product, int[] periods){
+        //遍历订阅者
+        for (SubModel subModel : subService.getSubTechnicalByProductAndPeriods(product, periods)){
+            for (int period : periods){
+
+            }
+            String techSingle = technical.getTechSingle();
+            if (!SystemConstant.TECH_NO_CLEAR_SINGLE.equals(techSingle)){
+                mailUtil.sendMail(mailSender,
+                        subModel.getEmail(),
+                        product+"-"+techSingle,
+                        "技术分析详情： \n\n" + technical.toString());
+
+                subService.removeSubPrice(subModel);
+
+                logger.debug("mail has send to {}", subModel.getEmail());
+            }
+        }
     }
 }

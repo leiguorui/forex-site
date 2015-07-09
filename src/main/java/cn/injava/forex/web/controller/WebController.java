@@ -1,6 +1,6 @@
 package cn.injava.forex.web.controller;
 
-import cn.injava.forex.core.constant.SubTypeConstant;
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.service.SubService;
 import org.slf4j.Logger;
@@ -26,6 +26,11 @@ public class WebController {
         return "content/index";
     }
 
+    /**
+     * 订阅报价
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/sub_price", method = RequestMethod.GET)
     public String sub_price(ModelMap model) {
         model.addAttribute("products", subService.getProducts());
@@ -40,16 +45,28 @@ public class WebController {
         subModel.setEmail(email);
         subModel.setPrice(price);
         subModel.setProduct(product);
-        subModel.setSubType(SubTypeConstant.sub_price);
+        subModel.setSubType(SystemConstant.sub_price);
         subService.addSubPrice(subModel);
         return "ok";
     }
 
+    /**
+     * 订阅技术分析
+     * @param model
+     * @return
+     */
     @RequestMapping(value = "/sub_technical", method = RequestMethod.GET)
     public String sub_technical(ModelMap model) {
         return "content/sub_technical";
     }
 
+    /**
+     * 订阅一个时段的技术分析
+     * @param email
+     * @param product
+     * @param period
+     * @return
+     */
     @RequestMapping(value = "/sub_technical", method = RequestMethod.POST)
     @ResponseBody
     public String do_sub_technical(String email, String product, int period) {
@@ -57,7 +74,26 @@ public class WebController {
         subModel.setEmail(email);
         subModel.setPeriod(period);
         subModel.setProduct(product);
-        subModel.setSubType(SubTypeConstant.sub_technical);
+        subModel.setSubType(SystemConstant.sub_technical);
+        subService.addSubPrice(subModel);
+        return "ok";
+    }
+
+    /**
+     * 订阅多个时段的技术分析
+     * @param email
+     * @param product
+     * @param periods
+     * @return
+     */
+    @RequestMapping(value = "/sub_technical", method = RequestMethod.POST)
+    @ResponseBody
+    public String do_sub_technical(String email, String product, int[] periods) {
+        SubModel subModel = new SubModel();
+        subModel.setEmail(email);
+        subModel.setPeriods(periods);
+        subModel.setProduct(product);
+        subModel.setSubType(SystemConstant.sub_technical);
         subService.addSubPrice(subModel);
         return "ok";
     }
