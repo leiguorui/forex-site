@@ -3,6 +3,7 @@ package cn.injava.forex.core.schedul;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
+import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.model.Technical;
 import cn.injava.forex.web.service.SubService;
@@ -16,6 +17,9 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.HashSet;
+import java.util.Map;
+import java.util.Set;
 
 /**
  * 读取技术指标
@@ -131,19 +135,22 @@ public class SubTechnicalTask implements Runnable{
      * @param periods
      */
     public void subByMultiPeriod(String product, int[] periods){
+        Map<Integer, Technical> technicalsInService = subService.getProductByProductName(product).getTechnicals();
         //遍历订阅者
         for (SubModel subModel : subService.getSubTechnicalByProductAndPeriods(product, periods)){
-            for (int period : periods){
+            Set<String> techSingleSet = new HashSet<>();
 
+            //遍历时段
+            for (int period : periods){
+                String techSingle = technicalsInService.get(period).getTechSingle();
+                techSingleSet.add(techSingle);
             }
-            String techSingle = technical.getTechSingle();
-            if (!SystemConstant.TECH_NO_CLEAR_SINGLE.equals(techSingle)){
+
+            if (techSingleSet.size() == 1){
                 mailUtil.sendMail(mailSender,
                         subModel.getEmail(),
-                        product+"-"+techSingle,
-                        "技术分析详情： \n\n" + technical.toString());
-
-                subService.removeSubPrice(subModel);
+                        product+"-"+techSingleSet.iterator().next(),
+                        "技术分析详情： \n\n" + technicalsInService.toString());
 
                 logger.debug("mail has send to {}", subModel.getEmail());
             }
