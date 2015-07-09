@@ -59,7 +59,7 @@ public class SubTechnicalTask implements Runnable{
         while(true){
             Technical technical = subTechnical(product, period);
 
-
+            subByMultiPeriod(product, new int[]{300, 900, 3600});
 
             try {
                 Thread.sleep(period*1000);
@@ -122,7 +122,7 @@ public class SubTechnicalTask implements Runnable{
                         product+"-"+techSingle,
                         "技术分析详情： \n\n" + technical.toString());
 
-                subService.removeSubPrice(subModel);
+//                subService.removeSubPrice(subModel);
 
                 logger.debug("mail has send to {}", subModel.getEmail());
             }
