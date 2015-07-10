@@ -1,5 +1,6 @@
 package test.service;
 
+import cn.injava.forex.core.schedul.SubPriceTask;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import com.gargoylesoftware.htmlunit.WebClient;
@@ -42,5 +43,17 @@ public class TestMail {
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Test
+    public void test_subprice(){
+        ApplicationContext context =
+                new ClassPathXmlApplicationContext("spring-web-servlet.xml");
+
+        SubPriceTask subPriceTask1 = (SubPriceTask) context.getBean("subPriceTask");
+        SubPriceTask subPriceTask2 = (SubPriceTask) context.getBean("subPriceTask");
+
+        System.out.println(subPriceTask1.toString());
+        System.out.println(subPriceTask2.toString());
     }
 }

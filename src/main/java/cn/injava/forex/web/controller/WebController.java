@@ -86,9 +86,9 @@ public class WebController {
      * @param periods
      * @return
      */
-    @RequestMapping(value = "/sub_technical", method = RequestMethod.POST)
+    @RequestMapping(value = "/sub_technical_periods", method = RequestMethod.POST)
     @ResponseBody
-    public String do_sub_technical(String email, String product, int[] periods) {
+    public String do_sub_technical_periods(String email, String product, int[] periods) {
         SubModel subModel = new SubModel();
         subModel.setEmail(email);
         subModel.setPeriods(periods);

@@ -26,7 +26,6 @@ import java.io.IOException;
  * Created by Administrator on 2015/6/30.
  */
 @Component
-@Scope("prototype")
 public class SubPriceTask implements Runnable{
     @Value("#{sysConfigProperties['forex.price.host']}")
     private String forexPriceHost;
@@ -47,10 +46,6 @@ public class SubPriceTask implements Runnable{
     private SubService subService;
 
     private String product;
-
-    public SubPriceTask(String product){
-        this.product = product;
-    }
 
     private static final Logger logger =
             LoggerFactory.getLogger(SubPriceTask.class);
@@ -126,5 +121,9 @@ public class SubPriceTask implements Runnable{
         }
 
         return product;
+    }
+
+    public void setProduct(String product){
+        this.product = product;
     }
 }

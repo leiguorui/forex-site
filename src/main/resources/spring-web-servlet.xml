@@ -69,17 +69,12 @@
 	<!-- // 线程池-->
 
 	<!--定时器-->
+
+	<!--获取当前applicationContext-->
+	<bean id="applicationContextProvder" class="cn.injava.forex.core.common.ApplicationContextProvider"/>
+
 	<!--订阅报价-->
-	<bean id="subPriceTaskEURUSD" class="cn.injava.forex.core.schedul.SubPriceTask">
-		<constructor-arg type="java.lang.String">
-			<value>EURUSD</value>
-		</constructor-arg>
-	</bean>
-	<bean id="subPriceTaskAUDUSD" class="cn.injava.forex.core.schedul.SubPriceTask">
-		<constructor-arg type="java.lang.String">
-			<value>AUDUSD</value>
-		</constructor-arg>
-	</bean>
+	<bean id="subPriceTask" class="cn.injava.forex.core.schedul.SubPriceTask" scope="prototype"/>
 
 	<!--订阅技术分析-->
 	<bean id="subTechnicalTaskEURUSD300" class="cn.injava.forex.core.schedul.SubTechnicalTask">
@@ -144,8 +139,8 @@
 		<property name="jobDataAsMap">
 			<map>
 				<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />
-				<entry key="subPriceTaskEURUSD" value-ref="subPriceTaskEURUSD" />
-				<entry key="subTechnicalTaskEURUSD300" value-ref="subTechnicalTaskEURUSD300" />
+				<!--<entry key="subPriceTaskEURUSD" value-ref="subPriceTaskEURUSD" />-->
+				<!--<entry key="subTechnicalTaskEURUSD300" value-ref="subTechnicalTaskEURUSD300" />-->
 			</map>
 		</property>
 
@@ -165,16 +160,16 @@
 
 	<bean id="cronTriggerRunMeJob"
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
-
 		<property name="jobDetail" ref="runMeJob" />
-		<!--<property name="cronExpression" value="0 0/4 * * * ?" />-->
-		<property name="cronExpression" value="0 30 9 * * ?" />
+		<property name="cronExpression" value="0 0/2 * * * ?" />
+		<!--<property name="cronExpression" value="0 30 9 * * ?" />-->
 	</bean>
 
 	<bean id="cronTriggerStopMeJob"
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="stopMeJob" />
-		<property name="cronExpression" value="0 30 22 * * ?" />
+		<property name="cronExpression" value="0 0/6 * * * ?" />
+		<!--<property name="cronExpression" value="0 30 22 * * ?" />-->
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">

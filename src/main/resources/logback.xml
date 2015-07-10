@@ -54,15 +54,16 @@
 
     </appender>
 
-    <!-- 配置要弃用日志功能的包名， 在 console 和 file 中记录日志  -->
-    <logger name="cn.injava.forex" level="debug"
-            additivity="false">
+    <!-- 配置要用日志功能的包名， 在 console 和 file 中记录日志  -->
+    <logger name="cn.injava.forex" level="debug" additivity="false">
         <appender-ref ref="FILE-AUDIT" />
         <appender-ref ref="STDOUT" />
     </logger>
 
     <root level="error">
+    <!--<root level="debug">-->
         <appender-ref ref="FILE-ERROR" />
+        <appender-ref ref="STDOUT" />
     </root>
 
 </configuration>
