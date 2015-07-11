@@ -15,16 +15,10 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  * Time: 上午10:46
  */
 public class StopMeJob extends QuartzJobBean {
-//    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     private ThreadPool threadPool;
 
     private static final Logger logger =
             LoggerFactory.getLogger(StopMeJob.class);
-
-//    public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-//        this.threadPoolTaskExecutor = threadPoolTaskExecutor;
-//        }
-
 
     public void setThreadPool(ThreadPool threadPool) {
         this.threadPool = threadPool;

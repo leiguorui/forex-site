@@ -71,7 +71,7 @@ public class SubTechnicalTask implements Runnable{
             }
         }
 
-        logger.debug("Shutting down thread");
+        logger.debug("thread completed ！");
     }
 
     /**

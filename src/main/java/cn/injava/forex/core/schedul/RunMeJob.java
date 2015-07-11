@@ -19,7 +19,6 @@ import org.springframework.scheduling.quartz.QuartzJobBean;
  */
 public class RunMeJob extends QuartzJobBean {
     //线程池
-//    private ThreadPoolTaskExecutor threadPoolTaskExecutor;
     private ThreadPool threadPool;
 
     ApplicationContext applicationContext = ApplicationContextProvider.getApplicationContext();
@@ -32,22 +31,17 @@ public class RunMeJob extends QuartzJobBean {
             throws JobExecutionException {
         logger.debug("定时任务正在启动...");
 
-        //订阅价格
-        SubPriceTask subPriceTaskEURUSD = (SubPriceTask) applicationContext.getBean("subPriceTask");
-        subPriceTaskEURUSD.setProduct("EURUSD");
-        threadPool.runTask(subPriceTaskEURUSD);
-//
-//        //订阅价格
-//        SubPriceTask subPriceTaskAUDUSD = (SubPriceTask) applicationContext.getBean("subPriceTask");
-//        subPriceTaskAUDUSD.setProduct("AUDUSD");
-//        threadPoolTaskExecutor.execute(subPriceTaskAUDUSD);
+        String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY","NZDUSD","CHFUSD","USDCAD"};
 
-        logger.debug("定时任务已启动, 共有线程 {} 个", threadPool.getActiveCount());
+        for (String product : products){
+            //订阅价格
+            SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
+            subPriceTask.setProduct(product);
+            threadPool.runTask(subPriceTask);
+        }
+
+        logger.debug("定时任务已启动, ActiveCount {} ", threadPool.getActiveCount());
     }
-
-//    public void setThreadPoolTaskExecutor(ThreadPoolTaskExecutor threadPoolTaskExecutor) {
-//        this.threadPoolTaskExecutor = threadPoolTaskExecutor;
-//    }
 
     public void setThreadPool(ThreadPool threadPool){
         this.threadPool = threadPool;
