@@ -66,6 +66,8 @@
 		<property name="maxPoolSize" value="10" />
 		<property name="WaitForTasksToCompleteOnShutdown" value="false" />
 	</bean>
+
+	<bean id="myThreadPool" class="cn.injava.forex.core.concurrent.ThreadPool"/>
 	<!-- // 线程池-->
 
 	<!--定时器-->
@@ -138,7 +140,8 @@
 		<property name="jobClass" value="cn.injava.forex.core.schedul.RunMeJob" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />
+				<!--<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />-->
+				<entry key="threadPool" value-ref="myThreadPool" />
 				<!--<entry key="subPriceTaskEURUSD" value-ref="subPriceTaskEURUSD" />-->
 				<!--<entry key="subTechnicalTaskEURUSD300" value-ref="subTechnicalTaskEURUSD300" />-->
 			</map>
@@ -152,7 +155,8 @@
 		<property name="jobClass" value="cn.injava.forex.core.schedul.StopMeJob" />
 		<property name="jobDataAsMap">
 			<map>
-				<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />
+				<!--<entry key="threadPoolTaskExecutor" value-ref="threadPoolTaskExecutor" />-->
+				<entry key="threadPool" value-ref="myThreadPool" />
 			</map>
 		</property>
 
