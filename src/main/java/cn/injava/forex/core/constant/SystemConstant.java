@@ -1,5 +1,7 @@
 package cn.injava.forex.core.constant;
 
+import java.util.Map;
+
 /**
  *  系统常量
  *

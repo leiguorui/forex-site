@@ -48,11 +48,6 @@ public class SubTechnicalTask implements Runnable{
     private static final Logger logger =
             LoggerFactory.getLogger(SubTechnicalTask.class);
 
-    public SubTechnicalTask(String product, int period){
-        this.product = product;
-        this.period = period;
-    }
-
     @Override
     public void run() {
 
@@ -155,5 +150,13 @@ public class SubTechnicalTask implements Runnable{
                 logger.debug("mail has send to {}", subModel.getEmail());
             }
         }
+    }
+
+    public void setPeriod(int period) {
+        this.period = period;
+    }
+
+    public void setProduct(String product) {
+        this.product = product;
     }
 }

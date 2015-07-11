@@ -2,6 +2,7 @@ package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.core.common.ApplicationContextProvider;
 import cn.injava.forex.core.concurrent.ThreadPool;
+import cn.injava.forex.core.constant.SystemConstant;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
@@ -10,6 +11,9 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.quartz.QuartzJobBean;
+
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 定时任务，调用task执行方法
@@ -31,13 +35,25 @@ public class RunMeJob extends QuartzJobBean {
             throws JobExecutionException {
         logger.debug("定时任务正在启动...");
 
+        //订阅价格
         String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY","NZDUSD","CHFUSD","USDCAD"};
-
         for (String product : products){
-            //订阅价格
             SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
             subPriceTask.setProduct(product);
             threadPool.runTask(subPriceTask);
+        }
+
+        //订阅技术指标
+        String[] productsPeriod = {"eur-usd","aud-usd"};
+        for (String product : productsPeriod){
+            int[] periods = {300,900,3600}; //5分钟、15分钟、60分钟
+            for (int period : periods){
+                SubTechnicalTask subTechnicalTask =
+                        (SubTechnicalTask) applicationContext.getBean("subTechnicalTask");
+                subTechnicalTask.setProduct(product);
+                subTechnicalTask.setPeriod(period);
+                threadPool.runTask(subTechnicalTask);
+            }
         }
 
         logger.debug("定时任务已启动, ActiveCount {} ", threadPool.getActiveCount());
