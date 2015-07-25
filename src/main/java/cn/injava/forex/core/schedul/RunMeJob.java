@@ -36,7 +36,7 @@ public class RunMeJob extends QuartzJobBean {
         logger.debug("定时任务正在启动...");
 
         //订阅价格
-        String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY","NZDUSD","CHFUSD","USDCAD"};
+        String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
         for (String product : products){
             SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
             subPriceTask.setProduct(product);

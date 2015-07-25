@@ -73,4 +73,16 @@ public class Product {
     public void setTechnicals(Map<Integer, Technical> technicals) {
         this.technicals = technicals;
     }
+
+    @Override
+    public String toString() {
+        return "Product{" +
+                "productName='" + productName + '\'' +
+                ", dateTime=" + dateTime +
+                ", bid=" + bid +
+                ", ask=" + ask +
+                ", change=" + change +
+                ", technicals=" + technicals +
+                '}';
+    }
 }

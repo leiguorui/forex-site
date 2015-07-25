@@ -120,6 +120,8 @@ public class SubPriceTask implements Runnable{
             e.printStackTrace();
         }
 
+//        logger.debug("完成一次报价的请求, product: {}",product.toString());
+
         return product;
     }
 

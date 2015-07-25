@@ -18,7 +18,7 @@ public class ThreadPool {
     private BlockingQueue<Runnable> blockingQueue = new ArrayBlockingQueue<Runnable>(50);
 
     public ThreadPool() {
-        System.out.println("Starting pool...");
+        System.out.println("Initing pool...");
         threadPoolExecutor = new ThreadPoolExecutor(poolSize, maxPoolSize, keepAliveTime, TimeUnit.MILLISECONDS, blockingQueue);
     }
 

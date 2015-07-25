@@ -96,7 +96,7 @@ public class SubTechnicalTask implements Runnable{
             e.printStackTrace();
         }
 
-        logger.debug("完成一次请求 {} {}", product,product);
+        logger.debug("完成一次技术的请求，{}", technical.toString());
 
         return technical;
     }
