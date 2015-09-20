@@ -99,16 +99,13 @@
 	<bean id="cronTriggerRunMeJob"
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="runMeJob" />
-		<!--<property name="cronExpression" value="0 0/1 * * * ?" />-->
-		<!--<property name="cronExpression" value="0 30 9 * * ?" />-->
-		<property name="cronExpression" value="0 15 11 * * ?" />
+		<property name="cronExpression" value="${RunMeJob.cronExpression}" />
 	</bean>
 
 	<bean id="cronTriggerStopMeJob"
 		  class="org.springframework.scheduling.quartz.CronTriggerBean">
 		<property name="jobDetail" ref="stopMeJob" />
-		<!--<property name="cronExpression" value="0 0/6 * * * ?" />-->
-		<property name="cronExpression" value="0 30 22 * * ?" />
+		<property name="cronExpression" value="${StopMeJob.cronExpression}" />
 	</bean>
 
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
