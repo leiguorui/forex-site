@@ -11,6 +11,7 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.joda.time.DateTime;
+import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -19,6 +20,8 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.util.Date;
+import java.util.TimeZone;
 
 /**
  * 获取价格的方法
@@ -114,7 +117,7 @@ public class SubPriceTask implements Runnable{
             product.setAsk(ask);
             product.setBid(bid);
             product.setChange(change);
-            product.setDateTime(new DateTime(lasttime));
+            product.setDateTime(new DateTime(lasttime*1000));
             product.setProductName(productName);
         } catch (IOException e) {
             e.printStackTrace();

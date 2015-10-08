@@ -55,7 +55,7 @@
 									Donec elementum dolor eu mi elementum vulputate. Vivamus condimentum mauris laoreet eros lacinia tempus molestie elit ullamcorper. Fusce non mi nec nulla varius dictum. Cras condimentum, dolor eget consectetur feugiat, libero odio rhoncus neque, vitae porta erat eros sit amet sapien..
 								</p>
 
-								<div class="col-md-6">
+								<div class="col-md-12">
 									<h3>qoute</h3>
 									<p>Use contextual classes to color table rows.</p>
 									<table class="table">
