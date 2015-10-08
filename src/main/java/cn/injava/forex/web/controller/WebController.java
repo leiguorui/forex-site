@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 
 @Controller
 public class WebController {
@@ -39,7 +40,7 @@ public class WebController {
 
     @RequestMapping(value = "/sub_price", method = RequestMethod.POST)
     @ResponseBody
-    public String do_sub_price(String email, String product, double price) {
+    public String do_sub_price(String email, String product, BigDecimal price) {
 //        subPriceService.subPriceByEmailAsync(email, product, price);
         SubModel subModel = new SubModel();
         subModel.setEmail(email);

@@ -2,6 +2,7 @@ package cn.injava.forex.web.model;
 
 import org.joda.time.DateTime;
 
+import java.math.BigDecimal;
 import java.util.Map;
 
 /**
@@ -13,11 +14,11 @@ public class Product {
     String productName;
     DateTime dateTime;
     // 买入价
-    double bid;
+    BigDecimal bid;
     // 卖出价
-    double ask;
+    BigDecimal ask;
     //涨跌幅
-    double change;
+    BigDecimal change;
 
     /**
      * 技术分析
@@ -42,27 +43,27 @@ public class Product {
         this.dateTime = dateTime;
     }
 
-    public double getBid() {
+    public BigDecimal getBid() {
         return bid;
     }
 
-    public void setBid(double bid) {
+    public void setBid(BigDecimal bid) {
         this.bid = bid;
     }
 
-    public double getAsk() {
+    public BigDecimal getAsk() {
         return ask;
     }
 
-    public void setAsk(double ask) {
+    public void setAsk(BigDecimal ask) {
         this.ask = ask;
     }
 
-    public double getChange() {
+    public BigDecimal getChange() {
         return change;
     }
 
-    public void setChange(double change) {
+    public void setChange(BigDecimal change) {
         this.change = change;
     }
 

@@ -1,5 +1,7 @@
 package cn.injava.forex.web.model;
 
+import java.math.BigDecimal;
+
 /**
  * 订阅者的参数
  *
@@ -8,7 +10,7 @@ package cn.injava.forex.web.model;
 public class SubModel {
     private String email;
     private String product;
-    private double price;
+    private BigDecimal price;
     //订阅一个时段的技术指标
     private int period;
     //订阅多个时段的技术指标
@@ -32,11 +34,11 @@ public class SubModel {
         this.product = product;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

@@ -20,6 +20,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
+import java.math.BigDecimal;
 import java.util.Date;
 import java.util.TimeZone;
 
@@ -63,11 +64,11 @@ public class SubPriceTask implements Runnable{
             subService.setProduct(productModel);
 
             // 报价
-            double bid = productModel.getBid();
+            BigDecimal bid = productModel.getBid();
 
             //遍历订阅者
             for (SubModel subModel : subService.getSubPricesByProduct(product)){
-                double absul = Math.abs(bid - subModel.getPrice());
+                double absul = Math.abs(bid.doubleValue() - subModel.getPrice().doubleValue());
                 if (absul < pricePip){
                     mailUtil.sendMail(mailSender,
                             subModel.getEmail(),
@@ -109,9 +110,9 @@ public class SubPriceTask implements Runnable{
             JsonElement jelement = new JsonParser().parse(response);
             JsonObject jobject = jelement.getAsJsonObject();
             jobject = jobject.getAsJsonObject(productName);
-            double bid = jobject.get("bid").getAsDouble();
-            double ask = jobject.get("ask").getAsDouble();
-            double change = jobject.get("change").getAsDouble();
+            BigDecimal bid = jobject.get("bid").getAsBigDecimal();
+            BigDecimal ask = jobject.get("ask").getAsBigDecimal();
+            BigDecimal change = jobject.get("change").getAsBigDecimal();
             long lasttime = jobject.get("lasttime").getAsLong();
 
             product.setAsk(ask);
