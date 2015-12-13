@@ -1,5 +1,7 @@
 package cn.injava.forex.core.concurrent;
 
+import org.springframework.beans.factory.DisposableBean;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -9,7 +11,7 @@ import java.util.concurrent.*;
  *
  * Created by Administrator on 2015/7/11.
  */
-public class ThreadPool {
+public class ThreadPool implements DisposableBean {
     private int poolSize = 10;
     private int maxPoolSize = 20;
     private long keepAliveTime = 5000;
@@ -44,5 +46,14 @@ public class ThreadPool {
 
     public int getBlockingQueueSize(){
         return blockingQueue.size();
+    }
+
+    /**
+     * spring停止时,结束所有线程
+     * @throws Exception
+     */
+    @Override
+    public void destroy() throws Exception {
+        threadPoolExecutor.shutdownNow();
     }
 }
