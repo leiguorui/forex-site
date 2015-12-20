@@ -137,7 +137,11 @@ public class SubService {
      * @return
      */
     public Map<String, Technical> getTechnicals() {
-        return this.technicalMap;
+
+        //排序
+        Map<String, Technical> treeMap = new TreeMap<String, Technical>(this.technicalMap);
+
+        return treeMap;
     }
 
 }

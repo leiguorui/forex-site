@@ -71,7 +71,7 @@
 	<bean id="subPriceTask" class="cn.injava.forex.core.schedul.SubPriceTask" scope="prototype"/>
 
 	<!--订阅技术分析-->
-	<bean id="subTechnicalTask" class="cn.injava.forex.core.schedul.SubTechnicalTask"></bean>
+	<bean id="subTechnicalTask" class="cn.injava.forex.core.schedul.SubTechnicalTask" scope="prototype"/>
 
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 
@@ -111,8 +111,8 @@
 	<!-- 项目启动10秒后执行 -->
 	<bean id="simpleTrigger"  class="org.springframework.scheduling.quartz.SimpleTriggerFactoryBean">
 		<property name="jobDetail" ref="runMeJob" />
-		<!-- 10 seconds -->
-		<property name="startDelay" value="10000" />
+		<!--  5 seconds-->
+		<property name="startDelay" value="5000" />
 		<property name="repeatCount" value="0"/>
 		<property name="repeatInterval" value="10"/>
 	</bean>

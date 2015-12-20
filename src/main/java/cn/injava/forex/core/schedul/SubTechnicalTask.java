@@ -25,7 +25,6 @@ import java.util.Set;
  * 读取技术指标
  */
 @Component
-@Scope("prototype")
 public class SubTechnicalTask implements Runnable{
     @Value("#{sysConfigProperties['forex.technical.host']}")
     private String forexTechnicalHost;

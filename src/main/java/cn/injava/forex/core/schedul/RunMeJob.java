@@ -46,7 +46,7 @@ public class RunMeJob extends QuartzJobBean {
         //订阅技术指标
         String[] productsPeriod = {"eur-usd","aud-usd"};
         for (String product : productsPeriod){
-            int[] periods = {300,900,3600}; //5分钟、15分钟、60分钟
+            int[] periods = {900,3600,86400}; //15分钟、60分钟、一天
             for (int period : periods){
                 SubTechnicalTask subTechnicalTask =
                         (SubTechnicalTask) applicationContext.getBean("subTechnicalTask");
