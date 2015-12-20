@@ -57,7 +57,7 @@ public class SubTechnicalTask implements Runnable{
             subService.setTechnical(technical);
 
             //对订阅者发送消息
-            subByMultiPeriod(product, new int[]{300, 900, 3600});
+//            subByMultiPeriod(product, new int[]{300, 900, 3600});
 
             try {
                 Thread.sleep(period*1000);
