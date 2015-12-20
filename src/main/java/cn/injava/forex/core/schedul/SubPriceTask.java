@@ -118,7 +118,9 @@ public class SubPriceTask implements Runnable{
             product.setAsk(ask);
             product.setBid(bid);
             product.setChange(change);
-            product.setDateTime(new DateTime(lasttime*1000));
+            //TODO lasttime不知道是哪个时区,所有用了本地的时间
+//            product.setDateTime(new DateTime(lasttime*1000));
+            product.setDateTime(new DateTime());
             product.setProductName(productName);
         } catch (IOException e) {
             e.printStackTrace();
