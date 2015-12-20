@@ -54,6 +54,10 @@ public class SubTechnicalTask implements Runnable{
         while(true){
             Technical technical = subTechnical(product, period);
 
+            //加入到service
+            subService.setTechnical(technical);
+
+            //对订阅者发送消息
             subByMultiPeriod(product, new int[]{300, 900, 3600});
 
             try {

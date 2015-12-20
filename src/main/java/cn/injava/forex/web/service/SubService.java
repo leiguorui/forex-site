@@ -3,6 +3,7 @@ package cn.injava.forex.web.service;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
+import cn.injava.forex.web.model.Technical;
 import org.springframework.stereotype.Service;
 
 import java.util.*;
@@ -15,12 +16,18 @@ import java.util.*;
 @Service
 public class SubService {
     List<SubModel> subModels = new ArrayList<>();
+
     /**
      * 所有的货币对报价、技术分析等
      *
      * 由定时程序 SubPriceTask、SubTechnicalTask 更新
      */
     Map<String, Product> productMap = new HashMap<>();
+
+    /**
+     * 系统所提供的所有的技术指标
+     */
+    Map<String, Technical> technicalMap = new HashMap<>();
 
     /**
      * 添加订阅者
@@ -116,4 +123,21 @@ public class SubService {
     public Map<String, Product> getProducts() {
         return this.productMap;
     }
+
+    /**
+     * 添加技术指标
+     * @param technical
+     */
+    public void setTechnical(Technical technical) {
+        this.technicalMap.put(technical.getProdutcName() + "-" + technical.getPeriod(), technical);
+    }
+
+    /**
+     * 返回所有的技术指标
+     * @return
+     */
+    public Map<String, Technical> getTechnicals() {
+        return this.technicalMap;
+    }
+
 }

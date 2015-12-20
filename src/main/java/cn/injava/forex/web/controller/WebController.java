@@ -58,6 +58,7 @@ public class WebController {
      */
     @RequestMapping(value = "/sub_technical", method = RequestMethod.GET)
     public String sub_technical(ModelMap model) {
+        model.addAttribute("technicals", subService.getTechnicals());
         return "content/sub_technical";
     }
 

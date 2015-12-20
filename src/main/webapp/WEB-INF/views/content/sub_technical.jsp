@@ -54,9 +54,34 @@
 								<p>
 									Donec elementum dolor eu mi elementum vulputate. Vivamus condimentum mauris laoreet eros lacinia tempus molestie elit ullamcorper. Fusce non mi nec nulla varius dictum. Cras condimentum, dolor eget consectetur feugiat, libero odio rhoncus neque, vitae porta erat eros sit amet sapien..
 								</p>
-								<%--<div class="thumbnail">--%>
-									<%--<iframe frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?q=Scotland+Yard,+Broadway,+London,+Britain&hl=hu&ie=UTF8&sll=51.505217,0.099392&sspn=0.037023,0.104628&oq=Britain+scotlan&hq=Scotland+Yard,+Broadway,&hnear=London,+Egyes%C3%BClt+Kir%C3%A1lys%C3%A1g&t=m&z=14&amp;output=embed"></iframe>--%>
-								<%--</div>--%>
+
+								<div class="col-md-12">
+									<h3>qoute</h3>
+									<p>Use contextual classes to color table rows.</p>
+									<table class="table">
+										<thead>
+										<tr>
+											<th>#</th>
+											<th>productName</th>
+											<th>period</th>
+											<th>Moving Averages</th>
+											<th>Technical Indicators</th>
+										</tr>
+										</thead>
+										<tbody>
+										<c:forEach items="${technicals}" var="entry" varStatus="loop">
+											<tr>
+												<td>${loop.index}</td>
+												<td>${entry.value.produtcName}</td>
+												<td>${entry.value.period}</td>
+												<td>${entry.value.maBuy} / ${entry.value.maSell}</td>
+												<td>${entry.value.tiBuy} / ${entry.value.tiSell}</td>
+											</tr>
+										</c:forEach>
+										</tbody>
+									</table>
+								</div>
+
 								<!-- contact form -->
 								<form method="post" class="contact-form" action="/sub_price.html" id="subpriceId">
 								<div class="row">

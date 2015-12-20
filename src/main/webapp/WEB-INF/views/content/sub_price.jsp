@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -77,7 +78,7 @@
 												<td>${entry.value.bid}</td>
 												<td>${entry.value.ask}</td>
 												<td>${entry.value.change}</td>
-												<td>${entry.value.dateTime}</td>
+												<td><joda:format value="${entry.value.dateTime}" pattern="HH:mm:ss yyyy/MM/dd"/></td>
 											</tr>
 										</c:forEach>
 										</tbody>
