@@ -56,6 +56,7 @@ public class SubTechnicalTask implements Runnable{
             //加入到service
             subService.setTechnical(technical);
 
+            //TODO 需要给订阅者发送邮件提醒
             //对订阅者发送消息
 //            subByMultiPeriod(product, new int[]{300, 900, 3600});
 
