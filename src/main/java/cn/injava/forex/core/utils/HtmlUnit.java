@@ -13,14 +13,13 @@ import org.springframework.stereotype.Component;
  */
 @Component
 public class HtmlUnit {
-    private WebClient webClient;
 
     /**
      * 获取速度最快的浏览器
      * @return
      */
     public WebClient getFastWebClient() {
-        webClient = new WebClient(BrowserVersion.CHROME);
+        WebClient webClient = new WebClient(BrowserVersion.CHROME);
 
         //TODO 这里可以启动webclient的ajax功能，读取技术指标的变化
         webClient.getOptions().setCssEnabled(false);//if you don't need css

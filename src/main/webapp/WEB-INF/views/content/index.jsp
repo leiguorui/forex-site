@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 
 <!DOCTYPE html>
 <html>
@@ -210,8 +211,8 @@
 							</ul>
 							<section class="clearfix">
 								<div class="col-md-12 no-padding">
-									<iframe src="http://ec.cn.forexprostools.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3&countries=37,6,110,14,48,46,32,17,10,36,35,72,22,41,25,12,43,5,4,26,11,39,42&calType=week&timeZone=28&lang=6" width="636" height="467" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>
-								</div>	
+									<%--<iframe src="http://ec.cn.forexprostools.com?columns=exc_flags,exc_currency,exc_importance,exc_actual,exc_forecast,exc_previous&importance=3&countries=37,6,110,14,48,46,32,17,10,36,35,72,22,41,25,12,43,5,4,26,11,39,42&calType=week&timeZone=28&lang=6" width="636" height="467" frameborder="0" allowtransparency="true" marginwidth="0" marginheight="0"></iframe>--%>
+								</div>
 							</section>
 							
 							<ul class="section-title clearfix">
@@ -270,6 +271,60 @@
 							<div id="sidebar" class="sidebar-alignment">
 								<a href="#signin" data-toggle="modal" class="btn btn-success btn-block btn-flat">Sign in <i class="fa fa-sign-in"></i> GameForest</a>
 								<!-- latest games -->
+								<div class="sidebar-section">
+									<div class="title"><i class="fa fa-gamepad"></i> Technical</div>
+									<div class="categories">
+										<ul>
+											<li><a href="#EURUSD" data-toggle="tab">EURUSD</a></li>
+											<li><a href="#AUDUSD" data-toggle="tab">AUDUSD</a></li>
+										</ul>
+										<div class="clearfix"></div>
+									</div>
+									<div class="tab-content">
+										<ul id="EURUSD" class="tab-pane fade in active content">
+											<!-- row #1 -->
+											<c:forEach items="${technicals}" var="entry" varStatus="loop">
+												<c:if test="${fn:containsIgnoreCase(entry.value.produtcName, 'eur-usd')}">
+												<li class="clearfix">
+													<div class="number pull-left">${entry.value.period}</div>
+													<div class="details">
+														<div class="pull-left">
+															<h5><a href="#">${entry.value.produtcName}</a></h5>
+															<span class="category">建议买入</span>
+															<div class="sidebar-info line-height">${entry.value.maBuy} / ${entry.value.maSell}</div>
+														</div>
+														<div class="rate pull-right">
+															<span class="label label-success">牛</span>
+														</div>
+													</div>
+												</li>
+												</c:if>
+											</c:forEach>
+										</ul>
+
+										<ul id="AUDUSD" class="tab-pane fade content">
+											<!-- row #1 -->
+											<c:forEach items="${technicals}" var="entry" varStatus="loop">
+												<c:if test="${fn:containsIgnoreCase(entry.value.produtcName, 'aud-usd')}">
+													<li class="clearfix">
+														<div class="number pull-left">${entry.value.period}</div>
+														<div class="details">
+															<div class="pull-left">
+																<h5><a href="#">${entry.value.produtcName}</a></h5>
+																<span class="category">建议买入</span>
+																<div class="sidebar-info line-height">${entry.value.maBuy} / ${entry.value.maSell}</div>
+															</div>
+															<div class="rate pull-right">
+																<span class="label label-success">牛</span>
+															</div>
+														</div>
+													</li>
+												</c:if>
+											</c:forEach>
+										</ul>
+
+									</div>
+								</div>
 								<!-- ./latest games -->
 								
 								<!-- advertisement -->

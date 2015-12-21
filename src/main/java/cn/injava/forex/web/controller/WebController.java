@@ -24,6 +24,7 @@ public class WebController {
 
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
+        model.addAttribute("technicals", subService.getTechnicals());
         return "content/index";
     }
 

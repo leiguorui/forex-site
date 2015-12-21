@@ -98,6 +98,8 @@ public class SubTechnicalTask implements Runnable{
             technical.setTiSell(tiSell);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            webClient.close();
         }
 
         logger.debug("完成一次技术的请求，{}", technical.toString());
