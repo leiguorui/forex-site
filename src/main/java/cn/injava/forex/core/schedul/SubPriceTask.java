@@ -124,6 +124,8 @@ public class SubPriceTask implements Runnable{
             product.setProductName(productName);
         } catch (IOException e) {
             e.printStackTrace();
+        } finally {
+            webClient.close();
         }
 
 //        logger.debug("完成一次报价的请求, product: {}",product.toString());

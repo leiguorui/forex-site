@@ -29,7 +29,11 @@ public class HtmlUnit {
         webClient.getOptions().setGeolocationEnabled(false);
 //        webClient.getOptions().setDoNotTrackEnabled(true);  //不追踪隐私
         webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);  //页面有错，不抛出异常
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
         webClient.getOptions().setPrintContentOnFailingStatusCode(false);    //页面有错，不打印
+        webClient.setHTMLParserListener(null);
+        webClient.setJavaScriptErrorListener(null);
+        webClient.setJavaScriptTimeout(3000);
 
         return webClient;
     }
