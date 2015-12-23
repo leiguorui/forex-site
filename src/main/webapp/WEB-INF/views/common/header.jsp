@@ -42,7 +42,7 @@
         </ul>
       </li>
       <li><a href="forums.html">canlder</a></li>
-      <li><a href="gallery.html">Gallery</a></li>
+      <li><a href="videos.html">Videos</a></li>
       <li><a href="contact.html">Contact</a></li>
     </ul>
     <!-- search -->
