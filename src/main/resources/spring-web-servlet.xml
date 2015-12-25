@@ -123,7 +123,7 @@
 			<list>
 				<ref bean="cronTriggerRunMeJob" />
 				<ref bean="cronTriggerStopMeJob" />
-				<!--<ref bean="simpleTrigger" />-->
+				<ref bean="simpleTrigger" />
 			</list>
 		</property>
 	</bean>
