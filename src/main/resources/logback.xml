@@ -1,8 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <configuration>
 
-    <!--<property name="DEV_HOME" value="c:/logs" />-->
-    <property name="DEV_HOME" value="logs" />
+    <property resource="sys-config.properties" />
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <layout class="ch.qos.logback.classic.PatternLayout">
@@ -60,8 +59,8 @@
         <appender-ref ref="STDOUT" />
     </logger>
 
-    <root level="error">
-    <!--<root level="debug">-->
+    <!--<root level="error">-->
+    <root level="INFO">
         <appender-ref ref="FILE-ERROR" />
         <appender-ref ref="STDOUT" />
     </root>
