@@ -7,10 +7,7 @@ import cn.injava.forex.web.model.YouKuVideo;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
+import com.google.gson.*;
 import com.google.gson.reflect.TypeToken;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,6 +31,8 @@ public class WebController {
 
     @Resource
     private HtmlUnit htmlUnit;
+
+    Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     private static final Logger logger =
             LoggerFactory.getLogger(WebController.class);
@@ -133,14 +132,14 @@ public class WebController {
         //TODO 这里应该转换成spring rest client
         final WebClient webClient = htmlUnit.getFastWebClient();
         try {
-            final Page page = webClient.getPage("https://openapi.youku.com/v2/videos/by_user.json?client_id=7b4d1fbbc2359ab2&user_id=52643541");
+            final Page page = webClient.getPage("https://openapi.youku.com/v2/videos/by_user.json?client_id=7b4d1fbbc2359ab2&user_id=52643541&count=4");
             String response = page.getWebResponse().getContentAsString();
 
             JsonElement jelement = new JsonParser().parse(response);
             JsonObject jobject = jelement.getAsJsonObject();
 
             Type listType = new TypeToken<ArrayList<YouKuVideo>>() {}.getType();
-            List<YouKuVideo> videos = new Gson().fromJson(jobject.getAsJsonArray("videos"), listType);
+            List<YouKuVideo> videos = gson.fromJson(jobject.getAsJsonArray("videos"), listType);
 
             model.addAttribute("videos", videos);
         } catch (IOException e) {
