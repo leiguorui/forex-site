@@ -1,0 +1,225 @@
+@media (min-width: 768px) and (max-width: 1023px) {
+	body { 
+		padding: 0!important; 
+	}
+	#wrapper { 
+		box-shadow: 0 0 0 0!important; 
+	}
+	.sidebar-section .thumbnail.pull-left { 
+		display: none!important;
+	}
+	.to-top {
+		display:none!important; 
+	}
+	#top-navigation {
+		display: none;
+	}
+	.padding { 
+		padding: 10px!important; 
+	}
+	.bxslider-wrapper { 
+		margin-bottom: 0!important;
+		box-shadow: 0 0 0 0!important;
+	}
+	.section-categories {
+		display: none!important; 
+	}
+	section .pull-left img {
+		margin-right: 10px; 
+	}
+	section .details { 
+		padding: 0!important; 
+	}
+	.row {
+		margin: 0!important; 
+	}
+	#sub-navigation {
+		position: relative!important;
+	}
+	#top-social span {
+		display: none;
+	}
+	#categories li a {
+		font-size: 12px!important;
+	}
+	#links li {
+		display: none;
+	}
+	.logo {
+		float: none!important;
+		text-align: center!important;
+	}
+	#categories, #user-interface {
+		margin-left: 5px!important;
+	}
+	header .advertisement {
+		display: none;
+	}
+	#search { 
+		display: none!important;
+	}
+	.facebook-like-box iframe {
+		width: 100%!important;
+		height: auto!important;
+	}
+	.bxslider-bg {
+		height: 100%!important;
+		margin-bottom: 30px;
+	}
+	.bxslider .title {
+		display: none!important;
+	}
+	.bxslider-wrapper, .bx-wrapper .img {
+		width: 100%!important;
+	}
+	.bxslider .img .title {
+		font-size: 11px!important;
+	}
+	.bxslider .img .title h1 {
+		font: 18px 'BebasNeue', Arial, sans-serif!important;
+	}
+	#bx-tabs {
+		display: none;
+	}
+	.sidebar-margin {
+		margin: 0!important;
+	}
+	.sidebar-shadow {
+		display: none;
+	}
+	.footer-widget .span3, .footer-tags {
+		padding: 0 10px;
+	}
+	.footer-bottom { 
+		padding: 0 10px;
+		height: 100%!important;
+		text-align: center!important;
+		margin: 0 auto!important;
+	}
+	.footer-bottom .copy {
+		float: none!important;
+		text-align: center;
+		margin: 0!important;
+		padding: 0!important;
+	}
+	.footer-links {
+		display: none;
+	}
+}
+
+@media (max-width: 767px) {	
+	body { 
+		padding: 0!important; 
+	}
+	#wrapper { 
+		box-shadow: 0 0 0 0!important; 
+	}
+	.sidebar-section .thumbnail {
+		width: auto!important;
+	}
+	.to-top {
+		display:none!important; 
+	}
+	#top-navigation {
+		display: none;
+	}
+	.padding { 
+		padding: 10px!important; 
+	}
+	.bxslider-wrapper { 
+		margin-bottom: 0!important;
+		box-shadow: 0 0 0 0!important;
+	}
+	.sidebar-section .thumbnail.pull-left { 
+		display: none!important;
+	}
+	.thumbnail.pull-left {
+		margin-right: 10px; 
+		width: auto!important;
+		height: auto!important;
+	}
+	.section-categories {
+		display: none!important; 
+	}
+	section .pull-left img {
+		margin-right: 10px; 
+	}
+	section .details { 
+		padding: 0!important; 
+	}
+	.row {
+		margin: 0!important; 
+	}
+	#sub-navigation {
+		position: relative!important;
+	}
+	#top-social span {
+		display: none;
+	}
+	#categories li a {
+		font-size: 12px!important;
+	}
+	#links li {
+		display: none;
+	}
+	.logo {
+		float: none!important;
+		text-align: center!important;
+	}
+	#categories, #user-interface {
+		margin-left: 5px!important;
+	}
+	header .advertisement {
+		display: none;
+	}
+	#search { 
+		display: none!important;
+	}
+	.facebook-like-box iframe {
+		width: 100%!important;
+		height: auto!important;
+	}
+	.bxslider-bg {
+		height: 100%!important;
+		margin-bottom: 30px;
+	}
+	.bxslider .title {
+		display: none!important;
+	}
+	.bxslider-wrapper, .bx-wrapper .img {
+		width: 100%!important;
+	}
+	.bxslider .img .title {
+		font-size: 11px!important;
+	}
+	.bxslider .img .title h1 {
+		font: 18px 'BebasNeue', Arial, sans-serif!important;
+	}
+	#bx-tabs {
+		display: none;
+	}
+	.sidebar-margin {
+		margin: 0!important;
+	}
+	.sidebar-shadow {
+		display: none;
+	}
+	.footer-widget .span3, .footer-tags {
+		padding: 0 10px;
+	}
+	.footer-bottom { 
+		padding: 0 10px;
+		height: 100%!important;
+		text-align: center!important;
+		margin: 0 auto!important;
+	}
+	.footer-bottom .copy {
+		float: none!important;
+		text-align: center;
+		margin: 0!important;
+		padding: 0!important;
+	}
+	.footer-links {
+		display: none;
+	}
+}
