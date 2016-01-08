@@ -24,3 +24,7 @@ mvn -Dtest=TestSubTechnical#test_se test
 #### 开发中，学习的一些教程
 + Spring MVC + Logback SLF4j example ：http://www.mkyong.com/spring-mvc/spring-mvc-logback-slf4j-example/
 + logback logback.xml常用配置详解 ：http://aub.iteye.com/blog/1101260
+
+#### 访问链接
++   heroku: https://waihuitong.herokuapp.com/
++   阿里TAE: http://waihuitong.wx.jaeapp.com/
