@@ -15,19 +15,19 @@
    
    <preference name = "permissions" value = "none"/>
    
-   <icon src = "res/icon/android/drawable-ldpi/tp_icon.png" 
+   <icon src = "res/icon/android/drawable-ldpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "ldpi" />
 		
-   <icon src = "res/icon/android/drawable-mdpi/tp_icon.png" 
+   <icon src = "res/icon/android/drawable-mdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "mdpi" />
 		
-   <icon src = "res/icon/android/drawable-hdpi/tp_icon.png" 
+   <icon src = "res/icon/android/drawable-hdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "hdpi" />
 		
-   <icon src = "res/icon/android/drawable-xhdpi/tp_icon.png" 
+   <icon src = "res/icon/android/drawable-xhdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "xhdpi" />
 		
-   <icon src = "res/icon/android/drawable-xxhdpi/tp_icon.png" 
+   <icon src = "res/icon/android/drawable-xxhdpi/ic_launcher.png" 
       gap:platform = "android" gap:qualifier = "xxhdpi" />
    
    <icon src = "res/icon/ios/Icon-72.png" gap:platform = "ios" gap:qualifier = ""/>
