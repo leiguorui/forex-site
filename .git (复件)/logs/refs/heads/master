@@ -1,0 +1,56 @@
+0000000000000000000000000000000000000000 a1e29916073b5c52b387b986226ae11736f7c8c1 degree.lei@gmail.com <degree.lei@gmail.com> 1435127126 +0800	commit (initial): first commit
+a1e29916073b5c52b387b986226ae11736f7c8c1 319a9485a1c38d90ac3a41859aa8fa128bbb7957 degree.lei@gmail.com <degree.lei@gmail.com> 1435127863 +0800	commit: add forex price sub
+319a9485a1c38d90ac3a41859aa8fa128bbb7957 79a292d9d3c976f2f74c73b052c8e01237486d5c degree.lei@gmail.com <degree.lei@gmail.com> 1435128279 +0800	commit: add jstl dependency
+79a292d9d3c976f2f74c73b052c8e01237486d5c 205462cd6abe2358d861b1f5e224950b97ca9eaa degree.lei@gmail.com <degree.lei@gmail.com> 1435144241 +0800	commit: 汇价提醒
+205462cd6abe2358d861b1f5e224950b97ca9eaa fb81dd37cc22a8ac918a2c487ba36ef78a98b429 degree.lei@gmail.com <degree.lei@gmail.com> 1435204009 +0800	commit: 重构页面
+fb81dd37cc22a8ac918a2c487ba36ef78a98b429 bdb247327eb7421c4bb8eca4707c2cce5b1ad70a degree.lei@gmail.com <degree.lei@gmail.com> 1435219782 +0800	commit: 邮件订阅报价
+bdb247327eb7421c4bb8eca4707c2cce5b1ad70a 5c2126b27a1ce4de33316d42eedd71c9fac7ecf1 degree.lei@gmail.com <degree.lei@gmail.com> 1435309573 +0800	commit: 邮件订阅报价
+5c2126b27a1ce4de33316d42eedd71c9fac7ecf1 0787f9d748b27f8343e86b59ac8a52d6b5b9766b degree.lei@gmail.com <degree.lei@gmail.com> 1435314618 +0800	commit: 优化邮件订阅报价
+0787f9d748b27f8343e86b59ac8a52d6b5b9766b 50fed60749971826282b034c1b620b75e00af973 degree.lei@gmail.com <degree.lei@gmail.com> 1435390092 +0800	commit: 首页添加财经日历
+50fed60749971826282b034c1b620b75e00af973 e5922fd5eebf4b82cf0cc178479de0093380fb66 degree.lei@gmail.com <degree.lei@gmail.com> 1435390158 +0800	commit: 首页添加财经日历
+e5922fd5eebf4b82cf0cc178479de0093380fb66 a7c6c971e33079763687773601fd41a6480c2ddf degree.lei@gmail.com <degree.lei@gmail.com> 1435390275 +0800	commit: 首页添加财经日历
+a7c6c971e33079763687773601fd41a6480c2ddf 3aa6bd683cb2104e4fea34c977bd8c0adac86397 degree.lei@gmail.com <degree.lei@gmail.com> 1435483865 +0800	commit: 技术指标
+3aa6bd683cb2104e4fea34c977bd8c0adac86397 7f15220589380f8b5f468a365758001b29dc9a87 degree.lei@gmail.com <degree.lei@gmail.com> 1435489854 +0800	commit: 技术指标
+7f15220589380f8b5f468a365758001b29dc9a87 3bb44e048e84e23b64f36204f0224e9c359a0b14 degree.lei@gmail.com <degree.lei@gmail.com> 1435575538 +0800	commit: 设置请求的时间间隔
+3bb44e048e84e23b64f36204f0224e9c359a0b14 607cfed8f0716ca925fccc1925c5ab46d192046e degree.lei@gmail.com <degree.lei@gmail.com> 1435661935 +0800	commit: 使用定时器订阅报价
+607cfed8f0716ca925fccc1925c5ab46d192046e 22321b4c7dd75f757edd5eb3d93ee74585f5ea5f degree.lei@gmail.com <degree.lei@gmail.com> 1435729896 +0800	commit: 修复threadPoolTaskExecutor.shutdown() 不能结束线程的bug
+22321b4c7dd75f757edd5eb3d93ee74585f5ea5f 241517b1b67a94e91a9e8b3f01b5ea18a9a125d9 degree.lei@gmail.com <degree.lei@gmail.com> 1435729966 +0800	commit: 修复threadPoolTaskExecutor.shutdown() 不能结束线程的bug
+241517b1b67a94e91a9e8b3f01b5ea18a9a125d9 06ff058e6118be9133e5b1d7b7b758820d482a91 degree.lei@gmail.com <degree.lei@gmail.com> 1435731258 +0800	commit: 修改文件乱码
+06ff058e6118be9133e5b1d7b7b758820d482a91 3597df8f96e073318f690c2dd9c6683ad7cf4fbb degree.lei@gmail.com <degree.lei@gmail.com> 1435751304 +0800	commit: 添加：订阅技术指标
+3597df8f96e073318f690c2dd9c6683ad7cf4fbb e152631e84a6c3c71016d96d858d51852252c14c degree.lei@gmail.com <degree.lei@gmail.com> 1435751406 +0800	commit: 添加：订阅技术指标
+e152631e84a6c3c71016d96d858d51852252c14c b3db674a3f85c49696b165cd5a716e654ce7b135 degree.lei@gmail.com <degree.lei@gmail.com> 1435807357 +0800	commit: 修复：订阅技术指标
+b3db674a3f85c49696b165cd5a716e654ce7b135 ca2e26c5d6492f2282194e94f7ce14a8fa8f38ea degree.lei@gmail.com <degree.lei@gmail.com> 1435807970 +0800	commit: 优化：webclient的获取方式
+ca2e26c5d6492f2282194e94f7ce14a8fa8f38ea 34d4af156c23c2e29f5c3846433b30555c4161b7 degree.lei@gmail.com <degree.lei@gmail.com> 1435808732 +0800	commit: mail util
+34d4af156c23c2e29f5c3846433b30555c4161b7 17a30075b4ddf066b1d6c301de556d8716133629 degree.lei@gmail.com <degree.lei@gmail.com> 1435818592 +0800	commit: 添加：logback
+17a30075b4ddf066b1d6c301de556d8716133629 ae11e76ea421309d9428ea2852487ffe06547331 degree.lei@gmail.com <degree.lei@gmail.com> 1435890743 +0800	commit: 修复：改变context，不显示公共页面
+ae11e76ea421309d9428ea2852487ffe06547331 2f7a00527ce9ffd5b63c14709c17f0453cdb492e degree.lei@gmail.com <degree.lei@gmail.com> 1435893766 +0800	commit: 修复：移除context
+2f7a00527ce9ffd5b63c14709c17f0453cdb492e aa3b528283b7b49580b1ee088e231e61efa7bd0d degree.lei@gmail.com <degree.lei@gmail.com> 1435903560 +0800	commit: add：display quotes
+aa3b528283b7b49580b1ee088e231e61efa7bd0d 8b4992589a7e86dddb832fb4dce41e6aad256218 degree.lei@gmail.com <degree.lei@gmail.com> 1436410149 +0800	commit: add：sub multiple technical analysis
+8b4992589a7e86dddb832fb4dce41e6aad256218 8252f47aa5e90c825a0e7543cab20456ca93ce99 degree.lei@gmail.com <degree.lei@gmail.com> 1436412444 +0800	commit: add：sub multiple technical analysis
+8252f47aa5e90c825a0e7543cab20456ca93ce99 16787f6f2876cefc315a6f4b1d25a12b253e18b2 degree.lei@gmail.com <degree.lei@gmail.com> 1436412610 +0800	commit: add：sub multiple technical analysis
+16787f6f2876cefc315a6f4b1d25a12b253e18b2 568ae7bdcf9122829e976a88d1d4675f058087e6 degree.lei@gmail.com <degree.lei@gmail.com> 1436532967 +0800	commit: add：get application context anywhere
+568ae7bdcf9122829e976a88d1d4675f058087e6 ef014966935b722cc19049cc5b792ed445aa6a6e degree.lei@gmail.com <degree.lei@gmail.com> 1436598767 +0800	commit: add：my thread pool
+ef014966935b722cc19049cc5b792ed445aa6a6e dc4de57b159f3271f26ec616e9211cd83c7379f6 degree.lei@gmail.com <degree.lei@gmail.com> 1436601293 +0800	commit: update：sub price
+dc4de57b159f3271f26ec616e9211cd83c7379f6 0128008c85eff2f375d8b051c13c852da2815365 degree.lei@gmail.com <degree.lei@gmail.com> 1436603518 +0800	commit: update：sub technical
+0128008c85eff2f375d8b051c13c852da2815365 86c4e86144a9a621ad5ef256ef0b747741ef6be0 degree.lei@gmail.com <degree.lei@gmail.com> 1437797633 +0800	commit: add : test quertz
+86c4e86144a9a621ad5ef256ef0b747741ef6be0 fa131793da20b4b3f95a3d0d0d1b4e028cdb6a29 leiguorui <degree.lei@gmail.com> 1442730384 +0800	commit: update xml config
+fa131793da20b4b3f95a3d0d0d1b4e028cdb6a29 3cdf6fdcc6bc411860f05e2d64b020fd85f26387 leiguorui <degree.lei@gmail.com> 1444266063 +0800	commit: update timestamp to date
+3cdf6fdcc6bc411860f05e2d64b020fd85f26387 deddcf7c4baf17161c9aa2a4be5748e2c9275703 leiguorui <degree.lei@gmail.com> 1444268204 +0800	commit: double to bigdecimal in non scientific fomate
+deddcf7c4baf17161c9aa2a4be5748e2c9275703 ce2bea2a5ab0a857334b1a05f1ea6a5bfe651162 leiguorui <degree.lei@gmail.com> 1449986934 +0800	commit: start schedule after project started
+ce2bea2a5ab0a857334b1a05f1ea6a5bfe651162 6b4f74ce30b566fa06a55e80b400a5e4c919edda leiguorui <degree.lei@gmail.com> 1449992355 +0800	commit: shutdown all thread when application is stoped
+6b4f74ce30b566fa06a55e80b400a5e4c919edda 2b3bcbc3f50af8ac470d1d50e43bc8e72da0a63f leiguorui <degree.lei@gmail.com> 1450590434 +0800	commit: update price the way of datetime
+2b3bcbc3f50af8ac470d1d50e43bc8e72da0a63f c5b52ffb90d5db959225e5ecdb915d7df13f0141 leiguorui <degree.lei@gmail.com> 1450590586 +0800	commit: display technical on page
+c5b52ffb90d5db959225e5ecdb915d7df13f0141 1200a8c8c88a7fab7ea9c791884e4b39c46e0544 leiguorui <degree.lei@gmail.com> 1450593790 +0800	commit: create a technical instance each time
+1200a8c8c88a7fab7ea9c791884e4b39c46e0544 fa85091b68e7e888198d5283e8d330c5c5b0c468 leiguorui <degree.lei@gmail.com> 1450596326 +0800	commit: remove send technical temporarily
+fa85091b68e7e888198d5283e8d330c5c5b0c468 cfc18aa29ef1c3c06acc921247502a68010a2de8 leiguorui <degree.lei@gmail.com> 1450596490 +0800	commit: remove sending technical mail temporarily
+cfc18aa29ef1c3c06acc921247502a68010a2de8 78256edce883a476dada40744a9d005dd9554bbf leiguorui <degree.lei@gmail.com> 1450660984 +0800	commit: dispaly technical on home page
+78256edce883a476dada40744a9d005dd9554bbf 897fe5752ac5e3c4f91b4885aa5027fcf1ff7771 leiguorui <degree.lei@gmail.com> 1450750608 +0800	commit: fix js execute thread error
+897fe5752ac5e3c4f91b4885aa5027fcf1ff7771 48a118b94912a076514db246f25e5ab688439ddb leiguorui <degree.lei@gmail.com> 1450836473 +0800	commit: add cctv finacal videos
+48a118b94912a076514db246f25e5ab688439ddb 53ed309956ea3824a828b4a36c206b4f681630f5 leiguorui <degree.lei@gmail.com> 1450836914 +0800	commit: TODO
+53ed309956ea3824a828b4a36c206b4f681630f5 209c5687b2d4553c7d791d123398dca464332c1a leiguorui <degree.lei@gmail.com> 1451014302 +0800	commit: add index location
+209c5687b2d4553c7d791d123398dca464332c1a e075d3930c25aba4f9c985c4692a6fe870b316db leiguorui <degreelei@gmail.com> 1451810285 +0800	commit: update log dir
+e075d3930c25aba4f9c985c4692a6fe870b316db b0a76e6dc4ebd6ccb9926e0b9f68c36150530898 leiguorui <degreelei@gmail.com> 1451813205 +0800	commit: fix date bug
+b0a76e6dc4ebd6ccb9926e0b9f68c36150530898 caeb2213a67f3ddadf8f9e45f5639fc22f47e3a9 leiguorui <degreelei@gmail.com> 1452084665 +0800	commit: alibaba auth file
+caeb2213a67f3ddadf8f9e45f5639fc22f47e3a9 4d51b524b486f0e9b8ba6b48035ca54e8c9f4dae leiguorui <degreelei@gmail.com> 1452219557 +0800	commit: Deploy
+4d51b524b486f0e9b8ba6b48035ca54e8c9f4dae 34c4ef79ea934808c44c9f12d018f5155f704e55 leiguorui <degreelei@gmail.com> 1452220749 +0800	commit: Deploy
+34c4ef79ea934808c44c9f12d018f5155f704e55 1efc14dce7c4ab6cbf29757ce49c98c0d712d327 leiguorui <degreelei@gmail.com> 1452222653 +0800	commit: Add a Procfile to run processes on Heroku
