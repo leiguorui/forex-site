@@ -3,10 +3,10 @@
 <widget xmlns = "http://www.w3.org/ns/widgets" 
    xmlns:gap = "http://phonegap.com/ns/1.0" id = "com.tutorialspoint.onlineviewer" version = "1.0">
    
-   <name>Tutorials Point</name>
+   <name>外汇通</name>
    
    <description>
-      Tutorials Point Online Viewer
+      Tutorials Of Forx trander
    </description>
    
    <author href = "http://tutorialspoint.com" email = "contact@tutorialspoint.com">
