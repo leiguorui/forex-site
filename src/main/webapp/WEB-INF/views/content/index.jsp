@@ -485,6 +485,11 @@
 		</c:import>
 	</footer>	
 	<!-- ./footer -->
+
+	<!-- modal -->
+	<c:import url="/common/page/modal.html" charEncoding="UTF-8">
+	</c:import>
+	<!-- ./modal -->
 	
 	<!-- Javascript -->
     <script src="js/jquery.min.js"></script>

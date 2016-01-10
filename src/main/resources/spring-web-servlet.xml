@@ -1,9 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:mvc="http://www.springframework.org/schema/mvc"
-	xsi:schemaLocation="
+	   xmlns:context="http://www.springframework.org/schema/context"
+	   xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	   xmlns:mvc="http://www.springframework.org/schema/mvc"
+	   xmlns:p="http://www.springframework.org/schema/p"
+	   xsi:schemaLocation="
         http://www.springframework.org/schema/beans     
         http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
         http://www.springframework.org/schema/mvc 
@@ -130,7 +131,7 @@
 	<!-- // 定时器-->
 
 	<!--dbcp 连接池-->
-	<bean id="datasource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="true">
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="true">
 		<property name="driverClassName" value="org.sqlite.JDBC" />
 		<property name="url" value="jdbc:sqlite:database.db" />
 		<property name="initialSize" value="1" />
@@ -139,5 +140,17 @@
 		<property name="poolPreparedStatements" value="true" />
 	</bean>
 	<!-- // dbcp 连接池-->
+
+	<!-- mybaits -->
+
+	<!-- mybatis文件配置，扫描所有mapper文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:dataSource-ref="dataSource"
+		  p:configLocation="classpath:mybatis-config.xml"
+		  p:mapperLocations="classpath:cn/injava/forex/web/dao/*.xml"/>
+
+	<!-- spring与mybatis整合配置，扫描所有dao -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer" p:basePackage="cn.injava.forex.web.dao"
+		  p:sqlSessionFactoryBeanName="sqlSessionFactory"/>
+	<!-- // mybaits -->
 
 </beans>

@@ -35,4 +35,9 @@ public class CommonPageController {
     public String footer(ModelMap model) {
         return "common/footer";
     }
+
+    @RequestMapping(value = "/modal", method = RequestMethod.GET)
+    public String modal(ModelMap model) {
+        return "common/modal";
+    }
 }

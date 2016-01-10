@@ -6,19 +6,19 @@ package cn.injava.forex.web.model;
  * Created by lei on 16-1-10.
  */
 public class Customer {
-    private long custId;
+    private long id;
     private String name;
     private int age;
     private String password;
     private String account;
     private String email;
 
-    public long getCustId() {
-        return custId;
+    public long getId() {
+        return id;
     }
 
-    public void setCustId(long custId) {
-        this.custId = custId;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -59,5 +59,17 @@ public class Customer {
 
     public void setEmail(String email) {
         this.email = email;
+    }
+
+    @Override
+    public String toString() {
+        return "Customer{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", age=" + age +
+                ", password='" + password + '\'' +
+                ", account='" + account + '\'' +
+                ", email='" + email + '\'' +
+                '}';
     }
 }
