@@ -4,10 +4,10 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.AbstractJUnit4SpringContextTests;
 
 /**
- * TestSupport : Spring²âÊÔÖ§³Ö,ÓÃÓÚ²âÊÔÓÉSpring ¹ÜÀíµÄbean,±àĞ´²âÊÔÀàÊ±,¼Ì³Ğ¸ÃÀà
+ * TestSupport : Springæµ‹è¯•æ”¯æŒ,ç”¨äºæµ‹è¯•ç”±Spring ç®¡ç†çš„bean,ç¼–å†™æµ‹è¯•ç±»æ—¶,ç»§æ‰¿è¯¥ç±»
  *
  * @author StarZou
- * @since 2014Äê5ÔÂ18ÈÕ ÏÂÎç2:28:58
+ * @since 2014å¹´5æœˆ18æ—¥ ä¸‹åˆ2:28:58
  */
 @ContextConfiguration(locations = {"classpath*:spring-web-servlet.xml"})
 public class TestSupport extends AbstractJUnit4SpringContextTests {
@@ -15,7 +15,7 @@ public class TestSupport extends AbstractJUnit4SpringContextTests {
     protected long endTime;
 
     /**
-     * ¼ÇÂ¼ ¿ªÊ¼ÔËĞĞÊ±¼ä
+     * è®°å½• å¼€å§‹è¿è¡Œæ—¶é—´
      *
      * @return
      */
@@ -25,7 +25,7 @@ public class TestSupport extends AbstractJUnit4SpringContextTests {
     }
 
     /**
-     * ¼ÇÂ¼ ½áÊøÔËĞĞÊ±¼ä
+     * è®°å½• ç»“æŸè¿è¡Œæ—¶é—´
      *
      * @return
      */
@@ -36,10 +36,10 @@ public class TestSupport extends AbstractJUnit4SpringContextTests {
     }
 
     /**
-     * Êä³ö¼ÇÂ¼
+     * è¾“å‡ºè®°å½•
      */
     protected void log() {
-        String text = "\n¿ªÊ¼Ê±¼ä : " + this.startTime + "\n½áÊøÊ±¼ä : " + this.endTime + "\nÖ´ĞĞÊ±¼ä : " + (this.endTime - this.startTime);
+        String text = "\nå¼€å§‹æ—¶é—´ : " + this.startTime + "\nç»“æŸæ—¶é—´ : " + this.endTime + "\næ‰§è¡Œæ—¶é—´ : " + (this.endTime - this.startTime);
         logger.info(text);
     }
 }
