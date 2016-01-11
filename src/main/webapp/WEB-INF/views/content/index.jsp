@@ -498,5 +498,6 @@
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/holder.js"></script>
 	<script src="js/custom.js"></script>
+	<script src="js/service/user.js"></script>
 </body>
 </html>

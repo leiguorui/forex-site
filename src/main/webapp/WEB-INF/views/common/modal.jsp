@@ -71,35 +71,29 @@
                 <h4 class="modal-title" id="register-title"><i class="fa fa-user"></i> Create Account</h4>
             </div>
             <div class="modal-body">
-                <form action="#" method="post" class="clearfix">
+                <form action="/user/register.html" method="post" id="regist" class="clearfix">
                     <h5>New Account</h5>
                     <div class="alert alert-simple"><i class="fa fa-info"></i> All fields are required</div>
                     <div class="row">
                         <div class="control-group col-md-6">
                             <label class="control-label" for="username">Username</label>
                             <div class="controls">
-                                <input type="text" class="form-control" id="username" placeholder="Username" required>
+                                <input name="m" type="text" class="form-control" id="username" placeholder="Username" required>
                             </div>
                         </div>
                         <div class="control-group col-md-6">
                             <label class="control-label" for="email">Email</label>
                             <div class="controls">
-                                <input type="text" class="form-control" id="email" placeholder="Email" required>
+                                <input name="e" type="text" class="form-control" id="email" placeholder="Email" required>
                             </div>
                         </div>
                         <div class="control-group col-md-6">
                             <label class="control-label" for="password">Password</label>
                             <div class="controls">
-                                <input type="password" class="form-control" id="password" placeholder="Password" required>
+                                <input name="p" type="password" class="form-control" id="password" placeholder="Password" required>
                             </div>
                         </div>
                         <div class="control-group col-md-6">
-                            <label class="control-label" for="repeat-password">Repeat Password</label>
-                            <div class="controls">
-                                <input type="password" class="form-control" id="repeat-password" placeholder="Password" required>
-                            </div>
-                        </div>
-                        <div class="control-group col-md-12">
                             <label class="control-label" for="repeat-password">Repeat Password</label>
                             <div class="controls">
                                 <input type="password" class="form-control" id="repeat-password" placeholder="Password" required>

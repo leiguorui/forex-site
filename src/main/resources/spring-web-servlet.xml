@@ -131,14 +131,7 @@
 	<!-- // 定时器-->
 
 	<!--dbcp 连接池-->
-	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close" lazy-init="true">
-		<property name="driverClassName" value="org.sqlite.JDBC" />
-		<property name="url" value="jdbc:sqlite:database.db" />
-		<property name="initialSize" value="1" />
-		<property name="maxActive" value="1" />
-		<property name="maxIdle" value="1" />
-		<property name="poolPreparedStatements" value="true" />
-	</bean>
+	<bean id="dataSource"  class="cn.injava.forex.core.db.DataSourceFactoryBean"/>
 	<!-- // dbcp 连接池-->
 
 	<!-- mybaits -->
