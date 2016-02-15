@@ -10,4 +10,8 @@
         INSERT INTO CUSTOMER (name,age,account,password,email)
         VALUES (#{name},#{age},#{account},#{password},#{email});
     </insert>
+
+    <select id="getByEmail" resultType="cn.injava.forex.web.model.Customer">
+        select * FROM CUSTOMER WHERE email = #{email};
+    </select>
 </mapper>

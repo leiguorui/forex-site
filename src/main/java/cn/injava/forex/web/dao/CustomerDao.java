@@ -8,4 +8,5 @@ import cn.injava.forex.web.model.Customer;
 public interface CustomerDao {
     public int insert(Customer customer);
     public Customer findByCustomerId(int custId);
+    public Customer getByEmail(String email);
 }

@@ -16,10 +16,12 @@ mvn -Dtest=TestSubTechnical#test_se test
 
 + 外汇市场节目更新后,立即推送
 + 新页面中播放视频
++ 某种货币在一小时内波动超过1000点,则提示
 
 #### 待优化的功能
 + logback.xml 中， 不同的线程打印到不同的文件中
 + http请求中,不需要执行js的页面,使用restTemplate发送请求
++ OperationResult 类
 
 #### 开发中，学习的一些教程
 + Spring MVC + Logback SLF4j example ：http://www.mkyong.com/spring-mvc/spring-mvc-logback-slf4j-example/

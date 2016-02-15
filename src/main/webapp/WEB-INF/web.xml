@@ -21,6 +21,7 @@
         <servlet-name>dispatcher</servlet-name>
         <!-- 拦截所有/rest/* 的请求,交给DispatcherServlet处理,性能最好 -->
         <url-pattern>*.html</url-pattern>
+        <url-pattern>*.json</url-pattern>
     </servlet-mapping>
 </web-app>
 

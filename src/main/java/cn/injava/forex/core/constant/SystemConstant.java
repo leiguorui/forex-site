@@ -20,4 +20,9 @@ public class SystemConstant {
     final public static String TECH_BUY = "买入";
     final public static String TECH_SELL = "卖出";
     final public static String TECH_NO_CLEAR_SINGLE = "没有明确信号";
+
+    /**
+     * session中的值
+     */
+    final public static String S_USER = "session_user";
 }
