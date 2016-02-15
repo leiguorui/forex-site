@@ -35,6 +35,10 @@ public class RunMeJob extends QuartzJobBean {
             throws JobExecutionException {
         logger.debug("定时任务正在启动...");
 
+        //爬取新闻
+        NewsTask newsTask = (NewsTask) applicationContext.getBean("newsTask");
+        threadPool.runTask(newsTask);
+
         //订阅价格
         String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
         for (String product : products){

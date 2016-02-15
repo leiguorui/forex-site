@@ -74,6 +74,9 @@
 	<!--订阅技术分析-->
 	<bean id="subTechnicalTask" class="cn.injava.forex.core.schedul.SubTechnicalTask" scope="prototype"/>
 
+    <!--爬取新闻-->
+    <bean id="newsTask" class="cn.injava.forex.core.schedul.NewsTask" scope="prototype"/>
+
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 
 		<property name="jobClass" value="cn.injava.forex.core.schedul.RunMeJob" />

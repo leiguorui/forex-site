@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.injava.forex.web.dao.NewsDao">
+
+    <select id="findByType" resultType="cn.injava.forex.web.model.News">
+        select * FROM news
+        WHERE INSTR(type,#{type})
+        ORDER BY id DESC
+		limit #{start}, #{size}
+    </select>
+
+    <insert id="insert" parameterType="cn.injava.forex.web.model.News" useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+        INSERT INTO news (type,title,source,content,imageUrl,time)
+        VALUES (#{type},#{title},#{source},#{content},#{imageUrl},#{time});
+    </insert>
+
+</mapper>

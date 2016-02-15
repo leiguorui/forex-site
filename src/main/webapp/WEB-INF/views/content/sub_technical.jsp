@@ -6,15 +6,15 @@
 <head>
 <title>GameForest - Online Magazine Template</title>
 
-<!-- ======= META TAGS ======= -->	
+<!-- ======= META TAGS ======= -->
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-	
-<!-- ======= STYLE SHEET ======= -->	
+
+<!-- ======= STYLE SHEET ======= -->
 <link rel="stylesheet" type="text/css" href="css/style.css">
 <link rel="stylesheet" type="text/css" href="css/colors/blue.css" id="colors"/>
 
-<!-- ======= STYLE SWITCHER ======= -->	
+<!-- ======= STYLE SWITCHER ======= -->
 <link rel="stylesheet" href="css/styleswitcher.css">
 </head>
 
@@ -43,7 +43,7 @@
 	<!-- wrapper -->
 	<div class="container">
 		<div id="wrapper">
-					<div class="clearfix"> 
+					<div class="clearfix">
 						<div class="col-md-8 no-padding">
 							<div class="padding">
 							<ul class="section-title no-margin-top clearfix">
@@ -105,7 +105,7 @@
 							</section>
 						</div>
 						</div>
-						
+
 						<!-- sidebar section -->
 						<div class="col-md-4 no-padding right-sidebar">
 							<div id="sidebar" class="sidebar-alignment">
@@ -132,7 +132,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									
+
 									<!-- row #3 -->
 									<li>
 										<div class="details">
@@ -142,7 +142,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									
+
 									<!-- row #4 -->
 									<li>
 										<div class="details">
@@ -152,7 +152,7 @@
 										</div>
 										<div class="clearfix"></div>
 									</li>
-									
+
 									<!-- row #5 -->
 									<li>
 										<div class="details">
@@ -174,15 +174,18 @@
 		<div class="clearfix"></div>
 	</div>
 	<!-- ./wrapper -->
-	
+
 	<!-- footer -->
 	<footer>
 		<c:import url="/common/page/footer.html" charEncoding="UTF-8">
 		</c:import>
-	</footer>	
+	</footer>
 	<!-- ./footer -->
-	
 
+    <!-- modal -->
+    <c:import url="/common/page/modal.html" charEncoding="UTF-8">
+    </c:import>
+    <!-- ./modal -->
 
 	<!-- Javascript -->
     <script src="js/jquery.min.js"></script>
@@ -190,6 +193,7 @@
 	<script src="js/jquery.bxslider.min.js"></script>
 	<script src="js/jquery.prettyPhoto.js"></script>
 	<script src="js/custom.js"></script>
+    <script src="js/service/user.js"></script>
 
 	<script type="text/javascript">
 		$(document).ready(function () {
