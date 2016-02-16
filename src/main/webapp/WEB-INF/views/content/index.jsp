@@ -47,23 +47,18 @@
 						<div class="col-md-8 no-padding">
 							<div class="padding">
 							<ul class="section-title no-margin-top clearfix">
-									<li><h3>Latest News</h3></li>
+									<li><h3>汇市新闻</h3></li>
 							</ul>
 							<div class="clearfix">
 								<ul class="section-categories">
-									<li><a href="#" class="active">All</a></li>
-									<li><a href="#">PC</a></li>
-									<li><a href="#">PS3</a></li>
-									<li><a href="#">PS4</a></li>
-									<li><a href="#">Xbox 360</a></li>
-									<li><a href="#">Xbox One</a></li>
-									<li><a href="#">WII U</a></li>
-									<li><a href="#">PS VITA</a></li>
-									<li><a href="#">Mobile</a></li>
-									<li><a href="#">Vita</a></li>
-									<li><a href="#">3DS</a></li>
-									<li><a href="#">iPhone</a></li>
-									<li><a href="#">Microsoft</a></li>
+									<li><a href="#" class="active">全部</a></li>
+									<li><a href="#">美元</a></li>
+									<li><a href="#">欧元</a></li>
+									<li><a href="#">日元</a></li>
+									<li><a href="#">英镑</a></li>
+									<li><a href="#">澳元</a></li>
+									<li><a href="#">纽元</a></li>
+									<li><a href="#">人民币</a></li>
 								</ul>
 							</div>
 
@@ -73,12 +68,15 @@
 								<div class="pull-left col-md-2 no-padding"><img src="holder.js/100%x100" alt="" /></div>
 								<div class="col-md-10">
 									<h4></h4>
-									<p>/p>
-									<div class="details"><i class="fa fa-calendar-o"></i> </div>
-								</div>
+									<p></p>
+                                    <div class="details">
+                                        <i class="fa fa-calendar-o"> </i>
+                                        <i class="glyphicon glyphicon-link"></i>来自 <a href="#"> </a>
+                                    </div>
+                                </div>
 							</section>
 
-							<button type="button" class="btn-flat btn btn-primary btn-lg btn-block btn-load" data-loading-text="Loading...">加载更多...</button>
+							<button type="button" class="btn-flat btn btn-primary btn-lg btn-block btn-load" data-loading-text="正在加载...">加载更多...</button>
 						</div>
 						</div>
 						
@@ -152,7 +150,7 @@
 								
 								<!-- latest news -->
 								<div class="sidebar-section">
-								<div class="title"><i class="fa fa-file-text-o"></i> Latest News</div>
+								<div class="title"><i class="fa fa-file-text-o"></i> 汇市新闻</div>
 								<ul class="content">
 									<!-- row #1 -->
 									<li class="clearfix">

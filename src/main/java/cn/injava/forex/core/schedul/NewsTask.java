@@ -33,14 +33,17 @@ public class NewsTask implements Runnable{
     @Value("#{sysConfigProperties['forex.news.host']}")
     private String newsHost;
 
+    //执行时间间隔(秒)
+    @Value("#{sysConfigProperties['forex.news.period']}")
+    private int period;
+
     @Resource
     private HtmlUnit htmlUnit;
 
     @Resource
     private NewsService newsService;
 
-    //执行时间间隔(秒)
-    private int period;
+
 
     @Override
     public void run() {
@@ -68,7 +71,9 @@ public class NewsTask implements Runnable{
         final WebClient webClient = htmlUnit.getFastWebClient();
         try {
 
-            final HtmlPage page = webClient.getPage("http://cn.investing.com/news/%E7%BB%BC%E5%90%88%E6%80%A7%E6%96%B0%E9%97%BB");
+            logger.debug("开始一次新闻的请求");
+
+            final HtmlPage page = webClient.getPage(newsHost);
             List<DomElement> newses = (List)page.getByXPath("//article[@class='articleItem']");
 
             for (DomElement element : newses){
@@ -125,9 +130,6 @@ public class NewsTask implements Runnable{
         } finally {
             webClient.close();
         }
-
-
-        logger.debug("完成一次新闻的请求");
 
     }
 }
