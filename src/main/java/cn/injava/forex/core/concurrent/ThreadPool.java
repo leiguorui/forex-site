@@ -12,7 +12,7 @@ import java.util.concurrent.*;
  * Created by Administrator on 2015/7/11.
  */
 public class ThreadPool implements DisposableBean {
-    private int poolSize = 10;
+    private int poolSize = 15;
     private int maxPoolSize = 20;
     private long keepAliveTime = 5000;
     private ThreadPoolExecutor threadPoolExecutor = null;

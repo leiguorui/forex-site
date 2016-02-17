@@ -58,4 +58,25 @@ public class NewsController {
 
         return response;
     }
+
+    /**
+     * 获取财经日历
+     * @param from
+     * @param to
+     * @return
+     */
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
+    @ResponseBody
+    public String calendar(String from, String to) {
+        String response;
+
+        try {
+            response = newsService.getCalendar(from, to);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            response = OperationResult.buildFailureResult("error").toString();
+        }
+
+        return response;
+    }
 }

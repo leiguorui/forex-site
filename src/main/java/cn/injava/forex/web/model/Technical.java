@@ -16,24 +16,7 @@ public class Technical {
     // Technical Indicators
     private String tiBuy;
     private String tiSell;
-
-    /**
-     * 获取技术分析的结果
-     * @return 买或卖
-     */
-    public String getTechSingle() {
-        String summary = SystemConstant.TECH_NO_CLEAR_SINGLE;
-
-        if ("(0)".equals(maBuy) && "(0)".equals(tiBuy)) {
-            summary = SystemConstant.TECH_SELL;
-        }
-
-        if ("(0)".equals(maSell) && "(0)".equals(tiSell)) {
-            summary = SystemConstant.TECH_BUY;
-        }
-
-        return summary;
-    }
+    private String summary;
 
     public String getMaBuy() {
         return maBuy;
@@ -83,6 +66,14 @@ public class Technical {
         this.period = period;
     }
 
+    public String getSummary() {
+        return summary;
+    }
+
+    public void setSummary(String summary) {
+        this.summary = summary;
+    }
+
     @Override
     public String toString() {
         return "Technical{" +
@@ -92,6 +83,7 @@ public class Technical {
                 ", maSell='" + maSell + '\'' +
                 ", tiBuy='" + tiBuy + '\'' +
                 ", tiSell='" + tiSell + '\'' +
+                ", summary='" + summary + '\'' +
                 '}';
     }
 }

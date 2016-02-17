@@ -45,7 +45,6 @@ public class WebController {
      */
     @RequestMapping(value = "/index", method = RequestMethod.GET)
     public String printWelcome(ModelMap model) {
-        model.addAttribute("technicals", subService.getTechnicals());
         return "content/index";
     }
 
@@ -147,5 +146,15 @@ public class WebController {
         }
 
         return "videos/videos";
+    }
+
+    /**
+     * 财经日历
+     * @param model
+     * @return
+     */
+    @RequestMapping(value = "/calendar", method = RequestMethod.GET)
+    public String calendar(ModelMap model) {
+        return "calendar/calendar";
     }
 }

@@ -27,13 +27,6 @@
 	</div>
 	<!-- ./sub navigation -->
 
-	<!-- top navigation -->
-	<div id="top-navigation">
-		<c:import url="/common/page/top_navigation.html" charEncoding="UTF-8">
-		</c:import>
-	</div>
-	<!-- ./top navigation -->
-
 	<!-- header -->
 	<header>
 		<c:import url="/common/page/header.html" charEncoding="UTF-8">
@@ -47,18 +40,18 @@
 					<div class="clearfix"> 
 						<div class="col-md-8 no-padding">
 							<div class="padding">
-							<ul class="section-title no-margin-top clearfix">
-									<li><h3>Get in Touch</h3></li>
-							</ul>
-							<!-- section #1 -->
+
+                            <ol class="breadcrumb">
+                                <li><a href="index.html">首页</a></li>
+                                <li class="active">汇价预警</li>
+                            </ol>
+
+                            <!-- section #1 -->
 							<section class="clearfix">
-								<p>
-									Donec elementum dolor eu mi elementum vulputate. Vivamus condimentum mauris laoreet eros lacinia tempus molestie elit ullamcorper. Fusce non mi nec nulla varius dictum. Cras condimentum, dolor eget consectetur feugiat, libero odio rhoncus neque, vitae porta erat eros sit amet sapien..
-								</p>
 
 								<div class="col-md-12">
-									<h3>qoute</h3>
-									<p>Use contextual classes to color table rows.</p>
+									<h3>当前的汇价</h3>
+									<p>目前只有4中货币对.</p>
 									<table class="table">
 										<thead>
 										<tr>
@@ -86,25 +79,7 @@
 								</div>
 
 								<!-- contact form -->
-								<form method="post" class="contact-form" action="/sub_price.html" id="subpriceId">
-								<div class="row">
-									<div class="col-md-6">
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-user"></i></span>
-											<input class="form-control" type="text" name="product" placeholder="product" value="EURUSD"/>
-										</div>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-envelope"></i></span>
-											<input class="form-control" type="text" name="email" placeholder="Email Address" value="green_forex@163.com"/>
-										</div>
-										<div class="input-group">
-											<span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
-											<input class="form-control" type="text" name="price" placeholder="price" value="1."/>
-										</div>
-									</div>
-								</div>
-								<div class="details"><button class="btn btn-primary pull-right btn-flat">Send</button></div>
-								</form>
+
 							</section>
 						</div>
 						</div>
@@ -114,48 +89,34 @@
 							<div id="sidebar" class="sidebar-alignment">
 								<!-- contact info -->
 								<div class="sidebar-section">
-								<div class="title"><i class="awe-pushpin"></i> Information</div>
+								<div class="title"><i class="awe-pushpin"></i> 订阅并提醒</div>
 								<ul class="content">
 									<!-- row #1 -->
 									<li>
 										<div class="details">
-											<div class="pull-left">
-												<h5>Location: 2230 Dartmouth St., Boston</h5>
-											</div>
+                                            <form method="post" class="contact-form" action="/sub_price.html" id="subpriceId">
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-user"></i></span>
+                                                            <input class="form-control" type="text" name="product" placeholder="product" value="EURUSD"/>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-envelope"></i></span>
+                                                            <input class="form-control" type="text" name="email" placeholder="Email Address" value="green_forex@163.com"/>
+                                                        </div>
+                                                        <div class="input-group">
+                                                            <span class="input-group-addon"><i class="fa fa-list-alt"></i></span>
+                                                            <input class="form-control" type="text" name="price" placeholder="price" value="1."/>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="details"><button class="btn btn-primary pull-left btn-flat">订阅</button></div>
+                                            </form>
 										</div>
 										<div class="clearfix"></div>
 									</li>
 
-									<!-- row #2 -->
-									<li>
-										<div class="details">
-											<div class="pull-left">
-												<h5>Phone: (617) 000-0000</h5>
-											</div>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									
-									<!-- row #3 -->
-									<li>
-										<div class="details">
-											<div class="pull-left">
-												<h5>Fax: +00 777 00</h5>
-											</div>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									
-									<!-- row #4 -->
-									<li>
-										<div class="details">
-											<div class="pull-left">
-												<h5>Email: <a href="mailto:info@mydomain.com">info@mydomain.com</a></h5>
-											</div>
-										</div>
-										<div class="clearfix"></div>
-									</li>
-									
 									<!-- row #5 -->
 									<li>
 										<div class="details">

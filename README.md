@@ -13,6 +13,8 @@ mvn -Dtest=TestSubTechnical#test_se test
 + 在http://localhost/gameforest/gallery.html页面添加视频教程和外汇市场节目等
 + 在http://localhost/gameforest/forums.html页面添加论坛
 + 在http://localhost/gameforest/timeline.html页面今天将要发布的重要新闻,以及该新闻的历史数据,数据对汇价的影响等
++ 财经日历数据定时获取
++ 订阅财经事件
 
 + 外汇市场节目更新后,立即推送
 + 新页面中播放视频
@@ -22,11 +24,9 @@ mvn -Dtest=TestSubTechnical#test_se test
 + logback.xml 中， 不同的线程打印到不同的文件中
 + http请求中,不需要执行js的页面,使用restTemplate发送请求
 + OperationResult 类
++ 报价数据替换为http://finance.yahoo.com/webservice/v1/symbols/allcurrencies/quote?format=json
++ 外汇市场的页面里,缩小缩略图,显示当日的财经数据,聊天功能
 
 #### 开发中，学习的一些教程
 + Spring MVC + Logback SLF4j example ：http://www.mkyong.com/spring-mvc/spring-mvc-logback-slf4j-example/
 + logback logback.xml常用配置详解 ：http://aub.iteye.com/blog/1101260
-
-#### 访问链接
-+   heroku: https://waihuitong.herokuapp.com/
-+   阿里TAE: http://waihuitong.wx.jaeapp.com/

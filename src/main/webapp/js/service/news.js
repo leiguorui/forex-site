@@ -7,7 +7,7 @@
 $(document).ready(function(){
     var newsType = "";
     var newsPageNo = 1;
-    var newsPageSize = 10;
+    var newsPageSize = 6;
 
     //加载新闻
     getNews(newsType, newsPageNo, newsPageSize);
@@ -22,6 +22,7 @@ $(document).ready(function(){
         btn.button('reset');
     });
 
+    //按货币对查看
     $('.section-categories a').click(function( event ) {
         event.preventDefault();
 
@@ -54,9 +55,8 @@ function getNews(type, pageNo, pageSize){
         url: "/news/type.json",
         data: {"type":type, "pageNo":pageNo, "pageSize":pageSize},
         success: function(data) {
-            var orginSection = $('#wrapper .col-md-8 .padding section.clearfix:last');
-
             $.each(data.userdata.list,function(index, value){
+                var orginSection = $('#wrapper .col-md-8 .padding section.clearfix:last');
                 var newsSection = orginSection.clone();
                 newsSection.css("display", "");
                 newsSection.find("h4").text(value.title);

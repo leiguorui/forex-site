@@ -8,6 +8,7 @@ import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.model.Technical;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.WebClient;
+import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -89,6 +90,8 @@ public class SubTechnicalTask implements Runnable{
             String maSell = page.getHtmlElementById("maSell").asText();
             String tiBuy = page.getHtmlElementById("tiBuy").asText();
             String tiSell = page.getHtmlElementById("tiSell").asText();
+            String summary = ((DomElement)page.getFirstByXPath("//div[@class='summary']"))
+                    .getFirstElementChild().asText().toLowerCase();
 
             technical.setProdutcName(product);
             technical.setPeriod(period);
@@ -96,6 +99,7 @@ public class SubTechnicalTask implements Runnable{
             technical.setMaSell(maSell);
             technical.setTiBuy(tiBuy);
             technical.setTiSell(tiSell);
+            technical.setSummary(summary);
         } catch (IOException e) {
             e.printStackTrace();
         } finally {
@@ -116,7 +120,7 @@ public class SubTechnicalTask implements Runnable{
     public void subByPeriod(String product, int period, Technical technical){
         //遍历订阅者
         for (SubModel subModel : subService.getSubTechnicalByProductAndPeriod(product, period)){
-            String techSingle = technical.getTechSingle();
+            String techSingle = technical.getSummary();
             if (!SystemConstant.TECH_NO_CLEAR_SINGLE.equals(techSingle)){
                 mailUtil.sendMail(mailSender,
                         subModel.getEmail(),
@@ -143,7 +147,7 @@ public class SubTechnicalTask implements Runnable{
 
             //遍历时段
             for (int period : periods){
-                String techSingle = technicalsInService.get(period).getTechSingle();
+                String techSingle = technicalsInService.get(period).getSummary();
                 techSingleSet.add(techSingle);
             }
 

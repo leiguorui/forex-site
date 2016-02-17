@@ -84,132 +84,63 @@
 						<!-- sidebar section -->
 						<div class="col-md-4 no-padding right-sidebar">
 							<div id="sidebar" class="sidebar-alignment">
-								<a href="#signin" data-toggle="modal" class="btn btn-success btn-block btn-flat">Sign in <i class="fa fa-sign-in"></i> GameForest</a>
+								<a href="#signin" data-toggle="modal" class="btn btn-success btn-block btn-flat"> <i class="fa fa-sign-in"></i> 免费订阅 新闻/技术分析</a>
 								<!-- latest games -->
 								<div class="sidebar-section">
-									<div class="title"><i class="fa fa-gamepad"></i> Technical</div>
+									<div class="title"><i class="glyphicon glyphicon-stats"></i> 技术分析</div>
 									<div class="categories">
 										<ul>
-											<li><a href="#EURUSD" data-toggle="tab">EURUSD</a></li>
-											<li><a href="#AUDUSD" data-toggle="tab">AUDUSD</a></li>
+											<li><a href="#EURUSD" data-toggle="tab" type="button" class="btn disabled">EURUSD</a></li>
+											<li><a href="#AUDUSD" data-toggle="tab" type="button" class="btn">AUDUSD</a></li>
 										</ul>
 										<div class="clearfix"></div>
 									</div>
 									<div class="tab-content">
 										<ul id="EURUSD" class="tab-pane fade in active content">
 											<!-- row #1 -->
-											<c:forEach items="${technicals}" var="entry" varStatus="loop">
-												<c:if test="${fn:containsIgnoreCase(entry.value.produtcName, 'eur-usd')}">
-												<li class="clearfix">
-													<div class="number pull-left">${entry.value.period}</div>
-													<div class="details">
-														<div class="pull-left">
-															<h5><a href="#">${entry.value.produtcName}</a></h5>
-															<span class="category">建议买入</span>
-															<div class="sidebar-info line-height">${entry.value.maBuy} / ${entry.value.maSell}</div>
-														</div>
-														<div class="rate pull-right">
-															<span class="label label-success">牛</span>
-														</div>
-													</div>
-												</li>
-												</c:if>
-											</c:forEach>
+                                            <li class="clearfix hidden">
+
+                                                <div class="details">
+                                                    <div class="rate pull-left">
+                                                        <span class="label label-success">牛市</span>
+                                                    </div>
+
+                                                    <div class="pull-left">
+                                                        <h5><a href="sub_technical.html">EUR/USD</a> 5 分钟</h5>
+                                                        <div><span class="category">移动平均指数: 购买 (5) 出售 (7)</span></div>
+                                                        <div><span class="category">其他技术指标: 购买 (6) 出售 (1)</span></div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
 										</ul>
 
 										<ul id="AUDUSD" class="tab-pane fade content">
-											<!-- row #1 -->
-											<c:forEach items="${technicals}" var="entry" varStatus="loop">
-												<c:if test="${fn:containsIgnoreCase(entry.value.produtcName, 'aud-usd')}">
-													<li class="clearfix">
-														<div class="number pull-left">${entry.value.period}</div>
-														<div class="details">
-															<div class="pull-left">
-																<h5><a href="#">${entry.value.produtcName}</a></h5>
-																<span class="category">建议买入</span>
-																<div class="sidebar-info line-height">${entry.value.maBuy} / ${entry.value.maSell}</div>
-															</div>
-															<div class="rate pull-right">
-																<span class="label label-success">牛</span>
-															</div>
-														</div>
-													</li>
-												</c:if>
-											</c:forEach>
+                                            <!-- row #1 -->
+                                            <li class="clearfix hidden">
+
+                                                <div class="details">
+                                                    <div class="rate pull-left">
+                                                        <span class="label label-success">牛市</span>
+                                                    </div>
+
+                                                    <div class="pull-left">
+                                                        <h5><a href="sub_technical.html">AUD/USD</a> 5 分钟</h5>
+                                                        <div><span class="category">移动平均指数: 购买 (5) 出售 (7)</span></div>
+                                                        <div><span class="category">其他技术指标: 购买 (6) 出售 (1)</span></div>
+                                                    </div>
+
+                                                </div>
+                                            </li>
 										</ul>
 
 									</div>
 								</div>
 								<!-- ./latest games -->
 								
-								<!-- advertisement -->
-								<div class="sidebar-section advertisement">
-									<a href="#"><img src="holder.js/300x250" alt="" /></a>
-								</div>
-								<!-- ./advertisement -->
-								
 								<!-- latest news -->
 								<div class="sidebar-section">
-								<div class="title"><i class="fa fa-file-text-o"></i> 汇市新闻</div>
-								<ul class="content">
-									<!-- row #1 -->
-									<li class="clearfix">
-										<div class="details col-md-12 no-padding">
-											<div class="icon-nav pull-left">
-												<i class="fa fa-rss"></i>
-											</div>
-											<div class="pull-left">
-												<h5><a href="#">Caesar in Gaul Expansion</a></h5>
-												<div class="sidebar-info line-height">May 22, 2013 - <a href="#">14 Comments</a></div>
-											</div>
-										</div>
-									</li>
-									
-									<!-- row #2 -->
-									<li class="clearfix">
-										<div class="details col-md-12 no-padding">
-											<div class="icon-nav pull-left">
-												<i class="fa fa-rss"></i>
-											</div>
-											<div class="pull-left">
-												<h5><a href="#">Skullgirls Encore Re-Release</a></h5>
-												<div class="sidebar-info line-height">May 22, 2013 - <a href="#">14 Comments</a></div>
-											</div>
-										</div>
-									</li>
-									
-									<!-- row #3 -->
-									<li class="clearfix">
-										<div class="details col-md-12 no-padding">
-											<div class="icon-nav pull-left">
-												<i class="fa fa-rss"></i>
-											</div>
-											<div class="pull-left">
-												<h5><a href="#">Capture Mode Coming to GTA Online</a></h5>
-												<div class="sidebar-info line-height">May 22, 2013 - <a href="#">14 Comments</a></div>
-											</div>
-										</div>
-									</li>
-									
-									<!-- row #4 -->
-									<li class="clearfix">
-										<div class="details col-md-12 no-padding">
-											<div class="icon-nav pull-left">
-												<i class="fa fa-rss"></i>
-											</div>
-											<div class="pull-left">
-												<h5><a href="#">Titanfall PC Accessories</a></h5>
-												<div class="sidebar-info line-height">May 22, 2013 - <a href="#">14 Comments</a></div>
-											</div>
-										</div>
-									</li>
-								</ul>
-								</div>
-								<!-- ./latest news -->
-								
-								<!-- latest news -->
-								<div class="sidebar-section">
-								<div class="title"><i class="fa fa-comments"></i> Latest Comments</div>
+								<div class="title"><i class="fa fa-comments"></i> 大家都在说</div>
 								<ul class="content">
 									<!-- row #1 -->
 									<li class="clearfix">
@@ -278,15 +209,7 @@
 								</ul>
 								</div>
 								<!-- ./latest news -->
-								
-								<!-- facebook -->
-								<div class="sidebar-section">
-								<div class="title"><i class="fa fa-thumbs-up"></i> Facebook</div>
-									<div class="facebook-like-box">
-										<iframe></iframe>
-									</div>
-								</div>
-								<!-- ./facebook -->
+
 							</div>
 						</div>
 					<!-- ./sidebar section -->
@@ -315,5 +238,6 @@
 	<script src="js/custom.js"></script>
 	<script src="js/service/user.js"></script>
 	<script src="js/service/news.js"></script>
+	<script src="js/service/technical.js"></script>
 </body>
 </html>
