@@ -1,5 +1,6 @@
 package test.service;
 
+import cn.injava.forex.core.schedul.SubPriceTask;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.News;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -12,6 +13,8 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.w3c.dom.html.HTMLDocument;
 
 import java.io.IOException;
@@ -22,9 +25,15 @@ import java.util.List;
  * Created by leiguorui on 2017/1/17.
  */
 public class HtmlUnitTest {
+
+    private static final Logger logger =
+            LoggerFactory.getLogger(HtmlUnitTest.class);
+
     public static void main(String[] args) {
 
         while (true){
+
+            logger.info("request");
 
             final WebClient webClient = new HtmlUnit().getGeneralWebClient();
             try {
@@ -53,13 +62,14 @@ public class HtmlUnitTest {
                     String currency = element.select("p[class=trades_activity__info caption]").text();
 
                     String[] time = element.select("p[class=trades_activity__info caption]").text().split(" ");
-                    if(Integer.parseInt(time[time.length-1].replace("~","")) < 2){
+                    if(Integer.parseInt(time[time.length-3].replace("~","")) < 5){
                         sendSms("17600666891", "【国瑞科技】"+huobi+"在2.1232可以看涨");
+                        logger.info("sendSms");
                     }
 
                 }
 
-            } catch (IOException e) {
+            } catch (Exception e) {
                 e.printStackTrace();
             } finally {
                 webClient.close();
@@ -68,6 +78,7 @@ public class HtmlUnitTest {
 
             try {
                 Thread.sleep(2*60*1000); // Waiting before run.
+                logger.info("暂停");
             } catch (InterruptedException e) {
                 //A thread cannot process an interrupt while it's sleeping.  restore interrupted status
                 //当threadPoolTaskExecutor.shutdown()，会抛出这个异常，捕获之后结束循环
@@ -93,7 +104,7 @@ public class HtmlUnitTest {
             requestSettings.setRequestBody("key=bc0a7b18577f429f932eea97b52db071&mobile="+mobile+"&tpl_id=2773&content="+content);
 
 
-            final XmlPage page = webClient.getPage(requestSettings);
+            webClient.getPage(requestSettings);
 
 
         } catch (IOException e) {
