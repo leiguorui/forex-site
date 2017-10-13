@@ -37,4 +37,12 @@ public class HtmlUnit {
 
         return webClient;
     }
+
+    public WebClient getGeneralWebClient() {
+        WebClient webClient = new WebClient(BrowserVersion.CHROME);
+        webClient.getOptions().setThrowExceptionOnFailingStatusCode(false);  //页面有错，不抛出异常
+        webClient.getOptions().setThrowExceptionOnScriptError(false);
+        webClient.getOptions().setPrintContentOnFailingStatusCode(false);    //页面有错，不打印
+        return webClient;
+    }
 }
