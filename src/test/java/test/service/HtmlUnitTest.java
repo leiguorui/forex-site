@@ -13,8 +13,12 @@ import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
+import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.http.HttpHeaders;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.client.RestTemplate;
 import org.w3c.dom.html.HTMLDocument;
 
 import java.io.IOException;
@@ -26,10 +30,12 @@ import java.util.List;
  */
 public class HtmlUnitTest {
 
-    private static final Logger logger =
-            LoggerFactory.getLogger(HtmlUnitTest.class);
+    private static final Logger logger = LoggerFactory.getLogger(HtmlUnitTest.class);
+
+    RestTemplate restTemplate = new RestTemplate();
 
     public static void main(String[] args) {
+
 
         while (true){
 
@@ -58,12 +64,17 @@ public class HtmlUnitTest {
                     System.out.println(element.select("span[class~=^(better|worse)$]").text());
 
 
-                    String huobi = element.select("p[class=trades_activity__info caption]").text();
-                    String currency = element.select("p[class=trades_activity__info caption]").text();
-
+                    String[] currency = element.select("p[class=trades_activity__overview]").text().split(" ");
                     String[] time = element.select("p[class=trades_activity__info caption]").text().split(" ");
                     if(Integer.parseInt(time[time.length-3].replace("~","")) < 5){
-                        sendSms("17600666891", "【国瑞科技】"+huobi+"在2.1232可以看涨");
+
+                        if(currency[1].equals("SELL")){
+
+                        }else {
+
+                        }
+
+                        sendSms("17600666891", "【国瑞科技】"+currency+"在2.1232可以看涨");
                         logger.info("sendSms");
                     }
 
@@ -113,4 +124,6 @@ public class HtmlUnitTest {
             webClient.close();
         }
     }
+
+
 }
