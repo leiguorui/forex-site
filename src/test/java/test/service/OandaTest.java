@@ -43,6 +43,7 @@ public class OandaTest {
 
                 for (Integer id : profitableId){
                     tradeFxService.closeTrade(id);
+                    logger.info("close ---- " + id);
                 }
             }catch (Exception e){
                 logger.error(e.getMessage());

@@ -101,6 +101,28 @@ public class TradeFxService {
         return tradesIds;
     }
 
+    /**
+     * 获取亏损的持仓id
+     * @param profit
+     * @return
+     */
+    public List<Integer> getLossOpenedTrades(BigDecimal profit){
+        String url = baseUrl + "/openTrades";
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject trades = new Gson().fromJson(response.getBody(), JsonObject.class);
+
+        List<Integer> tradesIds = new ArrayList<>();
+        for (JsonElement trade : trades.getAsJsonArray("trades")){
+            JsonObject tradeJO = trade.getAsJsonObject();
+            BigDecimal unrealizedPL = tradeJO.get("unrealizedPL").getAsBigDecimal();
+            if (unrealizedPL.subtract(profit).doubleValue() < 0){
+                tradesIds.add(tradeJO.get("id").getAsInt());
+            }
+        }
+
+        return tradesIds;
+    }
+
     @PostConstruct
     public void init() {
         httpHeaders = new HttpHeaders();
