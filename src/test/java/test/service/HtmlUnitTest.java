@@ -3,6 +3,7 @@ package test.service;
 import cn.injava.forex.core.schedul.SubPriceTask;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.News;
+import cn.injava.forex.web.model.technical.Signal;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -58,24 +59,32 @@ public class HtmlUnitTest {
                 Document doc = Jsoup.parse(page.asText());
 
                 for (Element element : doc.select("tr[class=trades_activity__row]")){
-                    System.out.println(element.select("p[class=trades_activity__overview]").text());
-                    System.out.println(element.select("p[class=trades_activity__info caption]").text());
-                    System.out.println(element.select("a[class=avatar]").next().text());
-                    System.out.println(element.select("span[class~=^(better|worse)$]").text());
+//                    System.out.println(element.select("p[class=trades_activity__overview]").text());
+//                    System.out.println(element.select("p[class=trades_activity__info caption]").text());
+//                    System.out.println(element.select("a[class=avatar]").next().text());
+//                    System.out.println(element.select("span[class~=^(better|worse)$]").text());
 
+//                    EUR/USD  BUY  1.1755
+//                    Opened Long | 3 min ago
+//                    M.A.C.Doug
+//                    0.1% 1
 
                     String[] currency = element.select("p[class=trades_activity__overview]").text().split(" ");
                     String[] time = element.select("p[class=trades_activity__info caption]").text().split(" ");
+                    String user = element.select("a[class=avatar]").next().text();
+                    String[] profit = element.select("span[class~=^(better|worse)$]").text().split(" ");
                     if(Integer.parseInt(time[time.length-3].replace("~","")) < 5){
 
-                        if(currency[1].equals("SELL")){
+                        Signal signal = new Signal();
+                        signal.setCurrency(currency[0].replace("/", "_"));
+                        signal.setSignal(currency[1]);
 
+                        if(Integer.parseInt(profit[1]) > 0){
+                            signal.setIntensity(5);
                         }else {
-
+                            signal.setIntensity(5);
                         }
 
-                        sendSms("17600666891", "【国瑞科技】"+currency+"在2.1232可以看涨");
-                        logger.info("sendSms");
                     }
 
                 }

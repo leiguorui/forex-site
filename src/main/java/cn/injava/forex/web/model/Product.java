@@ -1,5 +1,6 @@
 package cn.injava.forex.web.model;
 
+import cn.injava.forex.web.model.technical.Technical;
 import org.joda.time.DateTime;
 
 import java.math.BigDecimal;

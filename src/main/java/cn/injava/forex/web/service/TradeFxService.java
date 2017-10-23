@@ -115,7 +115,7 @@ public class TradeFxService {
         for (JsonElement trade : trades.getAsJsonArray("trades")){
             JsonObject tradeJO = trade.getAsJsonObject();
             BigDecimal unrealizedPL = tradeJO.get("unrealizedPL").getAsBigDecimal();
-            if (unrealizedPL.subtract(profit).doubleValue() < 0){
+            if (unrealizedPL.subtract(profit.multiply(new BigDecimal(-1))).doubleValue() < 0){
                 tradesIds.add(tradeJO.get("id").getAsInt());
             }
         }

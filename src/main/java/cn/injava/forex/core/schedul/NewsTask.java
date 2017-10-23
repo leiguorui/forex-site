@@ -1,13 +1,8 @@
 package cn.injava.forex.core.schedul;
 
-import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
-import cn.injava.forex.core.utils.MailUtil;
 import cn.injava.forex.web.model.News;
-import cn.injava.forex.web.model.SubModel;
-import cn.injava.forex.web.model.Technical;
 import cn.injava.forex.web.service.NewsService;
-import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -18,10 +13,7 @@ import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
-import java.util.HashSet;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
  * 爬取新闻

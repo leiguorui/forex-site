@@ -3,9 +3,8 @@ package cn.injava.forex.core.schedul;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
-import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
-import cn.injava.forex.web.model.Technical;
+import cn.injava.forex.web.model.technical.Technical;
 import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
@@ -13,7 +12,6 @@ import com.gargoylesoftware.htmlunit.html.HtmlPage;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;

@@ -3,7 +3,7 @@ package cn.injava.forex.web.service;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.SubModel;
-import cn.injava.forex.web.model.Technical;
+import cn.injava.forex.web.model.technical.Technical;
 import org.springframework.stereotype.Service;
 
 import java.util.*;

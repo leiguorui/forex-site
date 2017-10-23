@@ -1,10 +1,7 @@
 package cn.injava.forex.web.controller;
 
 import cn.injava.forex.core.utils.OperationResult;
-import cn.injava.forex.web.model.News;
-import cn.injava.forex.web.model.PageModel;
-import cn.injava.forex.web.model.Technical;
-import cn.injava.forex.web.service.NewsService;
+import cn.injava.forex.web.model.technical.Technical;
 import cn.injava.forex.web.service.SubService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

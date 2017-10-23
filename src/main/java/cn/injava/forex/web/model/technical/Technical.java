@@ -1,4 +1,4 @@
-package cn.injava.forex.web.model;
+package cn.injava.forex.web.model.technical;
 
 import cn.injava.forex.core.constant.SystemConstant;
 
