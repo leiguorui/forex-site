@@ -63,7 +63,7 @@ public class TradeSignalService {
                 String[] time = element.select("p.trades_activity__info span.nowrap").text().split(" ");
                 String user = element.select("a[class=avatar]").next().text();
                 String[] profit = element.select("span[class~=^(better|worse)$]").text().split(" ");
-                if(Integer.parseInt(time[0].replace("~","")) < 4 && "min".equals(time[1])){
+                if(Integer.parseInt(time[0].replace("~","")) < 3 && "min".equals(time[1])){
 
                     Signal signal = new Signal();
                     signal.setCurrency(currency[0].replace("/", "_"));
