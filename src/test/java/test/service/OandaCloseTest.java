@@ -1,5 +1,6 @@
 package test.service;
 
+import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.service.TradeFxService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -28,11 +29,21 @@ public class OandaCloseTest {
             logger.info("request");
 
             try {
+                //盈利订单
                 List<Integer> profitableId = tradeFxService.getProfitableOpenedTrades(new BigDecimal(0.1));
-                profitableId.addAll(tradeFxService.getLossOpenedTrades(new BigDecimal(1)));
 
                 for (Integer id : profitableId){
                     tradeFxService.closeTrade(id);
+                    logger.info("close ---- " + id);
+                }
+
+                //亏损订单
+                List<Integer> lossId = tradeFxService.getLossOpenedTrades(new BigDecimal(0.5));
+                for (Integer id : lossId){
+                    // TODO: 2017/10/23 此处不要关闭订单, 而是反手做, 当反手做的也在亏损时, 则不在开仓
+                    tradeFxService.closeTrade(id);
+                    Trade trade = tradeFxService.getTradeById(id);
+                    tradeFxService.openTrade(trade.getCurrency(), -1*trade.getUnits());
                     logger.info("close ---- " + id);
                 }
             }catch (Exception e){

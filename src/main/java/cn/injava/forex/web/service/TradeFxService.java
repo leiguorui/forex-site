@@ -1,5 +1,6 @@
 package cn.injava.forex.web.service;
 
+import cn.injava.forex.web.model.order.Trade;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -121,6 +122,25 @@ public class TradeFxService {
         }
 
         return tradesIds;
+    }
+
+    /**
+     * 根据id, 获取oanda的持仓头寸
+     * @param id
+     * @return
+     */
+    public Trade getTradeById(int id){
+        String url = baseUrl + "/trades/"+id;
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject tradeJson = new Gson().fromJson(response.getBody(), JsonObject.class).get("trade").getAsJsonObject();
+
+        Trade trade = new Trade();
+        trade.setCurrency(tradeJson.get("instrument").getAsString());
+        trade.setPl(tradeJson.get("unrealizedPL").getAsBigDecimal());
+        trade.setPrice(tradeJson.get("price").getAsBigDecimal());
+        trade.setUnits(tradeJson.get("currentUnits").getAsInt());
+
+        return trade;
     }
 
     @PostConstruct
