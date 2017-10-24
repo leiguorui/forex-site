@@ -44,7 +44,7 @@ public class RunMeJob extends QuartzJobBean {
         for (String product : products){
             SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
             subPriceTask.setProduct(product);
-            threadPool.runTask(subPriceTask);
+//            threadPool.runTask(subPriceTask);
         }
 
         //订阅技术指标
