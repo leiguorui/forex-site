@@ -37,7 +37,7 @@ public class RunMeJob extends QuartzJobBean {
 
         //爬取新闻
         NewsTask newsTask = (NewsTask) applicationContext.getBean("newsTask");
-        threadPool.runTask(newsTask);
+//        threadPool.runTask(newsTask);
 
         //订阅价格
         String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
@@ -59,6 +59,14 @@ public class RunMeJob extends QuartzJobBean {
                 threadPool.runTask(subTechnicalTask);
             }
         }
+
+        //自动关闭oanda的订单
+        OandaCloseTradeTask oandaCloseTradeTask = (OandaCloseTradeTask) applicationContext.getBean("oandaCloseTradeTask");
+        threadPool.runTask(oandaCloseTradeTask);
+
+        //自动开启oanda的订单
+        OandaOpenTradeTask oandaOpenTradeTask = (OandaOpenTradeTask) applicationContext.getBean("oandaOpenTradeTask");
+        threadPool.runTask(oandaOpenTradeTask);
 
         logger.debug("定时任务已启动, ActiveCount {} ", threadPool.getActiveCount());
     }
