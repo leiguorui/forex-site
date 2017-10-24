@@ -69,6 +69,7 @@ public class TradeSignalService {
                     signal.setCurrency(currency[0].replace("/", "_"));
                     signal.setSignal(currency[1]);
 
+                    //设置信号强度
                     if(Integer.parseInt(profit[1]) > 0){
                         signal.setIntensity(5);
                     }else {
