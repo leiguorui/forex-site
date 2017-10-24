@@ -2,6 +2,7 @@ package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.model.technical.Signal;
+import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
 import cn.injava.forex.web.service.TradeSignalService;
 import org.slf4j.Logger;
@@ -50,6 +51,9 @@ public class OandaOpenTradeTask extends BaseTask{
                 }
 
                 logger.info("open ---- " + signal.toString());
+
+                SmsService smsService = new SmsService();
+                smsService.sendSms("【国瑞科技】"+signal.getCurrency()+"在"+signal.getPrice()+"可以看涨","17600666891", 2773);
             }
         }catch (Exception e){
             logger.error(e.getMessage());
