@@ -1,7 +1,7 @@
 package cn.injava.forex.web.service;
 
 import cn.injava.forex.core.constant.SystemConstant;
-import cn.injava.forex.web.model.order.Order;
+import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.service.order.OrderService;
 import com.google.gson.Gson;
@@ -39,7 +39,7 @@ public class TradeFxService {
      * @param currency
      * @return
      */
-    public Order openTrade(String currency, int units){
+    public TradingOrder openTrade(String currency, int units){
         String url = baseUrl + "/orders";
         String param = "{\n" +
                 "  \"order\": {\n" +
@@ -54,7 +54,7 @@ public class TradeFxService {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity(param, httpHeaders), String.class);
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
-        Order order = new Order();
+        TradingOrder order = new TradingOrder();
         order.setCurrency(currency);
         order.setLots((new BigDecimal(units).divide(new BigDecimal(100000))).floatValue());
         order.setTradingId(JsonObject.get("lastTransactionID").getAsString());
@@ -72,13 +72,13 @@ public class TradeFxService {
      * 平仓
      * @return
      */
-    public Order closeTrade(int tradeId){
+    public TradingOrder closeTrade(int tradeId){
         String url = baseUrl + "/trades/"+tradeId+"/close";
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity(httpHeaders), String.class);
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
-        Order order = orderService.selectOrderByRradeId(tradeId+"");
+        TradingOrder order = orderService.selectOrderByRradeId(tradeId+"");
         order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
         order.setProfitPips(JsonObject.get("pl").getAsJsonObject().get("price").getAsFloat());
         order.setCloseTime(new Date());

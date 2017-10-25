@@ -1,0 +1,291 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.injava.forex.web.dao.technical.TradingSignalMapper" >
+  <resultMap id="BaseResultMap" type="cn.injava.forex.web.model.technical.TradingSignal" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="order_id" property="orderId" jdbcType="INTEGER" />
+    <result column="platform" property="platform" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="price" property="price" jdbcType="DECIMAL" />
+    <result column="profit_price" property="profitPrice" jdbcType="DECIMAL" />
+    <result column="loss_price" property="lossPrice" jdbcType="DECIMAL" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, order_id, platform, user_name, currency, price, profit_price, loss_price, create_time, 
+    type
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.injava.forex.web.model.technical.TradingSignalExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from trading_signal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from trading_signal
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from trading_signal
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.injava.forex.web.model.technical.TradingSignalExample" >
+    delete from trading_signal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.injava.forex.web.model.technical.TradingSignal" >
+    insert into trading_signal (id, order_id, platform, 
+      user_name, currency, price, 
+      profit_price, loss_price, create_time, 
+      type)
+    values (#{id,jdbcType=INTEGER}, #{orderId,jdbcType=INTEGER}, #{platform,jdbcType=VARCHAR}, 
+      #{userName,jdbcType=VARCHAR}, #{currency,jdbcType=VARCHAR}, #{price,jdbcType=DECIMAL}, 
+      #{profitPrice,jdbcType=DECIMAL}, #{lossPrice,jdbcType=DECIMAL}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{type,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.injava.forex.web.model.technical.TradingSignal" >
+    insert into trading_signal
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="orderId != null" >
+        order_id,
+      </if>
+      <if test="platform != null" >
+        platform,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="price != null" >
+        price,
+      </if>
+      <if test="profitPrice != null" >
+        profit_price,
+      </if>
+      <if test="lossPrice != null" >
+        loss_price,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="orderId != null" >
+        #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="profitPrice != null" >
+        #{profitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="lossPrice != null" >
+        #{lossPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.injava.forex.web.model.technical.TradingSignalExample" resultType="java.lang.Integer" >
+    select count(*) from trading_signal
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update trading_signal
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.orderId != null" >
+        order_id = #{record.orderId,jdbcType=INTEGER},
+      </if>
+      <if test="record.platform != null" >
+        platform = #{record.platform,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currency != null" >
+        currency = #{record.currency,jdbcType=VARCHAR},
+      </if>
+      <if test="record.price != null" >
+        price = #{record.price,jdbcType=DECIMAL},
+      </if>
+      <if test="record.profitPrice != null" >
+        profit_price = #{record.profitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.lossPrice != null" >
+        loss_price = #{record.lossPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="record.type != null" >
+        type = #{record.type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update trading_signal
+    set id = #{record.id,jdbcType=INTEGER},
+      order_id = #{record.orderId,jdbcType=INTEGER},
+      platform = #{record.platform,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      currency = #{record.currency,jdbcType=VARCHAR},
+      price = #{record.price,jdbcType=DECIMAL},
+      profit_price = #{record.profitPrice,jdbcType=DECIMAL},
+      loss_price = #{record.lossPrice,jdbcType=DECIMAL},
+      create_time = #{record.createTime,jdbcType=TIMESTAMP},
+      type = #{record.type,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.injava.forex.web.model.technical.TradingSignal" >
+    update trading_signal
+    <set >
+      <if test="orderId != null" >
+        order_id = #{orderId,jdbcType=INTEGER},
+      </if>
+      <if test="platform != null" >
+        platform = #{platform,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="currency != null" >
+        currency = #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="price != null" >
+        price = #{price,jdbcType=DECIMAL},
+      </if>
+      <if test="profitPrice != null" >
+        profit_price = #{profitPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="lossPrice != null" >
+        loss_price = #{lossPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="type != null" >
+        type = #{type,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.injava.forex.web.model.technical.TradingSignal" >
+    update trading_signal
+    set order_id = #{orderId,jdbcType=INTEGER},
+      platform = #{platform,jdbcType=VARCHAR},
+      user_name = #{userName,jdbcType=VARCHAR},
+      currency = #{currency,jdbcType=VARCHAR},
+      price = #{price,jdbcType=DECIMAL},
+      profit_price = #{profitPrice,jdbcType=DECIMAL},
+      loss_price = #{lossPrice,jdbcType=DECIMAL},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      type = #{type,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

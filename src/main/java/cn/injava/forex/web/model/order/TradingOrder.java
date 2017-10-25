@@ -3,7 +3,7 @@ package cn.injava.forex.web.model.order;
 import java.math.BigDecimal;
 import java.util.Date;
 
-public class Order {
+public class TradingOrder {
     private Integer id;
 
     private String currency;

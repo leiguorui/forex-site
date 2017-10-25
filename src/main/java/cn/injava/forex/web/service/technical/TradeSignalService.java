@@ -1,26 +1,18 @@
-package cn.injava.forex.web.service.signal;
+package cn.injava.forex.web.service.technical;
 
 import cn.injava.forex.core.utils.HtmlUnit;
+import cn.injava.forex.web.dao.technical.TradingSignalMapper;
 import cn.injava.forex.web.model.technical.Signal;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-import com.google.gson.Gson;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.springframework.http.HttpEntity;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpMethod;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
-import java.math.BigDecimal;
-import java.net.MalformedURLException;
+import javax.annotation.Resource;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;

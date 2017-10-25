@@ -1,26 +1,23 @@
-package cn.injava.forex.web.service.signal;
+package cn.injava.forex.web.service.technical;
 
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.technical.Signal;
+import cn.injava.forex.web.model.technical.TradingSignal;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
-import org.jsoup.nodes.Element;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 /**
@@ -30,6 +27,9 @@ import java.util.List;
  */
 @Service
 public class SignalZulutradeService {
+
+    @Resource
+    private TradingSignalService signalService;
 
     private WebRequest requestSettings;
 
@@ -50,17 +50,26 @@ public class SignalZulutradeService {
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
                 signal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 3 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= 20 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
 
                     signal.setPrice(tradeJO.get("pr").getAsDouble());
-
                     if (tradeJO.get("tc").getAsInt() == 1){
                         signal.setSignal(Signal.SIGNAL_SELL);
                     }else {
                         signal.setSignal(Signal.SIGNAL_BUY);
                     }
 
-                    signals.add(signal);
+                    TradingSignal tradingSignal = new TradingSignal();
+                    tradingSignal.setCurrency(signal.getCurrency());
+                    tradingSignal.setPlatform(SystemConstant.BROKER_ZULUTRADE);
+                    tradingSignal.setPrice(tradeJO.get("pr").getAsBigDecimal());
+                    tradingSignal.setUserName(tradeJO.get("pn").getAsString());
+                    tradingSignal.setType(tradeJO.get("tc").getAsInt() == 1 ? SystemConstant.TRADE_TYPE_SELL : SystemConstant.TRADE_TYPE_BUY);
+
+                    if (signalService.insert(tradingSignal)){
+                        signals.add(signal);
+                    }
+
                 }
             }
 

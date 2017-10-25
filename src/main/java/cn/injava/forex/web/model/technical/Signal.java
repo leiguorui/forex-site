@@ -58,7 +58,7 @@ public class Signal {
     public String toString() {
         return "Signal{" +
                 "currency='" + currency + '\'' +
-                ", signal='" + signal + '\'' +
+                ", technical='" + signal + '\'' +
                 ", price=" + price +
                 ", intensity=" + intensity +
                 '}';
