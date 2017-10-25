@@ -56,7 +56,7 @@ public class RunMeJob extends QuartzJobBean {
                         (SubTechnicalTask) applicationContext.getBean("subTechnicalTask");
                 subTechnicalTask.setProduct(product);
                 subTechnicalTask.setPeriod(period);
-                threadPool.runTask(subTechnicalTask);
+//                threadPool.runTask(subTechnicalTask);
             }
         }
 

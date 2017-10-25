@@ -1,4 +1,4 @@
-package cn.injava.forex.web.service;
+package cn.injava.forex.web.service.signal;
 
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.technical.Signal;

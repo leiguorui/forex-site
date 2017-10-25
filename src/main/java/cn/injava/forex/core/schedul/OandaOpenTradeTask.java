@@ -1,17 +1,16 @@
 package cn.injava.forex.core.schedul;
 
-import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
-import cn.injava.forex.web.service.TradeSignalService;
+import cn.injava.forex.web.service.signal.SignalZulutradeService;
+import cn.injava.forex.web.service.signal.TradeSignalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
-import java.math.BigDecimal;
 import java.util.List;
 
 /**
@@ -29,10 +28,13 @@ public class OandaOpenTradeTask extends BaseTask{
     private TradeFxService tradeFxService ;
     @Resource
     private TradeSignalService tradeSignalService;
+    @Resource
+    private SignalZulutradeService signalZulutradeService;
 
     /**
      * 获取操作业务
      */
+    @Override
     public void action() {
 
         super.period = period;
@@ -40,7 +42,7 @@ public class OandaOpenTradeTask extends BaseTask{
         logger.info("request for open");
 
         try {
-            List<Signal> signals = tradeSignalService.getSignals();
+            List<Signal> signals = signalZulutradeService.getSignals();
 
             for (Signal signal : signals){
 

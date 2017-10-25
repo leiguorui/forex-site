@@ -35,6 +35,7 @@ public class OandaCloseTradeTask extends BaseTask{
     /**
      * 获取操作业务
      */
+    @Override
     public void action() {
 
         super.period = period;
