@@ -50,7 +50,7 @@ public class SignalZulutradeService {
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
                 signal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 20 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= 4 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
 
                     signal.setPrice(tradeJO.get("pr").getAsDouble());
                     if (tradeJO.get("tc").getAsInt() == 1){
