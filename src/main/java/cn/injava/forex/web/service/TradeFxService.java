@@ -1,6 +1,9 @@
 package cn.injava.forex.web.service;
 
+import cn.injava.forex.core.constant.SystemConstant;
+import cn.injava.forex.web.model.order.Order;
 import cn.injava.forex.web.model.order.Trade;
+import cn.injava.forex.web.service.order.OrderService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -12,11 +15,9 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
 import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.math.BigDecimal;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 /**
  * oanda.com 交易
@@ -30,12 +31,15 @@ public class TradeFxService {
     private RestTemplate restTemplate = new RestTemplate();
     private HttpHeaders httpHeaders;
 
+    @Resource
+    private OrderService orderService;
+
     /**
      * 开仓
      * @param currency
      * @return
      */
-    public int openTrade(String currency, int units){
+    public Order openTrade(String currency, int units){
         String url = baseUrl + "/orders";
         String param = "{\n" +
                 "  \"order\": {\n" +
@@ -50,27 +54,42 @@ public class TradeFxService {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity(param, httpHeaders), String.class);
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
-        return JsonObject.get("lastTransactionID").getAsInt();
+        Order order = new Order();
+        order.setCurrency(currency);
+        order.setLots((new BigDecimal(units).divide(new BigDecimal(100000))).floatValue());
+        order.setTradingId(JsonObject.get("lastTransactionID").getAsString());
+        order.setType(units > 0 ? SystemConstant.TRADE_TYPE_BUY : SystemConstant.TRADE_TYPE_SELL);
+        order.setTradingPlatform(SystemConstant.BROKER_OANDA);
+        order.setOpenPrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
+        order.setOpenTime(new Date());
+
+        orderService.insert(order);
+
+        return order;
     }
 
     /**
      * 平仓
-     * @param currency
-     * @param units
      * @return
      */
-    public int closeTrade(int tradeId){
+    public Order closeTrade(int tradeId){
         String url = baseUrl + "/trades/"+tradeId+"/close";
 
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.PUT, new HttpEntity(httpHeaders), String.class);
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
-        return JsonObject.get("lastTransactionID").getAsInt();
+        Order order = orderService.selectOrderByRradeId(tradeId+"");
+        order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
+        order.setProfitPips(JsonObject.get("pl").getAsJsonObject().get("price").getAsFloat());
+        order.setCloseTime(new Date());
+
+        orderService.update(order);
+
+        return order;
     }
 
     /**
      * 获取所有持仓
-     * @param instrument
      * @return
      */
     public JsonObject getOpenedTrades(){

@@ -42,4 +42,15 @@ public class SystemConstant {
             add("USD_JPY");
         }
     };
+
+    /**
+     * 服务商
+     */
+    final public static String BROKER_OANDA = "oanda";
+
+    /**
+     * 交易类型
+     */
+    final public static String TRADE_TYPE_BUY = "BUY";
+    final public static String TRADE_TYPE_SELL = "SELL";
 }

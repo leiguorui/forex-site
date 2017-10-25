@@ -11,9 +11,13 @@ import java.util.Date;
 public class Trade {
     private String currency;
     private BigDecimal price;
-    //持仓手数
+    /**
+     * 持仓手数
+     */
     private int units;
-    //盈利金额
+    /**
+     * 盈利金额
+     */
     private BigDecimal pl;
 
     public String getCurrency() {

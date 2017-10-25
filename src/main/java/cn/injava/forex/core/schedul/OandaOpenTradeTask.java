@@ -1,10 +1,13 @@
 package cn.injava.forex.core.schedul;
 
+import cn.injava.forex.web.model.order.Order;
 import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
+import cn.injava.forex.web.service.order.OrderService;
 import cn.injava.forex.web.service.signal.SignalZulutradeService;
 import cn.injava.forex.web.service.signal.TradeSignalService;
+import org.apache.xpath.operations.Or;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
@@ -30,6 +33,8 @@ public class OandaOpenTradeTask extends BaseTask{
     private TradeSignalService tradeSignalService;
     @Resource
     private SignalZulutradeService signalZulutradeService;
+    @Resource
+    private OrderService orderService;
 
     /**
      * 获取操作业务
@@ -46,11 +51,7 @@ public class OandaOpenTradeTask extends BaseTask{
 
             for (Signal signal : signals){
 
-                if (Signal.SIGNAL_BUY.equals(signal.getSignal())){
-                    tradeFxService.openTrade(signal.getCurrency(), 1000);
-                }else {
-                    tradeFxService.openTrade(signal.getCurrency(), -1000);
-                }
+                tradeFxService.openTrade(signal.getCurrency(), Signal.SIGNAL_BUY.equals(signal.getSignal()) ? 1000 : -1000);
 
                 logger.info("open ---- " + signal.toString());
 

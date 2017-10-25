@@ -2,9 +2,11 @@ package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.News;
+import cn.injava.forex.web.model.order.Order;
 import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.service.NewsService;
 import cn.injava.forex.web.service.TradeFxService;
+import cn.injava.forex.web.service.order.OrderService;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.html.DomElement;
 import com.gargoylesoftware.htmlunit.html.HtmlPage;
@@ -31,6 +33,8 @@ public class OandaCloseTradeTask extends BaseTask{
 
     @Resource
     private TradeFxService tradeFxService ;
+    @Resource
+    private OrderService orderService ;
 
     /**
      * 获取操作业务
