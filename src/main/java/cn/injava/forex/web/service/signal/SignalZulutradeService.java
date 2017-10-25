@@ -1,5 +1,6 @@
 package cn.injava.forex.web.service.signal;
 
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.technical.Signal;
 import com.gargoylesoftware.htmlunit.HttpMethod;
@@ -47,9 +48,10 @@ public class SignalZulutradeService {
 
                 JsonObject tradeJO = trade.getAsJsonObject();
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
+                signal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) < 3){
-                    signal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
+                if (Integer.parseInt(time[0]) <= 3 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
+
                     signal.setPrice(tradeJO.get("pr").getAsDouble());
 
                     if (tradeJO.get("tc").getAsInt() == 1){

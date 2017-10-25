@@ -1,5 +1,7 @@
 package cn.injava.forex.core.constant;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -25,4 +27,19 @@ public class SystemConstant {
      * session中的值
      */
     final public static String S_USER = "session_user";
+
+    /**
+     * 主流货币对
+     */
+    final public static List<String> MAJOR_CURRENCES = new ArrayList<String>() {
+        {
+            add("AUD_USD");
+            add("EUR_USD");
+            add("GBP_USD");
+            add("NZD_USD");
+            add("USD_CAD");
+            add("USD_CHF");
+            add("USD_JPY");
+        }
+    };
 }
