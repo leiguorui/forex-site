@@ -19,6 +19,7 @@ import java.net.MalformedURLException;
 import java.net.URL;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 /**
  * zulutrade.com 交易信号
@@ -30,6 +31,8 @@ public class SignalZulutradeService {
 
     @Resource
     private TradingSignalService signalService;
+    @Resource
+    private TechnicalnvestingService technicalnvestingService;
 
     private WebRequest requestSettings;
 
@@ -40,8 +43,11 @@ public class SignalZulutradeService {
 
         try {
             final String response = webClient.getPage(requestSettings).getWebResponse().getContentAsString();
-
             JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
+
+            //获取技术分析结果
+            Map<String, String> technicals = technicalnvestingService.getTechnicals();
+
 
             for (JsonElement trade : jsonObject.getAsJsonArray("d")){
                 TradingSignal tradingSignal = new TradingSignal();
@@ -50,13 +56,19 @@ public class SignalZulutradeService {
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
                 tradingSignal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 4 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= 20 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
 
                     tradingSignal.setCurrency(tradingSignal.getCurrency());
                     tradingSignal.setPlatform(SystemConstant.BROKER_ZULUTRADE);
                     tradingSignal.setPrice(tradeJO.get("pr").getAsBigDecimal());
                     tradingSignal.setUserName(tradeJO.get("pn").getAsString());
                     tradingSignal.setType(tradeJO.get("tc").getAsInt() == 1 ? SystemConstant.TRADE_TYPE_SELL : SystemConstant.TRADE_TYPE_BUY);
+
+                    String technical = technicals.get(tradingSignal.getCurrency());
+                    //信号符合技术分析
+                    if (technical != null && technical.equals(tradingSignal.getType())){
+                        tradingSignal.setProfitPrice(new BigDecimal(1));
+                    }
 
                     if (signalService.insert(tradingSignal)){
                         signals.add(tradingSignal);

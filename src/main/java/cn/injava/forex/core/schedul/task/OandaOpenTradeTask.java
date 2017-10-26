@@ -5,6 +5,7 @@ import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
 import cn.injava.forex.web.service.order.OrderService;
 import cn.injava.forex.web.service.technical.SignalZulutradeService;
+import cn.injava.forex.web.service.technical.TechnicalnvestingService;
 import cn.injava.forex.web.service.technical.TradeSignalService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,7 +13,9 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
+import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * oanda.com 自动下单
@@ -33,6 +36,8 @@ public class OandaOpenTradeTask extends BaseTask {
     private SignalZulutradeService signalZulutradeService;
     @Resource
     private OrderService orderService;
+    @Resource
+    private TechnicalnvestingService technicalnvestingService;
 
     /**
      * 获取操作业务
@@ -49,7 +54,8 @@ public class OandaOpenTradeTask extends BaseTask {
 
             for (TradingSignal signal : signals){
 
-                if (!tradeFxService.hasTrading(signal.getCurrency())){
+                //没有头寸, 且符合技术分析
+                if (!tradeFxService.hasTrading(signal.getCurrency()) && signal.getProfitPrice() != null){
 
                     tradeFxService.openTrade(signal);
 
