@@ -103,4 +103,20 @@ public class TradingSignal {
     public void setType(String type) {
         this.type = type == null ? null : type.trim();
     }
+
+    @Override
+    public String toString() {
+        return "TradingSignal{" +
+                "id=" + id +
+                ", orderId=" + orderId +
+                ", platform='" + platform + '\'' +
+                ", userName='" + userName + '\'' +
+                ", currency='" + currency + '\'' +
+                ", price=" + price +
+                ", profitPrice=" + profitPrice +
+                ", lossPrice=" + lossPrice +
+                ", createTime=" + createTime +
+                ", type='" + type + '\'' +
+                '}';
+    }
 }

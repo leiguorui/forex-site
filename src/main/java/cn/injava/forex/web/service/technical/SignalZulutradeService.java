@@ -66,6 +66,8 @@ public class SignalZulutradeService {
                     tradingSignal.setUserName(tradeJO.get("pn").getAsString());
                     tradingSignal.setType(tradeJO.get("tc").getAsInt() == 1 ? SystemConstant.TRADE_TYPE_SELL : SystemConstant.TRADE_TYPE_BUY);
 
+                    System.out.println(tradingSignal.toString());
+
                     if (signalService.insert(tradingSignal)){
                         signals.add(signal);
                     }

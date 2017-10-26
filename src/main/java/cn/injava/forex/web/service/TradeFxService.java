@@ -80,7 +80,7 @@ public class TradeFxService {
 
         TradingOrder order = orderService.selectOrderByRradeId(tradeId+"");
         order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
-        order.setProfitPips(JsonObject.get("pl").getAsJsonObject().get("price").getAsFloat());
+        order.setProfitPips(JsonObject.get("orderFillTransaction").getAsJsonObject().get("pl").getAsFloat());
         order.setCloseTime(new Date());
 
         orderService.update(order);
