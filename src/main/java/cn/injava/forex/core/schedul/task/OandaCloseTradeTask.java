@@ -1,6 +1,5 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
-import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.service.TradeFxService;
 import cn.injava.forex.web.service.order.OrderService;
 import org.slf4j.Logger;
@@ -16,7 +15,7 @@ import java.util.List;
  * oanda.com 自动关闭订单
  */
 @Component
-public class OandaCloseTradeTask extends BaseTask{
+public class OandaCloseTradeTask extends BaseTask {
     private static final Logger logger = LoggerFactory.getLogger(OandaCloseTradeTask.class);
 
     //执行时间间隔(秒)

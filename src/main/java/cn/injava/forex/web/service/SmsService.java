@@ -1,13 +1,9 @@
 package cn.injava.forex.web.service;
 
-import cn.injava.forex.core.schedul.OandaCloseTradeTask;
 import cn.injava.forex.core.utils.HtmlUnit;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.google.gson.Gson;
-import org.jsoup.Jsoup;
-import org.jsoup.nodes.Document;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;

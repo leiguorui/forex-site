@@ -1,6 +1,6 @@
 package test.service;
 
-import cn.injava.forex.core.schedul.SubPriceTask;
+import cn.injava.forex.core.schedul.task.SubPriceTask;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
 import com.gargoylesoftware.htmlunit.WebClient;

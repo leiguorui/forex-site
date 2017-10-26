@@ -1,30 +1,20 @@
 package test.service;
 
-import cn.injava.forex.core.schedul.SubPriceTask;
 import cn.injava.forex.core.utils.HtmlUnit;
-import cn.injava.forex.web.model.News;
 import cn.injava.forex.web.model.technical.Signal;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
-import com.gargoylesoftware.htmlunit.html.DomElement;
-import com.gargoylesoftware.htmlunit.html.HtmlPage;
-import com.gargoylesoftware.htmlunit.javascript.host.html.HTMLDivElement;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
-import org.junit.Test;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.client.RestTemplate;
-import org.w3c.dom.html.HTMLDocument;
 
 import java.io.IOException;
 import java.net.URL;
-import java.util.List;
 
 /**
  * Created by leiguorui on 2017/1/17.

@@ -1,30 +1,18 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
 import cn.injava.forex.core.utils.HtmlUnit;
-import cn.injava.forex.core.utils.MailUtil;
-import cn.injava.forex.web.model.Product;
-import cn.injava.forex.web.model.SubModel;
-import cn.injava.forex.web.service.SubService;
 import com.gargoylesoftware.htmlunit.HttpMethod;
-import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
 import com.gargoylesoftware.htmlunit.xml.XmlPage;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonObject;
-import com.google.gson.JsonParser;
-import org.joda.time.DateTime;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import org.jsoup.nodes.Element;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Component;
 
-import javax.annotation.Resource;
 import java.io.IOException;
-import java.math.BigDecimal;
 import java.net.URL;
 
 /**

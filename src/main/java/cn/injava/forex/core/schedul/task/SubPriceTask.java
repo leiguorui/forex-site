@@ -1,4 +1,4 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.core.utils.MailUtil;
@@ -11,18 +11,14 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import org.joda.time.DateTime;
-import org.joda.time.DateTimeZone;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
-import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Component;
 
 import javax.annotation.Resource;
 import java.io.IOException;
 import java.math.BigDecimal;
-import java.util.Date;
-import java.util.TimeZone;
 
 /**
  * 获取价格的方法

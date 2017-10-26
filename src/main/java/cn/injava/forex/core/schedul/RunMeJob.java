@@ -2,18 +2,13 @@ package cn.injava.forex.core.schedul;
 
 import cn.injava.forex.core.common.ApplicationContextProvider;
 import cn.injava.forex.core.concurrent.ThreadPool;
-import cn.injava.forex.core.constant.SystemConstant;
+import cn.injava.forex.core.schedul.task.*;
 import org.quartz.JobExecutionContext;
 import org.quartz.JobExecutionException;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.support.ClassPathXmlApplicationContext;
-import org.springframework.scheduling.concurrent.ThreadPoolTaskExecutor;
 import org.springframework.scheduling.quartz.QuartzJobBean;
-
-import java.util.Map;
-import java.util.TreeMap;
 
 /**
  * 定时任务，调用task执行方法

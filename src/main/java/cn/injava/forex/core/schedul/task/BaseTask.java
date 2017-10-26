@@ -1,4 +1,4 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
 import cn.injava.forex.web.service.TradeFxService;
 import org.springframework.beans.factory.annotation.Value;

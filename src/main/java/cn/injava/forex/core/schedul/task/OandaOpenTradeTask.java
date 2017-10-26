@@ -1,7 +1,5 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
-import cn.injava.forex.core.constant.SystemConstant;
-import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
@@ -20,7 +18,7 @@ import java.util.List;
  * oanda.com 自动下单
  */
 @Component
-public class OandaOpenTradeTask extends BaseTask{
+public class OandaOpenTradeTask extends BaseTask {
     private static final Logger logger = LoggerFactory.getLogger(OandaOpenTradeTask.class);
 
     //执行时间间隔(秒)

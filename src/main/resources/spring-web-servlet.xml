@@ -69,13 +69,13 @@
 	<bean id="applicationContextProvder" class="cn.injava.forex.core.common.ApplicationContextProvider"/>
 
 	<!--订阅报价-->
-	<bean id="subPriceTask" class="cn.injava.forex.core.schedul.SubPriceTask" scope="prototype"/>
+	<bean id="subPriceTask" class="cn.injava.forex.core.schedul.task.SubPriceTask" scope="prototype"/>
 
 	<!--订阅技术分析-->
-	<bean id="subTechnicalTask" class="cn.injava.forex.core.schedul.SubTechnicalTask" scope="prototype"/>
+	<bean id="subTechnicalTask" class="cn.injava.forex.core.schedul.task.SubTechnicalTask" scope="prototype"/>
 
     <!--爬取新闻-->
-    <bean id="newsTask" class="cn.injava.forex.core.schedul.NewsTask" scope="prototype"/>
+    <bean id="newsTask" class="cn.injava.forex.core.schedul.task.NewsTask" scope="prototype"/>
 
 	<bean name="runMeJob" class="org.springframework.scheduling.quartz.JobDetailBean">
 

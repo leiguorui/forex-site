@@ -1,4 +1,4 @@
-package cn.injava.forex.core.schedul;
+package cn.injava.forex.core.schedul.task;
 
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
