@@ -33,10 +33,10 @@ public class SignalZulutradeService {
 
     private WebRequest requestSettings;
 
-    public List<Signal> getSignals() throws MalformedURLException {
+    public List<TradingSignal> getSignals() throws MalformedURLException {
 
         final WebClient webClient = new HtmlUnit().getGeneralWebClient();
-        List<Signal> signals = new ArrayList<>();
+        List<TradingSignal> signals = new ArrayList<>();
 
         try {
             final String response = webClient.getPage(requestSettings).getWebResponse().getContentAsString();
@@ -44,23 +44,15 @@ public class SignalZulutradeService {
             JsonObject jsonObject = new Gson().fromJson(response, JsonObject.class);
 
             for (JsonElement trade : jsonObject.getAsJsonArray("d")){
-                Signal signal = new Signal();
+                TradingSignal tradingSignal = new TradingSignal();
 
                 JsonObject tradeJO = trade.getAsJsonObject();
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
-                signal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
+                tradingSignal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 4 && SystemConstant.MAJOR_CURRENCES.contains(signal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= 4 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
 
-                    signal.setPrice(tradeJO.get("pr").getAsDouble());
-                    if (tradeJO.get("tc").getAsInt() == 1){
-                        signal.setSignal(Signal.SIGNAL_SELL);
-                    }else {
-                        signal.setSignal(Signal.SIGNAL_BUY);
-                    }
-
-                    TradingSignal tradingSignal = new TradingSignal();
-                    tradingSignal.setCurrency(signal.getCurrency());
+                    tradingSignal.setCurrency(tradingSignal.getCurrency());
                     tradingSignal.setPlatform(SystemConstant.BROKER_ZULUTRADE);
                     tradingSignal.setPrice(tradeJO.get("pr").getAsBigDecimal());
                     tradingSignal.setUserName(tradeJO.get("pn").getAsString());
@@ -69,7 +61,7 @@ public class SignalZulutradeService {
                     System.out.println(tradingSignal.toString());
 
                     if (signalService.insert(tradingSignal)){
-                        signals.add(signal);
+                        signals.add(tradingSignal);
                     }
 
                 }

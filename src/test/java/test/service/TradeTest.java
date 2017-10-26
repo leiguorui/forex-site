@@ -21,10 +21,6 @@ public class TradeTest extends TestSupport {
         fxService.getOpenedTrades();
     }
 
-    @Test
-    public void openTrade() {
-        fxService.openTrade("GBP_USD", -100);
-    }
 
     @Test
     public void closeTrade() {

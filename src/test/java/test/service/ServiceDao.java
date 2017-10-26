@@ -20,9 +20,5 @@ public class ServiceDao extends TestSupport {
         tradeFxService.closeTrade(742);
     }
 
-    @Test
-    public void test_dao() {
-        tradeFxService.openTrade("USD_JPY", 10);
-    }
 
 }

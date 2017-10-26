@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.injava.forex.web.dao.order.TradingOrderMapperExt" >
+  <resultMap id="BaseResultMap" type="cn.injava.forex.web.model.order.TradingOrder" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="currency" property="currency" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="VARCHAR" />
+    <result column="lots" property="lots" jdbcType="REAL" />
+    <result column="profit_pips" property="profitPips" jdbcType="REAL" />
+    <result column="open_price" property="openPrice" jdbcType="DECIMAL" />
+    <result column="open_time" property="openTime" jdbcType="TIMESTAMP" />
+    <result column="close_price" property="closePrice" jdbcType="DECIMAL" />
+    <result column="close_time" property="closeTime" jdbcType="TIMESTAMP" />
+    <result column="trading_id" property="tradingId" jdbcType="VARCHAR" />
+    <result column="trading_platform" property="tradingPlatform" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, currency, type, lots, profit_pips, open_price, open_time, close_price, close_time, 
+    trading_id, trading_platform
+  </sql>
+
+  <insert id="insertSelectiveReturnId" parameterType="cn.injava.forex.web.model.order.TradingOrder"
+          useGeneratedKeys="true" keyProperty="id" keyColumn="id">
+    insert into trading_order
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="currency != null" >
+        currency,
+      </if>
+      <if test="type != null" >
+        type,
+      </if>
+      <if test="lots != null" >
+        lots,
+      </if>
+      <if test="profitPips != null" >
+        profit_pips,
+      </if>
+      <if test="openPrice != null" >
+        open_price,
+      </if>
+      <if test="openTime != null" >
+        open_time,
+      </if>
+      <if test="closePrice != null" >
+        close_price,
+      </if>
+      <if test="closeTime != null" >
+        close_time,
+      </if>
+      <if test="tradingId != null" >
+        trading_id,
+      </if>
+      <if test="tradingPlatform != null" >
+        trading_platform,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="currency != null" >
+        #{currency,jdbcType=VARCHAR},
+      </if>
+      <if test="type != null" >
+        #{type,jdbcType=VARCHAR},
+      </if>
+      <if test="lots != null" >
+        #{lots,jdbcType=REAL},
+      </if>
+      <if test="profitPips != null" >
+        #{profitPips,jdbcType=REAL},
+      </if>
+      <if test="openPrice != null" >
+        #{openPrice,jdbcType=DECIMAL},
+      </if>
+      <if test="openTime != null" >
+        #{openTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="closePrice != null" >
+        #{closePrice,jdbcType=DECIMAL},
+      </if>
+      <if test="closeTime != null" >
+        #{closeTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="tradingId != null" >
+        #{tradingId,jdbcType=VARCHAR},
+      </if>
+      <if test="tradingPlatform != null" >
+        #{tradingPlatform,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+
+</mapper>

@@ -22,6 +22,11 @@ public class TradingSignalService {
     @Resource
     private TradingSignalMapper signalMapper;
 
+    /**
+     * 新增信号, 如果存在相同, 则插入失败
+     * @param signal
+     * @return
+     */
     public boolean insert(TradingSignal signal){
 
         TradingSignalExample example = new TradingSignalExample();
@@ -40,6 +45,10 @@ public class TradingSignalService {
         }
 
         return result;
+    }
+
+    public int update(TradingSignal signal){
+        return signalMapper.updateByPrimaryKeySelective(signal);
     }
 
 }

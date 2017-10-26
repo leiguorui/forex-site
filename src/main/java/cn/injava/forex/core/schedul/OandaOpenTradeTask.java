@@ -1,6 +1,8 @@
 package cn.injava.forex.core.schedul;
 
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.technical.Signal;
+import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
 import cn.injava.forex.web.service.order.OrderService;
@@ -45,16 +47,20 @@ public class OandaOpenTradeTask extends BaseTask{
         logger.info("request for open");
 
         try {
-            List<Signal> signals = signalZulutradeService.getSignals();
+            List<TradingSignal> signals = signalZulutradeService.getSignals();
 
-            for (Signal signal : signals){
+            for (TradingSignal signal : signals){
 
-                tradeFxService.openTrade(signal.getCurrency(), Signal.SIGNAL_BUY.equals(signal.getSignal()) ? 1000 : -1000);
+                if (!tradeFxService.hasTrading(signal.getCurrency())){
 
-                logger.info("open ---- " + signal.toString());
+                    tradeFxService.openTrade(signal);
 
-                SmsService smsService = new SmsService();
+                    logger.info("open ---- " + signal.toString());
+
+                    SmsService smsService = new SmsService();
 //                smsService.sendSms("【国瑞科技】"+signal.getCurrency()+"在"+signal.getPrice()+"可以看涨","17600666891", 2773);
+                }
+
             }
         }catch (Exception e){
             logger.error(e.getMessage());

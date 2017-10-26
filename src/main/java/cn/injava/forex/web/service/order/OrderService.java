@@ -2,6 +2,7 @@ package cn.injava.forex.web.service.order;
 
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.dao.order.TradingOrderMapper;
+import cn.injava.forex.web.dao.order.TradingOrderMapperExt;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.TradingOrderExample;
 import org.springframework.stereotype.Service;
@@ -19,6 +20,8 @@ import java.util.List;
 public class OrderService {
     @Resource
     private TradingOrderMapper orderMapper;
+    @Resource
+    private TradingOrderMapperExt orderMapperExt;
 
     /**
      * 获取财经日历
@@ -45,7 +48,8 @@ public class OrderService {
 
     public int insert(TradingOrder order){
         order.setOpenTime(new Date());
-        return orderMapper.insertSelective(order);
+        orderMapperExt.insertSelectiveReturnId(order);
+        return order.getId();
     }
 
     public int update(TradingOrder order){

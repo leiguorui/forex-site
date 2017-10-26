@@ -3,7 +3,10 @@ package cn.injava.forex.web.service;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.Trade;
+import cn.injava.forex.web.model.technical.Signal;
+import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.order.OrderService;
+import cn.injava.forex.web.service.technical.TradingSignalService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
@@ -33,13 +36,19 @@ public class TradeFxService {
 
     @Resource
     private OrderService orderService;
+    @Resource
+    private TradingSignalService signalService;
 
     /**
      * 开仓
      * @param currency
      * @return
      */
-    public TradingOrder openTrade(String currency, int units){
+    public TradingOrder openTrade(TradingSignal signal){
+
+        String currency = signal.getCurrency();
+        int units = SystemConstant.TRADE_TYPE_BUY.equals(signal.getType()) ? 1000 : -1000;
+
         String url = baseUrl + "/orders";
         String param = "{\n" +
                 "  \"order\": {\n" +
@@ -54,6 +63,7 @@ public class TradeFxService {
         ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.POST, new HttpEntity(param, httpHeaders), String.class);
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
+        //新增订单
         TradingOrder order = new TradingOrder();
         order.setCurrency(currency);
         order.setLots((new BigDecimal(units).divide(new BigDecimal(100000))).floatValue());
@@ -62,8 +72,11 @@ public class TradeFxService {
         order.setTradingPlatform(SystemConstant.BROKER_OANDA);
         order.setOpenPrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
         order.setOpenTime(new Date());
+        int orderId = orderService.insert(order);
 
-        orderService.insert(order);
+        //写入订单id
+        signal.setOrderId(orderId);
+        signalService.update(signal);
 
         return order;
     }
@@ -98,6 +111,27 @@ public class TradeFxService {
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
         return JsonObject;
+    }
+
+    /**
+     * 是否有持仓
+     * @return
+     */
+    public boolean hasTrading(String currency){
+        String url = baseUrl + "/openTrades";
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject trades = new Gson().fromJson(response.getBody(), JsonObject.class);
+
+        boolean result = false;
+        for (JsonElement trade : trades.getAsJsonArray("trades")){
+            JsonObject tradeJO = trade.getAsJsonObject();
+            String instrument = tradeJO.get("instrument").getAsString();
+            if (currency.equals(instrument)){
+                result = true;
+            }
+        }
+
+        return result;
     }
 
     /**
