@@ -50,15 +50,13 @@ public class SignalZulutradeService {
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
                 tradingSignal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 4 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= 20 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
 
                     tradingSignal.setCurrency(tradingSignal.getCurrency());
                     tradingSignal.setPlatform(SystemConstant.BROKER_ZULUTRADE);
                     tradingSignal.setPrice(tradeJO.get("pr").getAsBigDecimal());
                     tradingSignal.setUserName(tradeJO.get("pn").getAsString());
                     tradingSignal.setType(tradeJO.get("tc").getAsInt() == 1 ? SystemConstant.TRADE_TYPE_SELL : SystemConstant.TRADE_TYPE_BUY);
-
-                    System.out.println(tradingSignal.toString());
 
                     if (signalService.insert(tradingSignal)){
                         signals.add(tradingSignal);

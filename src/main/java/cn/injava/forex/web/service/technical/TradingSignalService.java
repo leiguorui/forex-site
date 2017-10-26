@@ -3,6 +3,7 @@ package cn.injava.forex.web.service.technical;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.dao.order.TradingOrderMapper;
 import cn.injava.forex.web.dao.technical.TradingSignalMapper;
+import cn.injava.forex.web.dao.technical.TradingSignalMapperExt;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.TradingOrderExample;
 import cn.injava.forex.web.model.technical.TradingSignal;
@@ -21,6 +22,8 @@ import java.util.List;
 public class TradingSignalService {
     @Resource
     private TradingSignalMapper signalMapper;
+    @Resource
+    private TradingSignalMapperExt signalMapperExt;
 
     /**
      * 新增信号, 如果存在相同, 则插入失败
@@ -39,7 +42,7 @@ public class TradingSignalService {
         if (signalMapper.selectByExample(example).size() < 1){
             signal.setCreateTime(new Date());
 
-            signalMapper.insertSelective(signal);
+            signalMapperExt.insertSelectiveReturnId(signal);
 
             result = true;
         }

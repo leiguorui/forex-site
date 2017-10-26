@@ -46,15 +46,16 @@ public class OandaCloseTradeTask extends BaseTask {
                 logger.info("close ---- " + id);
             }
 
-//            //亏损订单
-//            List<Integer> lossId = tradeFxService.getLossOpenedTrades(new BigDecimal(0.5));
-//            for (Integer id : lossId){
-//                // TODO: 2017/10/23 此处不要关闭订单, 而是反手做, 当反手做的也在亏损时, 则不在开仓
+            //亏损订单
+            List<Integer> lossId = tradeFxService.getLossOpenedTrades(new BigDecimal(0.5));
+            for (Integer id : lossId){
+                // TODO: 2017/10/23 此处不要关闭订单, 而是反手做, 当反手做的也在亏损时, 则不在开仓
+
+                tradeFxService.closeTrade(id);
 //                Trade trade = tradeFxService.getTradeById(id);
-//                tradeFxService.closeTrade(id);
 //                tradeFxService.openTrade(trade.getCurrency(), -1*trade.getUnits());
-//                logger.info("close ---- " + id);
-//            }
+                logger.info("close ---- " + id);
+            }
         }catch (Exception e){
             logger.error(e.getMessage());
         }
