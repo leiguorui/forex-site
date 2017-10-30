@@ -10,6 +10,7 @@ import org.springframework.stereotype.Component;
 import javax.annotation.Resource;
 import java.math.BigDecimal;
 import java.util.List;
+import java.util.Map;
 
 /**
  * oanda.com 自动关闭订单
@@ -27,6 +28,9 @@ public class OandaCloseTradeTask extends BaseTask {
     @Resource
     private OrderService orderService ;
 
+    @Resource(name = "getSystemConfig")
+    private Map<String, String> systemConfig;
+
     /**
      * 获取操作业务
      */
@@ -39,7 +43,7 @@ public class OandaCloseTradeTask extends BaseTask {
 
         try {
             //盈利订单
-            List<Integer> profitableId = tradeFxService.getProfitableOpenedTrades(new BigDecimal(0.1));
+            List<Integer> profitableId = tradeFxService.getProfitableOpenedTrades(new BigDecimal(systemConfig.get("trade.profit")));
 
             for (Integer id : profitableId){
                 tradeFxService.closeTrade(id);

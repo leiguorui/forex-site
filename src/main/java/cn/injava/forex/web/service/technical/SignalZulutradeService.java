@@ -4,6 +4,7 @@ import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.model.technical.TradingSignal;
+import cn.injava.forex.web.service.system.SystemService;
 import com.gargoylesoftware.htmlunit.HttpMethod;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.gargoylesoftware.htmlunit.WebRequest;
@@ -34,6 +35,9 @@ public class SignalZulutradeService {
     @Resource
     private TechnicalnvestingService technicalnvestingService;
 
+    @Resource(name = "getSystemConfig")
+    private Map<String, String> systemConfig;
+
     private WebRequest requestSettings;
 
     public List<TradingSignal> getSignals() throws MalformedURLException {
@@ -56,7 +60,7 @@ public class SignalZulutradeService {
                 String[] time = tradeJO.get("ta").getAsString().split(" ");
                 tradingSignal.setCurrency(tradeJO.get("cun").getAsString().replace("/", "_"));
 
-                if (Integer.parseInt(time[0]) <= 20 && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
+                if (Integer.parseInt(time[0]) <= Integer.parseInt(systemConfig.get("open.trade.time")) && SystemConstant.MAJOR_CURRENCES.contains(tradingSignal.getCurrency()) ){
 
                     tradingSignal.setCurrency(tradingSignal.getCurrency());
                     tradingSignal.setPlatform(SystemConstant.BROKER_ZULUTRADE);
