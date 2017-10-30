@@ -55,4 +55,9 @@ public class SystemConstant {
      */
     final public static String TRADE_TYPE_BUY = "BUY";
     final public static String TRADE_TYPE_SELL = "SELL";
+
+
+    final public static int PAGE_SIZE = 20;
+
+
 }

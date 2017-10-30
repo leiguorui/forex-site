@@ -152,4 +152,18 @@
     </trim>
   </insert>
 
+  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="cn.injava.forex.web.model.order.TradingOrderExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from trading_order
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
 </mapper>

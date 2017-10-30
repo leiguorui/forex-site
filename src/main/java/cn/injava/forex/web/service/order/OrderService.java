@@ -1,6 +1,7 @@
 package cn.injava.forex.web.service.order;
 
 import cn.injava.forex.core.constant.SystemConstant;
+import cn.injava.forex.core.utils.page.Page;
 import cn.injava.forex.web.dao.order.TradingOrderMapper;
 import cn.injava.forex.web.dao.order.TradingOrderMapperExt;
 import cn.injava.forex.web.model.order.TradingOrder;
@@ -74,6 +75,18 @@ public class OrderService {
         }
 
         return order;
+    }
+
+    public Page<TradingOrder> queryWithPage(int pageNo){
+        Page<TradingOrder> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
+
+        TradingOrderExample example = new TradingOrderExample();
+        example.createCriteria().andIdIsNotNull();
+        example.setOrderByClause("id desc");
+
+        orderMapperExt.selectByExampleAndPage(page, example);
+
+        return page;
     }
 
 }
