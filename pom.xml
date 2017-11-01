@@ -265,7 +265,7 @@
     </dependencies>
 
     <build>
-        <finalName>forex</finalName>
+        <finalName>ROOT</finalName>
 
         <plugins>
 
@@ -331,5 +331,6 @@
             </resource>
         </resources>
         <!-- // 配置Maven 对resource文件 过滤 -->
+
     </build>
 </project>

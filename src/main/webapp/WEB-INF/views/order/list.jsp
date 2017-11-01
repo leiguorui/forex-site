@@ -20,19 +20,6 @@
 </head>
 
 <body>
-<!-- sub navigation -->
-<div id="sub-navigation">
-    <c:import url="/common/page/sub_navigation.html" charEncoding="UTF-8">
-    </c:import>
-</div>
-<!-- ./sub navigation -->
-
-<!-- header -->
-<header>
-    <c:import url="/common/page/header.html" charEncoding="UTF-8">
-    </c:import>
-</header>
-<!-- ./headerer -->
 
 <!-- wrapper -->
 <div class="container">
@@ -44,6 +31,14 @@
                     <!-- section #1 -->
                     <section class="clearfix">
 
+                        <c:forEach items="${stat}" var="entryInList" varStatus="loop">
+                            <c:forEach items="${entryInList}" var="entry" varStatus="loop">
+                                ${entry.key} = ${entry.value}
+                            </c:forEach>
+                            <br>
+                        </c:forEach>
+
+
                         <div class="col-md-12">
                             <table class="table">
                                 <tbody>
@@ -53,8 +48,11 @@
                                         <c:when test="${entry.profitPips > 0}">
                                             <tr  class="success" >
                                         </c:when>
-                                        <c:otherwise>
+                                        <c:when test="${entry.profitPips < 0}">
                                             <tr  class="warning" >
+                                        </c:when>
+                                        <c:otherwise>
+                                            <tr >
                                         </c:otherwise>
                                     </c:choose>
                                         <td>${entry.currency}</td>
@@ -71,15 +69,14 @@
                             </table>
                         </div>
 
-
-                        <c:forEach begin="1" end="${data.totalPages}" varStatus="loop">
-                            <a href="/order/list.html?pageNo=${loop.index}">${loop.index}</a>
-                        </c:forEach>
-
-
                         <!-- contact form -->
 
                     </section>
+
+                    <c:forEach begin="1" end="${data.totalPages}" varStatus="loop">
+                        <a href="/order/list.html?pageNo=${loop.index}">${loop.index}</a>
+                    </c:forEach>
+
                 </div>
             </div>
 

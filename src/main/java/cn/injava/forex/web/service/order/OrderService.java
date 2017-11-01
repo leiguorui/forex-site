@@ -4,13 +4,20 @@ import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.page.Page;
 import cn.injava.forex.web.dao.order.TradingOrderMapper;
 import cn.injava.forex.web.dao.order.TradingOrderMapperExt;
+import cn.injava.forex.web.dao.technical.TradingSignalMapper;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.TradingOrderExample;
+import cn.injava.forex.web.model.technical.TradingSignal;
+import cn.injava.forex.web.model.technical.TradingSignalExample;
+import org.apache.commons.collections.map.HashedMap;
+import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
 import java.util.Date;
 import java.util.List;
+import java.util.Map;
+import java.util.TreeMap;
 
 /**
  * 订单
@@ -23,6 +30,8 @@ public class OrderService {
     private TradingOrderMapper orderMapper;
     @Resource
     private TradingOrderMapperExt orderMapperExt;
+    @Resource
+    private TradingSignalMapper tradingSignalMapper;
 
     /**
      * 获取财经日历
@@ -87,6 +96,50 @@ public class OrderService {
         orderMapperExt.selectByExampleAndPage(page, example);
 
         return page;
+    }
+
+    public Map<String, Object> orderStat(DateTime dateTime){
+
+        TradingOrderExample example = new TradingOrderExample();
+        example.createCriteria()
+                .andOpenTimeBetween(dateTime.millisOfDay().withMinimumValue().toDate(), dateTime.millisOfDay().withMaximumValue().toDate());
+        List<TradingOrder> orders = orderMapper.selectByExample(example);
+
+        TradingSignalExample signalExample = new TradingSignalExample();
+        signalExample.createCriteria()
+                .andCreateTimeBetween(dateTime.millisOfDay().withMinimumValue().toDate(), dateTime.millisOfDay().withMaximumValue().toDate());
+        List<TradingSignal> signals = tradingSignalMapper.selectByExample(signalExample);
+
+
+        int profitOrders = 0;
+        int loseOrders = 0;
+        int ordersCount = 0;
+        for (TradingOrder order : orders){
+            ordersCount++;
+            if (order.getProfitPips() > 0){
+                profitOrders++;
+            }else if (order.getProfitPips() < 0){
+                loseOrders++;
+            }
+        }
+
+        int signalCount = 0;
+        int usefulSignal = 0;
+        for (TradingSignal signal : signals){
+            signalCount++;
+            if (signal.getProfitPrice() != null){
+                usefulSignal++;
+            }
+        }
+
+        Map<String, Object> result = new TreeMap();
+        result.put("profitOrders", profitOrders);
+        result.put("loseOrders", loseOrders);
+        result.put("ordersCount", ordersCount);
+        result.put("signalCount", signalCount);
+        result.put("usefulSignal", usefulSignal);
+
+        return result;
     }
 
 }
