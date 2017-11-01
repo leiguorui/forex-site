@@ -90,6 +90,6 @@ public class TechnicalnvestingService {
         requestSettings.setAdditionalHeader("Referer", "https://www.investing.com/technical/technical-summary");
         requestSettings.setAdditionalHeader("User-Agent", "Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/61.0.3163.100 Safari/537.36");
         requestSettings.setAdditionalHeader("X-Requested-With", "XMLHttpRequest");
-        requestSettings.setRequestBody("tab=forex&options%5Bperiods%5D%5B%5D=60&options%5Bperiods%5D%5B%5D=300&options%5Bperiods%5D%5B%5D=900&options%5Bperiods%5D%5B%5D=1800&options%5Breceive_email%5D=false&options%5Bcurrencies%5D%5B%5D=1&options%5Bcurrencies%5D%5B%5D=2&options%5Bcurrencies%5D%5B%5D=3&options%5Bcurrencies%5D%5B%5D=4&options%5Bcurrencies%5D%5B%5D=5&options%5Bcurrencies%5D%5B%5D=7&options%5Bcurrencies%5D%5B%5D=8");
+        requestSettings.setRequestBody("tab=forex&options%5Bperiods%5D%5B%5D=300&options%5Bperiods%5D%5B%5D=900&options%5Bperiods%5D%5B%5D=1800&options%5Bperiods%5D%5B%5D=3600&options%5Breceive_email%5D=false&options%5Bcurrencies%5D%5B%5D=1&options%5Bcurrencies%5D%5B%5D=2&options%5Bcurrencies%5D%5B%5D=3&options%5Bcurrencies%5D%5B%5D=4&options%5Bcurrencies%5D%5B%5D=5&options%5Bcurrencies%5D%5B%5D=7&options%5Bcurrencies%5D%5B%5D=8");
     }
 }
