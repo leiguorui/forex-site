@@ -114,9 +114,12 @@ public class OrderService {
         int profitOrders = 0;
         int loseOrders = 0;
         int ordersCount = 0;
+        int holdCount = 0;
         for (TradingOrder order : orders){
             ordersCount++;
-            if (order.getProfitPips() > 0){
+            if (order.getProfitPips() == null){
+                holdCount++;
+            }else if (order.getProfitPips() > 0){
                 profitOrders++;
             }else if (order.getProfitPips() < 0){
                 loseOrders++;
@@ -138,6 +141,7 @@ public class OrderService {
         result.put("ordersCount", ordersCount);
         result.put("signalCount", signalCount);
         result.put("usefulSignal", usefulSignal);
+        result.put("holdCount", holdCount);
 
         return result;
     }

@@ -4,6 +4,7 @@ import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
 import cn.injava.forex.web.service.order.OrderService;
+import cn.injava.forex.web.service.technical.SignalHitraderService;
 import cn.injava.forex.web.service.technical.SignalZulutradeService;
 import cn.injava.forex.web.service.technical.TechnicalnvestingService;
 import cn.injava.forex.web.service.technical.TradeSignalService;
@@ -35,6 +36,8 @@ public class OandaOpenTradeTask extends BaseTask {
     @Resource
     private SignalZulutradeService signalZulutradeService;
     @Resource
+    private SignalHitraderService signalHitraderService;
+    @Resource
     private OrderService orderService;
     @Resource
     private TechnicalnvestingService technicalnvestingService;
@@ -51,6 +54,7 @@ public class OandaOpenTradeTask extends BaseTask {
 
         try {
             List<TradingSignal> signals = signalZulutradeService.getSignals();
+            signals.addAll(signalHitraderService.getSignals());
 
             for (TradingSignal signal : signals){
 

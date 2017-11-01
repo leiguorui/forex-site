@@ -31,12 +31,20 @@
                     <!-- section #1 -->
                     <section class="clearfix">
 
-                        <c:forEach items="${stat}" var="entryInList" varStatus="loop">
-                            <c:forEach items="${entryInList}" var="entry" varStatus="loop">
+                        <p>
+                            <c:forEach items="${stat}" var="entryInList" varStatus="loop">
+                                <c:forEach items="${entryInList}" var="entry" varStatus="loop">
+                                    ${entry.key} = ${entry.value}
+                                </c:forEach>
+                                <br>
+                            </c:forEach>
+                        </p>
+
+                        <p>
+                            <c:forEach items="${technicals}" var="entry" varStatus="loop">
                                 ${entry.key} = ${entry.value}
                             </c:forEach>
-                            <br>
-                        </c:forEach>
+                        </p>
 
 
                         <div class="col-md-12">

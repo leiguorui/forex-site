@@ -49,6 +49,7 @@ public class SystemConstant {
     final public static String BROKER_OANDA = "oanda";
     final public static String BROKER_ZULUTRADE = "zulutrade";
     final public static String BROKER_FOREXFACTORY = "forexfactory";
+    final public static String BROKER_HITRADER = "hitrader";
 
     /**
      * 交易类型

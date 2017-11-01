@@ -2,6 +2,7 @@ package cn.injava.forex.web.controller;
 
 import cn.injava.forex.web.service.order.OrderService;
 import cn.injava.forex.web.service.system.SystemService;
+import cn.injava.forex.web.service.technical.TechnicalnvestingService;
 import org.joda.time.DateTime;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.annotation.Resource;
+import java.net.MalformedURLException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -29,13 +31,17 @@ public class OrderController {
 
     @Resource
     private OrderService orderService;
+    @Resource
+    private TechnicalnvestingService technicalnvestingService;
 
     @RequestMapping(value = "/list", method = RequestMethod.GET)
     public String config(Model model, String date,
-                         @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) {
+                         @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) throws MalformedURLException {
 
+        //设置订单
         model.addAttribute("data", orderService.queryWithPage(pageNo));
 
+        //设置统计
         DateTime dateTime = new DateTime();
         if (date != null){
             dateTime = new DateTime(date);
@@ -48,6 +54,10 @@ public class OrderController {
         }
 
         model.addAttribute("stat", stat);
+
+        //设置技术分析
+        Map<String, String> technicals = technicalnvestingService.getTechnicals();
+        model.addAttribute("technicals", technicals);
 
         return "order/list";
     }
