@@ -3,6 +3,7 @@ package cn.injava.forex.web.service;
 import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.Trade;
+import cn.injava.forex.web.model.order.TradingPrice;
 import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.order.OrderService;
@@ -175,6 +176,47 @@ public class TradeFxService {
         }
 
         return tradesIds;
+    }
+
+    /**
+     * 盈利和亏损订单
+     * @param profit
+     * @param loss
+     * @return
+     */
+    public Map<String, List<Integer>> getLossOrProfitTrades(BigDecimal profit, BigDecimal loss){
+        String url = baseUrl + "/openTrades";
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject trades = new Gson().fromJson(response.getBody(), JsonObject.class);
+
+        List<Integer> lossIds = new ArrayList<>();
+        List<Integer> profitIds = new ArrayList<>();
+        for (JsonElement trade : trades.getAsJsonArray("trades")){
+            JsonObject tradeJO = trade.getAsJsonObject();
+            BigDecimal unrealizedPL = tradeJO.get("unrealizedPL").getAsBigDecimal();
+
+            if (unrealizedPL.subtract(loss).doubleValue() < 0){
+                lossIds.add(tradeJO.get("id").getAsInt());
+            }
+
+            if (unrealizedPL.subtract(profit).doubleValue() > 0){
+                profitIds.add(tradeJO.get("id").getAsInt());
+            }
+
+            //设置订单获利情况
+            TradingPrice tradingPrice = new TradingPrice();
+            tradingPrice.setCurrency(tradeJO.get("instrument").getAsString());
+            tradingPrice.setOrderId(tradeJO.get("id").getAsInt());
+            tradingPrice.setPlatform(SystemConstant.BROKER_OANDA);
+            tradingPrice.setProfitPrice(tradeJO.get("unrealizedPL").getAsBigDecimal());
+            orderService.addOrderPrice(tradingPrice);
+        }
+
+        Map<String, List<Integer>> result = new HashMap<>(2);
+        result.put("profit", profitIds);
+        result.put("loss", lossIds);
+
+        return result;
     }
 
     /**

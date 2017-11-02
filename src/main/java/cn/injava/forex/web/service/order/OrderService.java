@@ -4,9 +4,11 @@ import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.utils.page.Page;
 import cn.injava.forex.web.dao.order.TradingOrderMapper;
 import cn.injava.forex.web.dao.order.TradingOrderMapperExt;
+import cn.injava.forex.web.dao.order.TradingPriceMapper;
 import cn.injava.forex.web.dao.technical.TradingSignalMapper;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.TradingOrderExample;
+import cn.injava.forex.web.model.order.TradingPrice;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.model.technical.TradingSignalExample;
 import org.apache.commons.collections.map.HashedMap;
@@ -32,6 +34,8 @@ public class OrderService {
     private TradingOrderMapperExt orderMapperExt;
     @Resource
     private TradingSignalMapper tradingSignalMapper;
+    @Resource
+    private TradingPriceMapper tradingPriceMapper;
 
     /**
      * 获取财经日历
@@ -98,6 +102,11 @@ public class OrderService {
         return page;
     }
 
+    /**
+     * 交易统计信息
+     * @param dateTime
+     * @return
+     */
     public Map<String, Object> orderStat(DateTime dateTime){
 
         TradingOrderExample example = new TradingOrderExample();
@@ -146,4 +155,10 @@ public class OrderService {
         return result;
     }
 
+    public int addOrderPrice(TradingPrice price){
+
+        price.setCreateTime(new Date());
+
+        return tradingPriceMapper.insertSelective(price);
+    }
 }
