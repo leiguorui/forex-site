@@ -39,7 +39,7 @@ public class OandaCloseTradeTask extends BaseTask {
 
         super.period = period;
 
-        logger.info("request for close");
+        logger.debug("request for close");
 
         try {
 

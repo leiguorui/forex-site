@@ -50,7 +50,7 @@ public class OandaOpenTradeTask extends BaseTask {
 
         super.period = period;
 
-        logger.info("request for open");
+        logger.debug("request for open");
 
         try {
             List<TradingSignal> signals = signalZulutradeService.getSignals();

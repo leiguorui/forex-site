@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="joda" uri="http://www.joda.org/joda/time/tags" %>
+<%@ taglib prefix = "fmt" uri = "http://java.sun.com/jsp/jstl/fmt" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -64,12 +65,15 @@
                                         </c:otherwise>
                                     </c:choose>
                                         <td>${entry.currency}</td>
-                                        <td>${entry.profitPips}</td>
+                                        <td>${entry.profitPips} </td>
+                                        <td>${entry.maxProfit} </td>
+                                        <td>${entry.maxLoss} </td>
                                         <td>${entry.type}</td>
                                         <td>${entry.openPrice}</td>
-                                        <td>${entry.openTime}</td>
                                         <td>${entry.closePrice}</td>
-                                        <td>${entry.closeTime}</td>
+                                        <td><fmt:formatDate pattern = "dd" value = "${entry.openTime}" /></td>
+                                        <td><fmt:formatDate pattern = "HH:mm:ss" value = "${entry.openTime}" /></td>
+                                        <td><fmt:formatDate pattern = "HH:mm:ss" value = "${entry.closeTime}" /></td>
                                         <td>${entry.tradingId}</td>
                                     </tr>
                                 </c:forEach>

@@ -94,7 +94,7 @@ public class TradeFxService {
 
         TradingOrder order = orderService.selectOrderByRradeId(tradeId+"");
         order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
-        order.setProfitPips(JsonObject.get("orderFillTransaction").getAsJsonObject().get("pl").getAsFloat());
+        order.setProfitPips((order.getClosePrice().subtract(order.getOpenPrice()).floatValue()) * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
         order.setCloseTime(new Date());
 
         orderService.update(order);

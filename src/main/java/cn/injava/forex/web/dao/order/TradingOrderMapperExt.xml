@@ -14,6 +14,12 @@
     <result column="trading_id" property="tradingId" jdbcType="VARCHAR" />
     <result column="trading_platform" property="tradingPlatform" jdbcType="VARCHAR" />
   </resultMap>
+
+  <resultMap id="OrderVoMap" type="cn.injava.forex.web.model.order.OrderVo"  extends="BaseResultMap">
+    <result column="maxProfit" property="maxProfit" jdbcType="DECIMAL" />
+    <result column="maxLoss" property="maxLoss" jdbcType="DECIMAL" />
+  </resultMap>
+
   <sql id="Example_Where_Clause" >
     <where >
       <foreach collection="oredCriteria" item="criteria" separator="or" >
@@ -152,7 +158,7 @@
     </trim>
   </insert>
 
-  <select id="selectByExampleAndPage" resultMap="BaseResultMap" parameterType="cn.injava.forex.web.model.order.TradingOrderExample" >
+  <select id="selectByExampleAndPage" resultMap="OrderVoMap" parameterType="cn.injava.forex.web.model.order.TradingOrderExample" >
     select
     <if test="distinct" >
       distinct
