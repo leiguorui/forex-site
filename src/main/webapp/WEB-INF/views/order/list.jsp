@@ -75,6 +75,8 @@
                                         <td><fmt:formatDate pattern = "HH:mm:ss" value = "${entry.openTime}" /></td>
                                         <td><fmt:formatDate pattern = "HH:mm:ss" value = "${entry.closeTime}" /></td>
                                         <td>${entry.tradingId}</td>
+                                        <td>${entry.signalSrc}</td>
+                                        <td>${entry.signalUser}</td>
                                     </tr>
                                 </c:forEach>
                                 </tbody>

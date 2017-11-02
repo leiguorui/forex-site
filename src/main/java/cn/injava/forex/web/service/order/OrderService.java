@@ -102,8 +102,14 @@ public class OrderService {
         for (OrderVo orderVo : page.getResult()){
             TradingPriceExample priceExample = new TradingPriceExample();
             priceExample.createCriteria().andOrderIdEqualTo(Integer.parseInt(orderVo.getTradingId()));
-
             orderVo.setTradingPrices(tradingPriceMapper.selectByExample(priceExample));
+
+            TradingSignalExample signalExample = new TradingSignalExample();
+            signalExample.createCriteria().andOrderIdEqualTo(orderVo.getId());
+            TradingSignal signal = tradingSignalMapper.selectByExample(signalExample).get(0);
+            orderVo.setSignalSrc(signal.getPlatform());
+            orderVo.setSignalUser(signal.getUserName());
+
         }
 
         return page;
@@ -135,7 +141,7 @@ public class OrderService {
         int ordersCount = 0;
         //持仓数量
         int holdCount = 0;
-        //获利或亏损金额
+        //获利或亏损点数
         float profitAmount = 0;
         for (TradingOrder order : orders){
             ordersCount++;
@@ -169,6 +175,7 @@ public class OrderService {
         result.put("signalCount", signalCount);
         result.put("usefulSignal", usefulSignal);
         result.put("holdCount", holdCount);
+        result.put("profitAmount", profitAmount);
 
         return result;
     }

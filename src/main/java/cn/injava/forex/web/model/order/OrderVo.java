@@ -9,6 +9,8 @@ import java.util.List;
 public class OrderVo extends TradingOrder{
     private BigDecimal maxProfit;
     private BigDecimal maxLoss;
+    private String signalSrc;
+    private String signalUser;
     private List<TradingPrice> tradingPrices;
 
     public BigDecimal getMaxProfit() {
@@ -25,6 +27,22 @@ public class OrderVo extends TradingOrder{
 
     public void setMaxLoss(BigDecimal maxLoss) {
         this.maxLoss = maxLoss;
+    }
+
+    public String getSignalSrc() {
+        return signalSrc;
+    }
+
+    public void setSignalSrc(String signalSrc) {
+        this.signalSrc = signalSrc;
+    }
+
+    public String getSignalUser() {
+        return signalUser;
+    }
+
+    public void setSignalUser(String signalUser) {
+        this.signalUser = signalUser;
     }
 
     public List<TradingPrice> getTradingPrices() {
