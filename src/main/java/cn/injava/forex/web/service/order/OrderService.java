@@ -109,7 +109,6 @@ public class OrderService {
             TradingSignal signal = tradingSignalMapper.selectByExample(signalExample).get(0);
             orderVo.setSignalSrc(signal.getPlatform());
             orderVo.setSignalUser(signal.getUserName());
-
         }
 
         return page;
