@@ -98,7 +98,7 @@ public class TradeFxService {
         order.setProfitPips((order.getClosePrice().subtract(order.getOpenPrice()).floatValue()) * 10000 * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
         //如果是含有日元, 获利点数为价格乘100
         if (order.getCurrency().contains("JPY")){
-            order.setProfitPips((order.getClosePrice().subtract(order.getOpenPrice()).floatValue()) * 100 * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
+            order.setProfitPips(order.getProfitPips() / 100);
         }
 
         order.setCloseTime(new Date());
