@@ -1,6 +1,7 @@
 package cn.injava.forex.web.model.order;
 
 import java.math.BigDecimal;
+import java.util.Iterator;
 import java.util.List;
 
 /**
@@ -50,20 +51,38 @@ public class OrderVo extends TradingOrder{
     }
 
     public void setTradingPrices(List<TradingPrice> tradingPrices) {
-        this.tradingPrices = tradingPrices;
 
         maxProfit = new BigDecimal(-99999);
         maxLoss = new BigDecimal(99999);
+        BigDecimal prePrice = null;
 
-        for (TradingPrice tradingPrice : tradingPrices){
-            if (maxProfit.compareTo(tradingPrice.getProfitPrice()) == -1){
-                maxProfit = tradingPrice.getProfitPrice();
+        for (Iterator<TradingPrice> iterator = tradingPrices.iterator(); iterator.hasNext(); ) {
+            TradingPrice tradingPrice = iterator.next();
+
+            //移除重复值
+            if (prePrice != null && prePrice.compareTo(tradingPrice.getProfitPrice()) == 0){
+                iterator.remove();
+                continue;
+            }else {
+                prePrice = tradingPrice.getProfitPrice();
             }
 
-            if (maxLoss.compareTo(tradingPrice.getProfitPrice()) == 1){
-                maxLoss = tradingPrice.getProfitPrice();
+            //设置最大值
+            if (maxProfit.compareTo(prePrice) == -1){
+                maxProfit = prePrice;
             }
+
+            //设置最小值
+            if (maxLoss.compareTo(prePrice) == 1){
+                maxLoss = prePrice;
+            }
+
+            tradingPrice.setId(null);
+            tradingPrice.setCreateTime(null);
+            tradingPrice.setPlatform(null);
         }
+
+        this.tradingPrices = tradingPrices;
 
     }
 }

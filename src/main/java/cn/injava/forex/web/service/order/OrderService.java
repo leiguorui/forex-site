@@ -100,6 +100,38 @@ public class OrderService {
 
         //设置获利价格
         for (OrderVo orderVo : page.getResult()){
+            TradingSignalExample signalExample = new TradingSignalExample();
+            signalExample.createCriteria().andOrderIdEqualTo(orderVo.getId());
+            TradingSignal signal = tradingSignalMapper.selectByExample(signalExample).get(0);
+            orderVo.setSignalSrc(signal.getPlatform());
+            orderVo.setSignalUser(signal.getUserName());
+        }
+
+        return page;
+    }
+
+    /**
+     * 获取订单的获利价格走势
+     * @param orderId
+     * @return
+     */
+    public List<TradingPrice> getProfitPrice(Integer orderId){
+        TradingPriceExample priceExample = new TradingPriceExample();
+        priceExample.createCriteria().andOrderIdEqualTo(orderId);
+        return tradingPriceMapper.selectByExample(priceExample);
+    }
+
+    public Page<OrderVo> queryWithPagePrice(int pageNo){
+        Page<OrderVo> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
+
+        TradingOrderExample example = new TradingOrderExample();
+        example.createCriteria().andIdIsNotNull();
+        example.setOrderByClause("id desc");
+
+        orderMapperExt.selectByExampleAndPage(page, example);
+
+        //设置获利价格
+        for (OrderVo orderVo : page.getResult()){
             TradingPriceExample priceExample = new TradingPriceExample();
             priceExample.createCriteria().andOrderIdEqualTo(Integer.parseInt(orderVo.getTradingId()));
             orderVo.setTradingPrices(tradingPriceMapper.selectByExample(priceExample));

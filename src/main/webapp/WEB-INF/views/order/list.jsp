@@ -18,6 +18,8 @@
 
     <!-- ======= STYLE SWITCHER ======= -->
     <link rel="stylesheet" href="/css/styleswitcher.css">
+
+
 </head>
 
 <body>
@@ -47,6 +49,9 @@
                             </c:forEach>
                         </p>
 
+                        <p>
+                        <div id="echarts" style="width: 600px;height:400px;"></div>
+                        </p>
 
                         <div class="col-md-12">
                             <table class="table">
@@ -118,7 +123,10 @@
 <script src="/js/jquery.bxslider.min.js"></script>
 <script src="/js/jquery.prettyPhoto.js"></script>
 <script src="/js/custom.js"></script>
+<script type="text/javascript" src="http://echarts.baidu.com/gallery/vendors/echarts/echarts-all-3.js"></script>
 <script src="/js/service/user.js"></script>
+<script src="/js/service/charts.js"></script>
+
 
 </body>
 </html>

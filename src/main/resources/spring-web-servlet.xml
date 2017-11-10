@@ -124,8 +124,8 @@
 	<bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
 		<property name="triggers">
 			<list>
-				<ref bean="cronTriggerRunMeJob" />
-				<ref bean="cronTriggerStopMeJob" />
+				<!--<ref bean="cronTriggerRunMeJob" />-->
+				<!--<ref bean="cronTriggerStopMeJob" />-->
 				<ref bean="simpleTrigger" />
 			</list>
 		</property>
