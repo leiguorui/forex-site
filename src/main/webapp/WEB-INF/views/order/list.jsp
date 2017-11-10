@@ -57,7 +57,6 @@
                             <table class="table">
                                 <tbody>
                                 <c:forEach items="${data.result}" var="entry" varStatus="loop">
-
                                     <c:choose>
                                         <c:when test="${entry.profitPips > 0}">
                                             <tr  class="success" >
@@ -69,6 +68,7 @@
                                             <tr >
                                         </c:otherwise>
                                     </c:choose>
+                                        <td>${loop.index + 1}</td>
                                         <td>${entry.currency}</td>
                                         <td>${entry.profitPips} </td>
                                         <td>${entry.maxProfit} </td>

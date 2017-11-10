@@ -9,20 +9,20 @@ var myEChart = echarts.init(document.getElementById('echarts'));
 $.get('/order/list.json').done(function (data) {
 
     var seriesArray = [];
-    var egendData = [];
+    var legendData = [];
 
     $.each( data.userdata, function( key, value ) {
 
-        var egendName = value.currency + "[ " + value.tradingId + " ]";
+        var legendName = value.currency + "[ " + value.tradingId + " ]";
 
         var series = {
-            name: egendName,
+            name: legendName,
             symbol: 'none',
             type: 'line',
             data: []
         };
 
-        egendData.push(egendName);
+        legendData.push(legendName);
 
         $.each(value.tradingPrices, function( keyPrice, valuePrice ) {
             series.data.push([keyPrice, valuePrice.profitPrice]);
@@ -33,8 +33,8 @@ $.get('/order/list.json').done(function (data) {
     });
 
     var chartOption = {
-        egend: {
-            data:egendData
+        legend: {
+            data:legendData
         },
         xAxis: { },
         yAxis: { },
@@ -42,11 +42,6 @@ $.get('/order/list.json').done(function (data) {
             {
                 type: 'inside',
                 xAxisIndex: 0,
-                filterMode: 'empty'
-            },
-            {
-                type: 'inside',
-                yAxisIndex: 0,
                 filterMode: 'empty'
             }
         ],

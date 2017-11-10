@@ -93,7 +93,7 @@ public class OrderService {
         Page<OrderVo> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
 
         TradingOrderExample example = new TradingOrderExample();
-        example.createCriteria().andIdIsNotNull();
+        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(new DateTime().withTime(0, 0, 0, 0).toDate());
         example.setOrderByClause("id desc");
 
         orderMapperExt.selectByExampleAndPage(page, example);
@@ -125,7 +125,7 @@ public class OrderService {
         Page<OrderVo> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
 
         TradingOrderExample example = new TradingOrderExample();
-        example.createCriteria().andIdIsNotNull();
+        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(new DateTime().withTime(0, 0, 0, 0).toDate());
         example.setOrderByClause("id desc");
 
         orderMapperExt.selectByExampleAndPage(page, example);
