@@ -94,9 +94,9 @@ public class TradeFxService {
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
         TradingOrder order = orderService.selectOrderByRradeId(tradeId+"");
-//        order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
+        BigDecimal closePrice = JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal();
 
-        order.setProfitPips((order.getClosePrice().subtract(order.getOpenPrice()).floatValue()) * 10000 * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
+        order.setProfitPips((closePrice.subtract(order.getOpenPrice()).floatValue()) * 10000 * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
         //如果是含有日元, 获利点数为价格乘100
         if (order.getCurrency().contains("JPY")){
             order.setProfitPips(order.getProfitPips() / 100);
