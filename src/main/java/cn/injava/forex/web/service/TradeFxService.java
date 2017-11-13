@@ -72,6 +72,7 @@ public class TradeFxService {
         order.setType(units > 0 ? SystemConstant.TRADE_TYPE_BUY : SystemConstant.TRADE_TYPE_SELL);
         order.setTradingPlatform(SystemConstant.BROKER_OANDA);
         order.setOpenPrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
+        order.setClosePrice(new BigDecimal(-1));
         order.setOpenTime(new Date());
         int orderId = orderService.insert(order);
 
@@ -101,9 +102,7 @@ public class TradeFxService {
             order.setProfitPips(order.getProfitPips() / 100);
         }
 
-        order.setCloseTime(new Date());
-
-        orderService.update(order);
+        orderService.close(order);
 
         return order;
     }
@@ -223,6 +222,52 @@ public class TradeFxService {
         result.put("loss", lossIds);
 
         return result;
+    }
+
+    /**
+     * 获取达到止损点的订单
+     * @param profit
+     * @param loss
+     * @return
+     */
+    public List<Integer> getStopLossTrades(){
+        String url = baseUrl + "/openTrades";
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject trades = new Gson().fromJson(response.getBody(), JsonObject.class);
+
+        List<Integer> stopLossIds = new ArrayList<>();
+        for (JsonElement trade : trades.getAsJsonArray("trades")){
+            JsonObject tradeJO = trade.getAsJsonObject();
+            BigDecimal unrealizedPL = tradeJO.get("unrealizedPL").getAsBigDecimal();
+
+            //设置订单获利情况
+            TradingPrice tradingPrice = new TradingPrice();
+            tradingPrice.setCurrency(tradeJO.get("instrument").getAsString());
+            tradingPrice.setOrderId(tradeJO.get("id").getAsInt());
+            tradingPrice.setPlatform(SystemConstant.BROKER_OANDA);
+            tradingPrice.setProfitPrice(tradeJO.get("unrealizedPL").getAsBigDecimal());
+            orderService.addOrderPrice(tradingPrice);
+
+            TradingOrder tradingOrder = orderService.selectOrderByRradeId(tradingPrice.getOrderId() + "");
+
+            //平仓出场
+            if (unrealizedPL.compareTo(tradingOrder.getClosePrice()) < 0){
+                stopLossIds.add(tradingPrice.getOrderId());
+            }
+            //刚开始盈利的订单, 设置获利最低是0
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) == 0 && unrealizedPL.compareTo(new BigDecimal(0)) > 0){
+                tradingOrder.setClosePrice(new BigDecimal(0));
+            }
+            //已经盈利的订单, 设置获利最低上浮0.2
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > 0.5){
+                tradingOrder.setClosePrice(tradingOrder.getClosePrice().add(new BigDecimal(0.2)));
+            }
+
+            orderService.update(tradingOrder);
+
+        }
+
+        return stopLossIds;
     }
 
     /**

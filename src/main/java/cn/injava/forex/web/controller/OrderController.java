@@ -40,14 +40,16 @@ public class OrderController {
     public String config(Model model, String date,
                          @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) throws MalformedURLException {
 
-        //设置订单
-        model.addAttribute("data", orderService.queryWithPage(pageNo));
-
-        //设置统计
         DateTime dateTime = new DateTime();
+
         if (date != null){
             dateTime = new DateTime(date);
         }
+
+        //设置订单
+        model.addAttribute("data", orderService.queryWithPage(pageNo, dateTime.withTime(0, 0, 0, 0).toDate()));
+
+        //设置统计
         List<Map> stat = new ArrayList<>();
         for (int n = 0; n > -5; n--){
             Map orderStat = orderService.orderStat(dateTime.plusDays(n));
@@ -69,7 +71,13 @@ public class OrderController {
     public OperationResult priceJson(Model model, String date,
                                       @RequestParam(value = "pageNo", defaultValue = "1") Integer pageNo) throws MalformedURLException {
 
-        Object data = orderService.queryWithPagePrice(pageNo).getResult();
+        Date dateParam = new DateTime().withTime(0, 0, 0, 0).toDate();
+
+        if (date != null){
+            dateParam = new DateTime(date).withTime(0, 0, 0, 0).toDate();
+        }
+
+        Object data = orderService.queryWithPagePrice(pageNo, dateParam).getResult();
 
         return OperationResult.buildSuccessResult("success", data);
     }

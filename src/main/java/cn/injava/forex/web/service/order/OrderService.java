@@ -9,6 +9,7 @@ import cn.injava.forex.web.dao.technical.TradingSignalMapper;
 import cn.injava.forex.web.model.order.*;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.model.technical.TradingSignalExample;
+import cn.injava.forex.web.service.SmsService;
 import org.apache.commons.collections.map.HashedMap;
 import org.joda.time.DateTime;
 import org.springframework.stereotype.Service;
@@ -65,8 +66,19 @@ public class OrderService {
         return order.getId();
     }
 
-    public int update(TradingOrder order){
+    public int close(TradingOrder order){
         order.setCloseTime(new Date());
+
+        //开仓闭仓时间低于10分钟
+        if ((order.getCloseTime().getTime() - order.getOpenTime().getTime()) < (1000 * 60 * 10)){
+            SmsService smsService = new SmsService();
+            smsService.sendSms("【国瑞科技】"+order.getCurrency()+"在"+order.getOpenPrice()+"可以看涨","17600666891", 2773);
+        }
+
+        return orderMapper.updateByPrimaryKey(order);
+    }
+
+    public int update(TradingOrder order){
         return orderMapper.updateByPrimaryKey(order);
     }
 
@@ -89,11 +101,11 @@ public class OrderService {
         return order;
     }
 
-    public Page<OrderVo> queryWithPage(int pageNo){
+    public Page<OrderVo> queryWithPage(int pageNo, Date date){
         Page<OrderVo> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
 
         TradingOrderExample example = new TradingOrderExample();
-        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(new DateTime().withTime(0, 0, 0, 0).toDate());
+        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(date);
         example.setOrderByClause("id desc");
 
         orderMapperExt.selectByExampleAndPage(page, example);
@@ -121,11 +133,17 @@ public class OrderService {
         return tradingPriceMapper.selectByExample(priceExample);
     }
 
-    public Page<OrderVo> queryWithPagePrice(int pageNo){
+    /**
+     * 查询获利价格
+     * @param pageNo
+     * @return
+     */
+    public Page<OrderVo> queryWithPagePrice(int pageNo, Date date){
         Page<OrderVo> page = new Page<>(pageNo, SystemConstant.PAGE_SIZE);
 
         TradingOrderExample example = new TradingOrderExample();
-        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(new DateTime().withTime(0, 0, 0, 0).toDate());
+
+        example.createCriteria().andOpenTimeGreaterThanOrEqualTo(date);
         example.setOrderByClause("id desc");
 
         orderMapperExt.selectByExampleAndPage(page, example);

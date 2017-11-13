@@ -6,7 +6,7 @@
 // 基于准备好的dom，初始化echarts实例
 var myEChart = echarts.init(document.getElementById('echarts'));
 
-$.get('/order/list.json').done(function (data) {
+$.get('/order/list.json' + location.search).done(function (data) {
 
     var seriesArray = [];
     var legendData = [];
