@@ -51,7 +51,7 @@ public class OandaCloseTradeTask extends BaseTask {
             }
 
         }catch (Exception e){
-            logger.error(e.getMessage());
+            e.printStackTrace();
         }
     }
 }

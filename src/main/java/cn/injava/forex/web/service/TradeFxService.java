@@ -94,7 +94,7 @@ public class TradeFxService {
         JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class);
 
         TradingOrder order = orderService.selectOrderByRradeId(tradeId+"");
-        order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
+//        order.setClosePrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
 
         order.setProfitPips((order.getClosePrice().subtract(order.getOpenPrice()).floatValue()) * 10000 * (order.getType().equals(SystemConstant.TRADE_TYPE_SELL) ? -1 : 1) );
         //如果是含有日元, 获利点数为价格乘100
@@ -256,7 +256,7 @@ public class TradeFxService {
             }
             //刚开始盈利的订单, 设置获利最低是0
             if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) == 0 && unrealizedPL.compareTo(new BigDecimal(0)) > 0){
-                tradingOrder.setClosePrice(new BigDecimal(0));
+                tradingOrder.setClosePrice(new BigDecimal(0.2));
             }
             //已经盈利的订单, 设置获利最低上浮0.2
             if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > 0.5){
