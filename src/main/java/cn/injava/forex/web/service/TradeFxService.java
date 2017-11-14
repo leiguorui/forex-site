@@ -256,7 +256,7 @@ public class TradeFxService {
             }
             //刚开始盈利的订单, 设置获利最低是0
             if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) == 0 && unrealizedPL.compareTo(new BigDecimal(0)) > 0){
-                tradingOrder.setClosePrice(new BigDecimal(0.2));
+                tradingOrder.setClosePrice(new BigDecimal(-0.2));
             }
             //已经盈利的订单, 设置获利最低上浮0.2
             if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > 0.5){
