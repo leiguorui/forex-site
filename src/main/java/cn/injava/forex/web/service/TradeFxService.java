@@ -40,6 +40,9 @@ public class TradeFxService {
     @Resource
     private TradingSignalService signalService;
 
+    @Resource(name = "getSystemConfig")
+    private Map<String, String> systemConfig;
+
     /**
      * 开仓
      * @param currency
@@ -72,7 +75,7 @@ public class TradeFxService {
         order.setType(units > 0 ? SystemConstant.TRADE_TYPE_BUY : SystemConstant.TRADE_TYPE_SELL);
         order.setTradingPlatform(SystemConstant.BROKER_OANDA);
         order.setOpenPrice(JsonObject.get("orderFillTransaction").getAsJsonObject().get("price").getAsBigDecimal());
-        order.setClosePrice(new BigDecimal(-1));
+        order.setClosePrice(new BigDecimal(systemConfig.get("trade.max.loss")));
         order.setOpenTime(new Date());
         int orderId = orderService.insert(order);
 
@@ -255,12 +258,12 @@ public class TradeFxService {
                 stopLossIds.add(tradingPrice.getOrderId());
             }
             //刚开始盈利的订单, 设置获利最低是0
-            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) == 0 && unrealizedPL.compareTo(new BigDecimal(0)) > 0){
-                tradingOrder.setClosePrice(new BigDecimal(-0.4));
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) == 0 && unrealizedPL.compareTo(new BigDecimal(systemConfig.get("trade.min.profit"))) > 0){
+                tradingOrder.setClosePrice(new BigDecimal(systemConfig.get("trade.min.profit")));
             }
             //已经盈利的订单, 设置获利最低上浮0.2
-            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(-1)) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > 0.5){
-                tradingOrder.setClosePrice(tradingOrder.getClosePrice().add(new BigDecimal(0.2)));
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > Double.parseDouble(systemConfig.get("trade.move.loss"))){
+                tradingOrder.setClosePrice(tradingOrder.getClosePrice().add(new BigDecimal(systemConfig.get("trade.move.loss"))));
             }
 
             orderService.update(tradingOrder);
