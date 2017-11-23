@@ -262,7 +262,7 @@ public class TradeFxService {
                 tradingOrder.setClosePrice(new BigDecimal(systemConfig.get("trade.min.profit")));
             }
             //已经盈利的订单, 设置获利最低上浮0.2
-            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > Double.parseDouble(systemConfig.get("trade.move.loss"))){
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) > 0 && unrealizedPL.subtract(tradingOrder.getClosePrice()).doubleValue() > Double.parseDouble(systemConfig.get("trade.move.trigger"))){
                 tradingOrder.setClosePrice(tradingOrder.getClosePrice().add(new BigDecimal(systemConfig.get("trade.move.loss"))));
             }
 
