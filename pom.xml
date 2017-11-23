@@ -296,7 +296,7 @@
                 <version>2.0</version>
                 <configuration>
                     <warName>ROOT</warName>
-                    <outputDirectory>~/dev/tools/apache-tomcat-7.0.82/webapp</outputDirectory>
+                    <outputDirectory>~/dev/tools/apache-tomcat-7.0.82/webapps</outputDirectory>
                 </configuration>
             </plugin>
 
