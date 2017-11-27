@@ -1,5 +1,6 @@
 package test.service;
 
+import cn.injava.forex.core.constant.SystemConstant;
 import cn.injava.forex.core.test.TestSupport;
 import cn.injava.forex.web.dao.CustomerDao;
 import cn.injava.forex.web.model.Customer;
@@ -18,6 +19,11 @@ public class ServiceDao extends TestSupport {
     @Test
     public void closeTrade() {
         tradeFxService.closeTrade(742);
+    }
+
+    @Test
+    public void isInThreshold() {
+        tradeFxService.isInThreshold("EUR_USD", SystemConstant.TRADE_TYPE_BUY);
     }
 
 

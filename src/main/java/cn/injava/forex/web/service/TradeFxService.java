@@ -1,9 +1,11 @@
 package cn.injava.forex.web.service;
 
 import cn.injava.forex.core.constant.SystemConstant;
+import cn.injava.forex.web.model.Product;
 import cn.injava.forex.web.model.order.TradingOrder;
 import cn.injava.forex.web.model.order.Trade;
 import cn.injava.forex.web.model.order.TradingPrice;
+import cn.injava.forex.web.model.technical.Candle;
 import cn.injava.forex.web.model.technical.Signal;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.order.OrderService;
@@ -11,6 +13,7 @@ import cn.injava.forex.web.service.technical.TradingSignalService;
 import com.google.gson.Gson;
 import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
+import org.joda.time.DateTime;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpMethod;
@@ -292,11 +295,71 @@ public class TradeFxService {
         return trade;
     }
 
+    /**
+     * 获取前一个蜡烛图, 并与之比较
+     *
+     *
+     * @param currency
+     * @return
+     */
+    public boolean isInThreshold(String currency, String signalType){
+        String url = "https://api-fxtrade.oanda.com/v3/instruments/"+currency+"/candles?count=2&price=M&granularity=M15";
+
+        HttpHeaders httpHeadersCandle = new HttpHeaders();
+        httpHeadersCandle.set("Content-Type", "application/json");
+        httpHeadersCandle.set("Authorization", "Bearer 3ec65c13a6c4681bd2033c853eaef61e-ddeb0c35a9c3841c4358355cc5bb8418");
+        httpHeadersCandle.set("Accept-Datetime-Format", "RFC3339");
+
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeadersCandle), String.class);
+        JsonObject tradeJson = new Gson().fromJson(response.getBody(), JsonObject.class).getAsJsonArray("candles").get(0).getAsJsonObject();
+
+        Candle candle = new Candle();
+        candle.setH(tradeJson.getAsJsonObject("mid").get("h").getAsBigDecimal());
+        candle.setL(tradeJson.getAsJsonObject("mid").get("l").getAsBigDecimal());
+
+        Product product = getCurrentCurrent(currency);
+
+        boolean result = false;
+
+        //如果信号是买入, bid在阈值内
+        if (SystemConstant.TRADE_TYPE_BUY.equals(signalType) &&
+                product.getAsk().subtract(candle.getL()).abs().compareTo(new BigDecimal(systemConfig.get("trade.open.threshold"))) < 0){
+            result = true;
+        }
+
+        //如果信号是买出, ask在阈值内
+        if (SystemConstant.TRADE_TYPE_SELL.equals(signalType) &&
+                product.getBid().subtract(candle.getH()).abs().compareTo(new BigDecimal(systemConfig.get("trade.open.threshold"))) < 0){
+            result = true;
+        }
+
+        return result;
+    }
+
+    /**
+     * 获取最新价格
+     * @param currency
+     * @return
+     */
+    public Product getCurrentCurrent(String currency){
+        String url = baseUrl + "/pricing?instruments="+currency;
+        ResponseEntity<String> response = restTemplate.exchange(url, HttpMethod.GET, new HttpEntity(httpHeaders), String.class);
+        JsonObject JsonObject = new Gson().fromJson(response.getBody(), JsonObject.class).getAsJsonArray("prices").get(0).getAsJsonObject();
+
+        Product product = new Product();
+        product.setProductName(currency);
+        product.setDateTime(new DateTime());
+        product.setBid(JsonObject.getAsJsonArray("bids").get(0).getAsJsonObject().get("price").getAsBigDecimal());
+        product.setAsk(JsonObject.getAsJsonArray("asks").get(0).getAsJsonObject().get("price").getAsBigDecimal());
+
+        return product;
+    }
+
     @PostConstruct
     public void init() {
         httpHeaders = new HttpHeaders();
         httpHeaders.set("Content-Type", "application/json");
-        httpHeaders.set("Authorization", "Bearer 28440b5543bf5d47ef7b46777f298eec-5e87822fca64fbbac583c45dbce086d2");
+        httpHeaders.set("Authorization", "Bearer d450d41406adf71bcbc8dbc3f0113de6-dc0a88769448d432d0d8f607fc14f026");
         httpHeaders.set("Accept-Datetime-Format", "RFC3339");
     }
 }

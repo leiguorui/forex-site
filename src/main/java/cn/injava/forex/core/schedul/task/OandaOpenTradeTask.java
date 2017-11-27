@@ -58,8 +58,10 @@ public class OandaOpenTradeTask extends BaseTask {
 
             for (TradingSignal signal : signals){
 
-                //没有头寸, 且符合技术分析
-                if (!tradeFxService.hasTrading(signal.getCurrency()) && signal.getProfitPrice() != null){
+                //没有头寸, 且符合技术分析, 且在价格阈值内
+                if (!tradeFxService.hasTrading(signal.getCurrency())
+                        && signal.getProfitPrice() != null
+                        && tradeFxService.isInThreshold(signal.getCurrency(), signal.getType())){
 
                     tradeFxService.openTrade(signal);
 
