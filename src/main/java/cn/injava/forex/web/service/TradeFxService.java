@@ -261,7 +261,7 @@ public class TradeFxService {
                 stopLossIds.add(tradingPrice.getOrderId());
             }
             //刚开始盈利的订单, 设置获利最低是0
-            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) == 0 && unrealizedPL.compareTo(new BigDecimal(systemConfig.get("trade.min.profit"))) > 0){
+            if (tradingOrder.getClosePrice().compareTo(new BigDecimal(systemConfig.get("trade.max.loss"))) == 0 && unrealizedPL.compareTo(new BigDecimal(systemConfig.get("trade.min.profit.trigger"))) > 0){
                 tradingOrder.setClosePrice(new BigDecimal(systemConfig.get("trade.min.profit")));
             }
             //已经盈利的订单, 设置获利最低上浮0.2

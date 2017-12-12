@@ -261,6 +261,12 @@
             <version>3.4</version>
         </dependency>
 
+        <!--蜡烛图技术分析库-->
+        <dependency>
+            <groupId>org.ta4j</groupId>
+            <artifactId>ta4j-core</artifactId>
+            <version>0.10</version>
+        </dependency>
 
     </dependencies>
 
