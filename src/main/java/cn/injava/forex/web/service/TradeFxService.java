@@ -333,6 +333,18 @@ public class TradeFxService {
             result = true;
         }
 
+        //如果信号是买入, 开盘价低于关盘价
+        if (SystemConstant.TRADE_TYPE_SELL.equals(signalType) &&
+                candle.getO().compareTo(candle.getC()) < 0){
+            result = true;
+        }
+
+        //如果信号是卖出, 开盘价低于关盘价
+        if (SystemConstant.TRADE_TYPE_SELL.equals(signalType) &&
+                candle.getO().compareTo(candle.getC()) > 0){
+            result = true;
+        }
+
         return result;
     }
 
