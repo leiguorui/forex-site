@@ -1,5 +1,6 @@
 package cn.injava.forex.core.schedul.task;
 
+import cn.injava.forex.core.utils.DingUtil;
 import cn.injava.forex.web.model.technical.TradingSignal;
 import cn.injava.forex.web.service.SmsService;
 import cn.injava.forex.web.service.TradeFxService;
@@ -63,9 +64,22 @@ public class OandaOpenTradeTask extends BaseTask {
                         && signal.getProfitPrice() != null
                         && tradeFxService.isInThreshold(signal.getCurrency(), signal.getType())){
 
-                    tradeFxService.openTrade(signal);
+
+                    String dingMsg = "{\n" +
+                            "    \"msgtype\": \"markdown\",\n" +
+                            "    \"markdown\": {\n" +
+                            "        \"title\": \"forex信号\",\n" +
+                            "        \"text\": \""+signal.getCurrency() + signal.getType() +
+                            "  \\n > " +signal.toString()+
+                            " \\n\\n [![img](https://www.baidu.com/img/bd_logo1.png)](http://10.4.35.202:9000/dashboard?id=com.example%3Aspring-jib)\\n  > ###### 10点20分发布 [天气](http://www.thinkpage.cn/) \"\n" +
+                            "    }\n" +
+                            "}";
+
+                    DingUtil.sendMsg(dingMsg);
 
                     logger.info("open ---- " + signal.toString());
+
+                    tradeFxService.openTrade(signal);
 
                 }
 

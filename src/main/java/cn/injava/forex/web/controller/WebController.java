@@ -5,6 +5,7 @@ import cn.injava.forex.core.utils.HtmlUnit;
 import cn.injava.forex.web.model.SubModel;
 import cn.injava.forex.web.model.YouKuVideo;
 import cn.injava.forex.web.service.SubService;
+import cn.injava.forex.web.service.TradeViewService;
 import com.gargoylesoftware.htmlunit.Page;
 import com.gargoylesoftware.htmlunit.WebClient;
 import com.google.gson.*;
@@ -31,6 +32,9 @@ public class WebController {
 
     @Resource
     private HtmlUnit htmlUnit;
+
+    @Resource
+    private TradeViewService tradeViewService;
 
     Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 

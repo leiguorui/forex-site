@@ -3,6 +3,7 @@ package cn.injava.forex.web.controller;
 import cn.injava.forex.core.utils.OperationResult;
 import cn.injava.forex.web.model.technical.Technical;
 import cn.injava.forex.web.service.SubService;
+import cn.injava.forex.web.service.TradeViewService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
@@ -26,6 +27,10 @@ public class TechnicalController {
     @Resource
     private SubService subService;
 
+    @Resource
+    private TradeViewService tradeViewService;
+
+
     /**
      * 获取所有的技术分析
      * @return
@@ -37,6 +42,22 @@ public class TechnicalController {
 
         try {
             Map<String, Technical> result = subService.getTechnicals();
+            response = OperationResult.buildSuccessResult("success", result);
+        } catch (Exception ex) {
+            logger.error(ex.getMessage());
+            response = OperationResult.buildFailureResult("error");
+        }
+
+        return response;
+    }
+
+    @RequestMapping(value = "/screenShot", method = RequestMethod.GET)
+    @ResponseBody
+    public OperationResult screenShot(String currency) {
+        OperationResult response;
+
+        try {
+            Object result = tradeViewService.screenShot(currency);
             response = OperationResult.buildSuccessResult("success", result);
         } catch (Exception ex) {
             logger.error(ex.getMessage());

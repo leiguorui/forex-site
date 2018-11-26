@@ -13,7 +13,7 @@
         <!-- base setting -->
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <project.build.locales>zh_CN</project.build.locales>
-        <project.build.jdk>1.7</project.build.jdk>
+        <project.build.jdk>1.8</project.build.jdk>
 
         <!-- plugin versions -->
         <plugin.maven-compiler>3.1</plugin.maven-compiler>
@@ -266,6 +266,18 @@
             <groupId>org.ta4j</groupId>
             <artifactId>ta4j-core</artifactId>
             <version>0.10</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.seleniumhq.selenium</groupId>
+            <artifactId>selenium-server</artifactId>
+            <version>3.0.1</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/ru.yandex.qatools.ashot/ashot -->
+        <dependency>
+            <groupId>ru.yandex.qatools.ashot</groupId>
+            <artifactId>ashot</artifactId>
+            <version>1.1</version>
         </dependency>
 
     </dependencies>

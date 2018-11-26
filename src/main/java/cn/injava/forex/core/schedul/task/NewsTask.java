@@ -66,7 +66,7 @@ public class NewsTask implements Runnable{
             logger.debug("开始一次新闻的请求");
 
             final HtmlPage page = webClient.getPage(newsHost);
-            List<DomElement> newses = (List)page.getByXPath("//article[@class='articleItem']");
+            List<DomElement> newses = (List)page.getByXPath("//article[@class='articleItem   ']");
 
             for (DomElement element : newses){
                 String[] newsInfo = element.asText().split("\n");

@@ -26,20 +26,21 @@ public class RunMeJob extends QuartzJobBean {
             LoggerFactory.getLogger(RunMeJob.class);
 
     //执行定时任务
+    @Override
     protected void executeInternal(JobExecutionContext context)
             throws JobExecutionException {
         logger.debug("定时任务正在启动...");
 
         //爬取新闻
         NewsTask newsTask = (NewsTask) applicationContext.getBean("newsTask");
-//        threadPool.runTask(newsTask);
+        threadPool.runTask(newsTask);
 
         //订阅价格
         String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
         for (String product : products){
             SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
             subPriceTask.setProduct(product);
-//            threadPool.runTask(subPriceTask);
+            threadPool.runTask(subPriceTask);
         }
 
         //订阅技术指标
@@ -51,7 +52,7 @@ public class RunMeJob extends QuartzJobBean {
                         (SubTechnicalTask) applicationContext.getBean("subTechnicalTask");
                 subTechnicalTask.setProduct(product);
                 subTechnicalTask.setPeriod(period);
-//                threadPool.runTask(subTechnicalTask);
+                threadPool.runTask(subTechnicalTask);
             }
         }
 
