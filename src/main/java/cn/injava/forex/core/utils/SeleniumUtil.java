@@ -1,6 +1,7 @@
 package cn.injava.forex.core.utils;
 
 import org.apache.commons.io.FileUtils;
+import org.apache.commons.lang3.RandomStringUtils;
 import org.joda.time.DateTime;
 import org.openqa.selenium.*;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -22,6 +23,8 @@ import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -32,6 +35,11 @@ import java.util.concurrent.TimeUnit;
  * @since 2018-11-26 14:04:18
  */
 public class SeleniumUtil {
+    /**
+     * tab和标题的对应关系
+     */
+    private static Map<String, String> keyWithTab = new ConcurrentHashMap<>();
+
     public static String getTradeViewImg(String currency){
         System.setProperty("webdriver.chrome.driver","D:\\workspace_personal\\forex-site\\chromedriver2.42.exe");
 
@@ -103,7 +111,7 @@ public class SeleniumUtil {
     public static String saveScreenshot(String cssSelector, WebDriver driver, String path){
 
         String fileName = DateTime.now().toString("yyyyMMddHHmmss") + DateTime.now().getMillisOfSecond();
-        fileName = path + fileName + ".png";
+        fileName = path + fileName + RandomStringUtils.randomAlphanumeric(8) + ".png";
         try {
 
             JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -142,13 +150,19 @@ public class SeleniumUtil {
      */
     public static boolean swichByKey(String tabKeyWord, WebDriver driver){
         boolean flag = false;
-        ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
-        //todo tabKeyWord和tab string的对应关系缓存, 就不用遍历tab了
-        for (String tab : tabs){
-            driver.switchTo().window(tab);
-            if (driver.getTitle().contains(tabKeyWord)){
-                flag = true;
-                break;
+
+        if (keyWithTab.containsKey(tabKeyWord)){
+            driver.switchTo().window(keyWithTab.get(tabKeyWord));
+            flag = true;
+        }else {
+            ArrayList<String> tabs = new ArrayList<>(driver.getWindowHandles());
+            for (String tab : tabs){
+                driver.switchTo().window(tab);
+                if (driver.getTitle().contains(tabKeyWord)){
+                    flag = true;
+                    keyWithTab.put(tabKeyWord, tab);
+                    break;
+                }
             }
         }
 
@@ -199,7 +213,7 @@ public class SeleniumUtil {
     }
 
     /**
-     * 获取tradeview的截图
+     * 获取tradeview生成的截图
      * @param driver
      * @return
      */
@@ -231,31 +245,32 @@ public class SeleniumUtil {
         System.setProperty("webdriver.chrome.driver","D:\\workspace_personal\\forex-site\\chromedriver2.42.exe");
 
         ChromeOptions chromeOptions = new ChromeOptions();
+        chromeOptions.addArguments("--headless");
+        chromeOptions.addArguments("--start-maximized");
         WebDriver driver = new ChromeDriver(chromeOptions);
-        driver.manage().window().maximize();
         driver.get("https://cn.bing.com/search?q=a&qs=n&form=QBLH&sp=-1&pq=a&sc=8-1&sk=&cvid=B113BABAC868456DB13F1178FB4A47C4");
 
         JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
 
-        String[] currencys = {"EURUSD", "AUDUSD", "USDCAD"};
-        for (String c : currencys){
-            jsExecutor.executeScript("window.open('https://www.tradingview.com/chart/?symbol=FX:"+c+"', '_blank')");
-        }
+//        String[] currencys = {"EURUSD", "AUDUSD", "USDCAD"};
+//        for (String c : currencys){
+//            jsExecutor.executeScript("window.open('https://www.tradingview.com/chart/?symbol=FX:"+c+"', '_blank')");
+//        }
+//
+//        System.out.println("====="+driver.getTitle());
+//
+//        swichByKey("EURUSD", driver);
 
         System.out.println("====="+driver.getTitle());
 
-        swichByKey("EURUSD", driver);
-
-        System.out.println("====="+driver.getTitle());
-
-//        waitForJStoLoad(driver);
-
-        jsExecutor.executeScript("$('body > div.tv-dialog__modal-wrap > div > div > div > div.tv-dialog__close.tv-blackfriday-popup__close.js-dialog__close').click()");
-
-        System.out.println("====="+driver.getTitle());
+        waitForJStoLoad(driver);
+//
+//        jsExecutor.executeScript("$('body > div.tv-dialog__modal-wrap > div > div > div > div.tv-dialog__close.tv-blackfriday-popup__close.js-dialog__close').click()");
+//
+//        System.out.println("====="+driver.getTitle());
 
 //        //保存截图
-        saveScreenshot("body > div.js-rootresizer__contents > div.layout__area--center > div > div.chart-container-border > div.chart-widget", driver, Paths.get("").toString());
+        saveScreenshot("#b_results > li:nth-child(1)", driver, Paths.get("").toString());
 
 
         System.out.println("===== end");

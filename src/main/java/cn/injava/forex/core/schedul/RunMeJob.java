@@ -32,16 +32,16 @@ public class RunMeJob extends QuartzJobBean {
         logger.debug("定时任务正在启动...");
 
         //爬取新闻
-        NewsTask newsTask = (NewsTask) applicationContext.getBean("newsTask");
-        threadPool.runTask(newsTask);
-
-        //订阅价格
-        String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
-        for (String product : products){
-            SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
-            subPriceTask.setProduct(product);
-            threadPool.runTask(subPriceTask);
-        }
+//        NewsTask newsTask = (NewsTask) applicationContext.getBean("newsTask");
+//        threadPool.runTask(newsTask);
+//
+//        //订阅价格
+//        String[] products = {"EURUSD","AUDUSD","GBPUSD","USDJPY"};
+//        for (String product : products){
+//            SubPriceTask subPriceTask = (SubPriceTask) applicationContext.getBean("subPriceTask");
+//            subPriceTask.setProduct(product);
+//            threadPool.runTask(subPriceTask);
+//        }
 
         //订阅技术指标
         String[] productsPeriod = {"eur-usd","aud-usd"};

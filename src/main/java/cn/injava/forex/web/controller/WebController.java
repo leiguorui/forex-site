@@ -33,9 +33,6 @@ public class WebController {
     @Resource
     private HtmlUnit htmlUnit;
 
-    @Resource
-    private TradeViewService tradeViewService;
-
     Gson gson=  new GsonBuilder().setDateFormat("yyyy-MM-dd HH:mm:ss").create();
 
     private static final Logger logger =
