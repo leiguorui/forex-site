@@ -16,6 +16,7 @@ public class TradingSignal {
 
     private BigDecimal price;
 
+    //不为空时, 说明符合技术分析
     private BigDecimal profitPrice;
 
     private BigDecimal lossPrice;

@@ -2,6 +2,7 @@ package cn.injava.forex.web.service;
 
 import cn.injava.forex.core.utils.SeleniumUtil;
 import lombok.extern.slf4j.Slf4j;
+import org.openqa.selenium.Dimension;
 import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
@@ -29,7 +30,6 @@ public class TradeViewService {
         System.setProperty("webdriver.chrome.driver","D:\\workspace_personal\\forex-site\\chromedriver2.42.exe");
 
         ChromeOptions chromeOptions = new ChromeOptions();
-        chromeOptions.addArguments("--headless");
         chromeOptions.addArguments("--start-maximized");
 
         driver = new ChromeDriver(chromeOptions);
@@ -58,6 +58,7 @@ public class TradeViewService {
     public String screenShot(String currency){
         SeleniumUtil.swichByKey(currency, driver);
         jsExecutor.executeScript("$('body > div.tv-dialog__modal-wrap > div > div > div > div.tv-dialog__close.tv-blackfriday-popup__close.js-dialog__close').click()");
+        jsExecutor.executeScript("$('body > div:nth-child(23) > div > div > div > div.tv-dialog__section.tv-dialog__section--actions.tv-dialog__section--actions-adaptive.tv-gopro-dialog__section--actions > div.js-dialog__action-click.js-dialog__no-drag.tv-button.tv-button--link.tv-button--no-padding.i-float_left').click()");
         return SeleniumUtil.saveScreenshot("body > div.js-rootresizer__contents > div.layout__area--center > div > div.chart-container-border > div.chart-widget", driver, "D:\\workspace_personal\\forex-site\\");
     }
 
