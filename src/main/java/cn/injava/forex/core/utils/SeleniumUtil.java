@@ -22,6 +22,7 @@ import java.io.IOException;
 import java.nio.file.FileSystems;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,6 +113,7 @@ public class SeleniumUtil {
 
         String fileName = DateTime.now().toString("yyyyMMddHHmmss") + DateTime.now().getMillisOfSecond();
         fileName = path + fileName + RandomStringUtils.randomAlphanumeric(8) + ".png";
+        Map<String, String> resultUpload = Collections.emptyMap();
         try {
 
             JavascriptExecutor jsExecutor = (JavascriptExecutor) driver;
@@ -138,11 +140,18 @@ public class SeleniumUtil {
             // Copy the element screenshot to disk
             File screenshotLocation = new File(fileName);
             FileUtils.copyFile(screenshot, screenshotLocation);
+
+            //上传图片
+            resultUpload = ImgUtil.uploadImg(fileName);
+
+            //删除本地图片
+            screenshotLocation.delete();
+
         } catch (Exception e) {
             e.printStackTrace();
         }
 
-        return fileName;
+        return resultUpload.get("url");
     }
 
     /**
@@ -270,7 +279,8 @@ public class SeleniumUtil {
 //        System.out.println("====="+driver.getTitle());
 
 //        //保存截图
-        saveScreenshot("#b_results > li:nth-child(1)", driver, Paths.get("").toString());
+        String url = saveScreenshot("#b_results > li:nth-child(1)", driver, Paths.get("").toString());
+        System.out.println("===== " + url);
 
 
         System.out.println("===== end");

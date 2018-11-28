@@ -21,7 +21,8 @@ import javax.annotation.PreDestroy;
 @Slf4j
 public class TradeViewService {
 
-    private String[] currencys = {"EURUSD", "AUDUSD", "USDCAD"};
+    private String[] currencys = {"jSwY0nlh", "cGNHR5bY", "vaLy4Qey"};
+
     WebDriver driver;
     JavascriptExecutor jsExecutor;
 
@@ -37,9 +38,8 @@ public class TradeViewService {
 
         driver.get("https://cn.bing.com/search?q=a&qs=n&form=QBLH&sp=-1&pq=a&sc=8-1&sk=&cvid=B113BABAC868456DB13F1178FB4A47C4");
 
-        String[] currencys = {"EURUSD", "AUDUSD", "USDCAD"};
         for (String c : currencys){
-            jsExecutor.executeScript("window.open('https://www.tradingview.com/chart/?symbol=FX:"+c+"', '_blank')");
+            jsExecutor.executeScript("window.open('https://cn.tradingview.com/chart/"+c+"', '_blank')");
         }
 
         log.info("=====WebDriver started=========");
@@ -55,10 +55,14 @@ public class TradeViewService {
         log.info("=====WebDriver quit=========");
     }
 
-    public String screenShot(String currency){
+    public String screenShot(String currency) throws InterruptedException {
         SeleniumUtil.swichByKey(currency, driver);
+        jsExecutor.executeScript("$('body > div.js-rootresizer__contents > div.layout__area--right > div > div.widgetbar-tabs > div > div.scrollWrap-3gtPS0Fe-.noScrollBar-ieMwbfur- > div > div > div.button-3SuA46Ww-.isTab-1dbyVeUX-.isActive-1D4aU96I-.isGrayed-3O5VgbN4-.apply-common-tooltip.common-tooltip-vertical').click()");
         jsExecutor.executeScript("$('body > div.tv-dialog__modal-wrap > div > div > div > div.tv-dialog__close.tv-blackfriday-popup__close.js-dialog__close').click()");
+        jsExecutor.executeScript("$('#tv-toasts > div > div > div > div > div.closeButton-10VUlhi4-.closeButtonAdv-2pjmC0Yh-.js-toast__close').click()");
+        Thread.sleep(500);
         jsExecutor.executeScript("$('body > div:nth-child(23) > div > div > div > div.tv-dialog__section.tv-dialog__section--actions.tv-dialog__section--actions-adaptive.tv-gopro-dialog__section--actions > div.js-dialog__action-click.js-dialog__no-drag.tv-button.tv-button--link.tv-button--no-padding.i-float_left').click()");
+        jsExecutor.executeScript("$('body > div.tv-dialog__modal-wrap').hide();");
         return SeleniumUtil.saveScreenshot("body > div.js-rootresizer__contents > div.layout__area--center > div > div.chart-container-border > div.chart-widget", driver, "D:\\workspace_personal\\forex-site\\");
     }
 
